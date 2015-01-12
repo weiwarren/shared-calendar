@@ -40,7 +40,8 @@
     "strong-cli": "^2.6.2",
     "strong-deploy": "^0.1.4",
     "strong-pm": "^0.1.9",
-    "strong-registry": "^1.1.2" 
+    "strong-registry": "^1.1.2",
+    "strong-supervisor": "^0.3.4"
   },
   "keywords": [
     "echo"
