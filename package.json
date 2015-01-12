@@ -30,7 +30,7 @@
     "loopback-connector-mongodb": "^1.4.4",
     "loopback-datasource-juggler": "^2.11.0",
     "loopback-explorer": "^1.5.1",
-    "loopback-sdk-angular-cli": "^1.1.4"
+    "loopback-sdk-angular-cli": "^1.1.4" 
   },
   "keywords": [
     "echo"
