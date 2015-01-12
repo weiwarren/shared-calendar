@@ -1,13 +1,8 @@
 {
   "restApiRoot": "/api",
   "host": "echo-sharedcalendar.azurewebsites.net",
-<<<<<<< HEAD
-  "port":443,
-  "url": "echo-sharedcalendar.azurewebsites.net",
-=======
   "port":"443",
   "url": "https://echo-sharedcalendar.azurewebsites.net",
->>>>>>> development
   "remoting": {
     "context": {
       "enableHttpContext": false
