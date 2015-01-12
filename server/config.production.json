@@ -1,8 +1,8 @@
 {
   "restApiRoot": "/api",
-  "host": "echo-calendar.azurewebsites.net",
-  "port":80,
-  "url": "echo-calendar.azurewebsites.net",
+  "host": "https://echo-calendar.azurewebsites.net",
+  "port":443,
+  "url": "https://echo-calendar.azurewebsites.net",
   "remoting": {
     "context": {
       "enableHttpContext": false
