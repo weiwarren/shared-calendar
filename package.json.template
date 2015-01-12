@@ -11,13 +11,13 @@
     "karma-junit-reporter": "^0.2.2"
   },
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node iisnode.js"
   },
   "engines": {
     "node": "0.10.x"
   },
   "subdomain": "echo.kloud",
-  "main": "/server/server.js",
+  "main": "/iisnode.js",
   "dependencies": {
     "body-parser": "^1.10.0",
     "compression": "^1.2.2",
