@@ -30,7 +30,18 @@
     "loopback-connector-mongodb": "^1.4.4",
     "loopback-datasource-juggler": "^2.11.0",
     "loopback-explorer": "^1.5.1",
-    "loopback-sdk-angular-cli": "^1.1.4" 
+    "loopback-sdk-angular-cli": "^1.1.4",
+    "node-inspector": "^0.7.4",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
+    "passport-saml": "^0.6.1",
+    "serve-favicon": "^2.1.7",
+    "strong-build": "^0.1.2",
+    "strong-cli": "^2.6.2",
+    "strong-deploy": "^0.1.4",
+    "strong-pm": "^0.1.9",
+    "strong-registry": "^1.1.2",
+    "strong-supervisor": "^0.3.4"
   },
   "keywords": [
     "echo"
