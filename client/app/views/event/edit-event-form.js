@@ -306,8 +306,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
         }
       }
     };
-
-  })
+  }) 
   .controller('editEventCtrl', function ($scope, $route, isModal, $location, eventItem, $controller, $routeParams, Event, Property, EventType) {
     $controller('eventCtrl', {$scope: $scope});
     $scope.editing = true;
