@@ -11,12 +11,13 @@
   "adfs": {
     "provider": "adfs",
     "module": "passport-saml",
-    "entryPoint": "https://mdxsts01.cloudapp.net/adfs/ls/IdpInitiatedSignon.aspx",
-    "issuer": "https://local.echo-kloud.com:3000/",
-    "callbackUrl": "https://local.echo-kloud.com:3000/auth/adfs/callback",
+    "entryPoint": "https://ee-adfs01.cloudapp.net/adfs/ls",
+    "existPoint": "https://ee-adfs01.cloudapp.net/adfs/ls/?wa=wsignoutcleanup1.0",
+    "issuer": "https://localhost",
+    "callbackUrl": "https://localhost/auth/adfs/callback",
     "identifierFormat": null,
     "authPath": "/auth/adfs",
-    "successRedirect": "https://local.echo-kloud.com:3000/app",
+    "successRedirect": "https://localhost/app",
     "failureRedirect": "/login",
     "link": false,
     "authScheme":"adfs"

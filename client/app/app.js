@@ -147,7 +147,7 @@ angular.module('echoCalendarApp', [
         });
         scope.$watch('duration', function (nv, ov) {
           if (nv && scope.start && scope.enabled) {
-            scope.end = moment(scope.start, scope.format).add(nv).format(scope.format);
+           // scope.end = moment(scope.start, scope.format).add(nv).format(scope.format);
           }
         });
         scope.$watch('end', function (nv, ov) {
@@ -317,12 +317,11 @@ angular.module('echoCalendarApp', [
     }
   })
   .run(function ($rootScope, $cookies, $route, $location, $modal, LoopBackAuth) {
-    LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], null);
+    LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], {userName: $cookies['userName']});
     LoopBackAuth.rememberMe = false;
     LoopBackAuth.save();
-
-    $rootScope.currentUserId = LoopBackAuth.currentUserId || "Anonymous";
-
+    $rootScope.currentUserId = LoopBackAuth.currentUserData.userName || "Anonymous";
+    console.log("token", $cookies['access_token']);
     //modalservice
     $rootScope.$on("$locationChangeStart", function (event, next) {
       //detect when the page is to be loaded using modal dialog
