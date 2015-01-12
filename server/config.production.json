@@ -1,8 +1,7 @@
 {
   "restApiRoot": "/api",
-  "host": "https://echo-sharedcalendar.net",
-  "port":443,
-  "url": "https://echo-sharedcalendar.net",
+  "host": "echo-sharedcalendar.net",
+  "url": "echo-sharedcalendar.net",
   "remoting": {
     "context": {
       "enableHttpContext": false
