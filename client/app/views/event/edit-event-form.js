@@ -71,16 +71,22 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       $scope.event.properties.splice(index, 1);
     };
 
+    $scope.$watch('event.allDay',function(nv){
+      if(nv){
+        $scope.event.dateFormat =  'DD/MM/YYYY';
+      }
+      else{
+        $scope.event.dateFormat = 'DD/MM/YYYY hh:mm a';
+      }
+    })
     $scope.getEventForProperty = function (ep) {
       var event = {};
       angular.copy($scope.event, event);
-      var localDateFormat = event.allDay ? 'DD/MM/YYYY' : 'DD/MM/YYYY hh:mm a';
-      var dbDateFormat = event.allDay ? 'YYYY-MM-DD' : 'YYYY-MM-DD hh:mm';
       if (event.occurrence == 'single') {
         delete event.multiEvents;
       }
-      event.start = moment(event.start, localDateFormat).format(dbDateFormat);
-      event.end = moment(event.end, localDateFormat).format(dbDateFormat);
+      event.start = moment(event.start, $scope.event.dateFormat).format();
+      event.end = moment(event.end, $scope.event.dateFormat).format();
       event.duration = event.duration.humanize();
       event.resource = (ep.property.key + "-" + event.eventType.key + "-" + event.category.key);
       event.cssClass = (ep.property.key + " " + event.eventType.key + " " + event.category.key + " Item");
@@ -94,10 +100,9 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     $scope.getMultiEvent = function (event, me) {
       var e1 = {};
       angular.copy(event, e1);
-      var localDateFormat = e1.allDay ? 'L' : 'LT';
       //var dbDateFormat = e1.allDay ? 'YYYY-MM-DD' : 'YYYY-MM-DD hh:mm';
-      e1.start = moment(me.start, localDateFormat).toISOString();
-      e1.end = moment(me.end, localDateFormat).toISOString();
+      e1.start = moment(me.start, $scope.event.dateFormat).format();
+      e1.end = moment(me.end, $scope.event.dateFormat).format();
       return e1;
     };
 
@@ -217,6 +222,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
   })
   .controller('addEventCtrl', function ($scope, $location, $route, isModal, $controller, Event, Property, EventType, Container, $q) {
     $controller('eventCtrl', {$scope: $scope});
+    $scope.eventProperties = [{}];
     $scope.event = {
       occurrence: 'single',
       properties: [{}],
@@ -308,10 +314,9 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     $scope.loading = true;
     //load event
     $scope.event = eventItem;
-    $scope.dateFormat = $scope.event.allDay ? 'L' : 'L LT';
-    $scope.event.start = moment($scope.event.start).format($scope.dateFormat);
-    $scope.event.end = moment($scope.event.end).format($scope.dateFormat);
-    $scope.event.duration = moment.duration(moment($scope.event.end, $scope.dateFormat).diff(moment($scope.event.start, $scope.dateFormat)));
+    $scope.event.start = moment($scope.event.start).format($scope.event.dateFormat);
+    $scope.event.end = moment($scope.event.end).format($scope.event.dateFormat);
+    $scope.event.duration = moment.duration(moment($scope.event.end, $scope.event.dateFormat).diff(moment($scope.event.start, $scope.event.dateFormat)));
     $scope.containerId = $scope.event.metadata.containerId || $scope.guid();
     $scope.eventProperties = $scope.event.properties.filter(function (item) {
       return item.propertyKey == $scope.event.property.key;
