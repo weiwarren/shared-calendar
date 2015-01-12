@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="157d5b6d-0ed7-4fc4-aea7-67c0488a32c8" name="Default" comment="">
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -25,6 +26,9 @@
     <list default="true" id="157d5b6d-0ed7-4fc4-aea7-67c0488a32c8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
+>>>>>>> development
+=======
+    <list default="true" id="157d5b6d-0ed7-4fc4-aea7-67c0488a32c8" name="Default" comment="" />
 >>>>>>> development
     <ignored path="SC.iws" />
     <ignored path=".idea/workspace.xml" />
