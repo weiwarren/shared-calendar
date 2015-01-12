@@ -1,0 +1,8 @@
+<h1>
+  <button class="btn btn-default" ng-click="changeScale('Day')">Day</button>
+  <button class="btn btn-default" ng-click="changeScale('Week')">Week</button>
+  <button class="btn btn-default" ng-click="changeScale('Month')">Month</button>
+  <button class="btn btn-default" ng-click="changeScale('Year')">Year</button>
+</h1>
+<daypilot-scheduler id="dp" daypilot-config="config" daypilot-events="events" style="display: block;"></daypilot-scheduler>
+<button class="btn btn-primary" ng-click="add()">Add random event</button>

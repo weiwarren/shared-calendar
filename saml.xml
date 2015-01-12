@@ -1,0 +1,58 @@
+<samlp:Response ID="_0197a183-03d6-4bb0-9af0-189afa0954bd" Version="2.0" IssueInstant="2014-12-10T03:57:46.720Z"
+                Destination="https://local.echo-kloud.com:3000/callback"
+                Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified" InResponseTo="_b8ea307fd6317ec2260e"
+                xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
+  <Issuer xmlns="urn:oasis:names:tc:SAML:2.0:assertion">http://mdxsts01.cloudapp.net/adfs/services/trust</Issuer>
+  <samlp:Status>
+    <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
+  </samlp:Status>
+  <Assertion ID="_af8dee01-58a6-4a27-971b-96e296fff83a" IssueInstant="2014-12-10T03:57:46.720Z" Version="2.0"
+             xmlns="urn:oasis:names:tc:SAML:2.0:assertion">
+    <Issuer>http://mdxsts01.cloudapp.net/adfs/services/trust</Issuer>
+    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+      <ds:SignedInfo>
+        <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+        <ds:Reference URI="#_af8dee01-58a6-4a27-971b-96e296fff83a">
+          <ds:Transforms>
+            <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+            <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+          </ds:Transforms>
+          <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+          <ds:DigestValue>jnEEYpnUg6fE7HqnfWN/TUCceV4LTJSYvn5KgKXKjG0=</ds:DigestValue>
+        </ds:Reference>
+      </ds:SignedInfo>
+      <ds:SignatureValue>
+        a9w27EvM0SuohsAIeIypEzmxQz9Pyh2ShbZaTze2jNm+iwcBwIHUtUJPWQyTPgzcreRQUlMd7S/nH8xO+utveuV/sA7tIXxfWqDjCekqJ5fnctbe9WREzArENBYUqqzBdNOhnHOsbeu23vYsfC75dOX0JBmkTK2gas7arwrcfFy3on6ZpbM9h+iQg0xMro6sKptonUKCAWO4pBX1r2YhnBTgqHEmSLaw1A8JZnuJWDcIu5l974XmAKznT6BxKkKHwnOfc7yedCXBf6xOc43ztmuvg7ooe+RlOkhOh5I8v2izglbVY01SyZtV8FVfHtJRYzSKHbmNYHBOILFbLISrcw==
+      </ds:SignatureValue>
+      <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>
+            MIIC5jCCAc6gAwIBAgIQFyp4nVtfzqtJX6yLEaJoQDANBgkqhkiG9w0BAQsFADAvMS0wKwYDVQQDEyRBREZTIFNpZ25pbmcgLSBtZHhzdHMwMS5jbG91ZGFwcC5uZXQwHhcNMTQxMjA4MDE1OTUyWhcNMTUxMjA4MDE1OTUyWjAvMS0wKwYDVQQDEyRBREZTIFNpZ25pbmcgLSBtZHhzdHMwMS5jbG91ZGFwcC5uZXQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC0w7NP4vacpH5RTE2jWREO+WXcgiWduQ39g0hXXqte4Uvhw7gOBm7AchFwJtYVCoQFEfUmjm7/OoUJm/ap0oyzPlQyTbLWQiX5r2gqCx2rNfGz0Vs/eHDWjC0U1xkHpdWDNXfL5k++GYd4OrJ7cCqW0MheRt1TrgmvH4ZOZTJsIbb2F8RamWQA7Dm8SUdnjVKS4V/hWTYCZNeVInEyFlBi8QVlk45ZKQplfHPj2hi+0yf/rwkwsDQ/YUnAo47j27CNxRg4gdAfo7TTBNwkBfvn3Z+egQgSQ5ZZrvRAsCTpeTShmL4nPoeurFKvoxoiM81jvEnM0FtSqRm375ot/sYlAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAJW8Loz31Y5owMyaiJruS7gmuoOzFHav9lG2/UsFbd7NHwm4EBUneaFqKqfrgU6jVRfSNYQE6nANDFX/f9x+xKUhLrO5Vc+klXKY3icSfmLEStmq23fYrul89gWyIOF1npS/Kg4+Q9lZqV54Ud9Byojyx5T58bjNlv9RDOWnZmu/CdgGbph0ZRqToErcaCGNmR7xl56EveXjRFBI0Hwi0e4Ah4BWAbBBEa8Kgz3cEXgtp+45q6X3P0yjhLgl0A6TIFIGIj0KvNxOTwIzEEIgRFD9z3Sdd4DPdVIt4oOwkviOKTMFnzXKXXLY+Cdv2mNtRIPsXY8hJF8E4NzJ23XJWy0=
+          </ds:X509Certificate>
+        </ds:X509Data>
+      </KeyInfo>
+    </ds:Signature>
+    <Subject>
+      <SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+        <SubjectConfirmationData InResponseTo="_b8ea307fd6317ec2260e" NotOnOrAfter="2014-12-10T04:02:46.720Z"
+                                 Recipient="https://local.echo-kloud.com:3000/callback"/>
+      </SubjectConfirmation>
+    </Subject>
+    <Conditions NotBefore="2014-12-10T03:57:46.704Z" NotOnOrAfter="2014-12-10T04:57:46.704Z">
+      <AudienceRestriction>
+        <Audience>https://local.echo-kloud.com:3000/app</Audience>
+      </AudienceRestriction>
+    </Conditions>
+    <AttributeStatement>
+      <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn">
+        <AttributeValue>calendar1@mdx.local</AttributeValue>
+      </Attribute>
+    </AttributeStatement>
+    <AuthnStatement AuthnInstant="2014-12-10T03:56:13.709Z">
+      <AuthnContext>
+        <AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</AuthnContextClassRef>
+      </AuthnContext>
+    </AuthnStatement>
+  </Assertion>
+</samlp:Response>

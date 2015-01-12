@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Bootstrap" pattern="file:client/app/bower_components/bootstrap/less/||file[SharedCalendar]:client/app/bower_components/bootstrap/less/*" />
+</component>

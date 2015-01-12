@@ -1,0 +1,50 @@
+<div>
+    <div class="container-fluid">
+
+
+            <div class="row page-toolbar affix" data-spy="affix">
+                <div class="col-sm-12">
+                    <h1><i class="fa fa-check-square-o"></i> Event Approval</h1>
+                </div>
+                <div class="col-sm-12 tools">
+                    <label><span><input type="checkbox" ng-click="publish(event)"></span> <span>Select All</span></label>
+                  <a href="#/"><button class="btn btn-lg btn-default pull-right">Cancel</button></a>
+                  <button class="btn btn-lg btn-primary pull-right">Approve &amp; Publish Selected</button>
+                </div>
+            </div>
+
+
+            <div class="row event-approval">
+                <div class="col-sm-12">
+                  <ul class="list-group">
+                     <!-- <li class="list-group-item"><label><span>
+                            <input type="checkbox" ng-click="publish(event)">
+                        </span> <span>Select All</span></label>
+                      </li> -->
+                    <li class="list-group-item" ng-repeat="event in events" >
+                        <label>
+                            <span>
+                                <input type="checkbox" ng-click="publish(event)">
+                            </span>
+                            <span class="title">{{event.text}}</span>
+                            <span><i class="fa fa-clock-o"></i> {{event.start}}</span>
+                            <span class="spacer">&mdash;</span>
+                            <span>{{event.end}}</span>
+                            <span class="location"><i class="fa fa-map-marker"></i> {{event.property.name}}</span>
+
+                            <!--<span>Status</span><span data-ng-bind="event.published?'Publish':'Unpublish'">__</span> -->
+                        </label>
+                        <button class="btn btn-sm btn-link pull-right" ng-click="showDetail(event)" >View Details</button>
+                    </li>
+                  </ul>
+                </div>
+                <!--<div class="col-sm-3">
+                </div>-->
+            </div>
+
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,24 @@
+{
+  "local": {
+    "provider": "local",
+    "module": "passport-local",
+    "usernameField": "username",
+    "passwordField": "password",
+    "authPath": "/auth/local",
+    "successRedirect": "/auth/account",
+    "failureRedirect": "/local"
+  },
+  "adfs": {
+    "provider": "adfs",
+    "module": "passport-saml",
+    "entryPoint": "https://mdxsts01.cloudapp.net/adfs/ls/IdpInitiatedSignon.aspx",
+    "issuer": "https://local.echo-kloud.com:3000/",
+    "callbackUrl": "https://local.echo-kloud.com:3000/auth/adfs/callback",
+    "identifierFormat": null,
+    "authPath": "/auth/adfs",
+    "successRedirect": "https://local.echo-kloud.com:3000/app",
+    "failureRedirect": "/login",
+    "link": false,
+    "authScheme":"adfs"
+  }
+}

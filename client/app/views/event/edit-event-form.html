@@ -1,0 +1,846 @@
+<nav class="navbar navbar-fixed-top navbar-default echo-brand" role="navigation">
+  <a class="navbar-brand back" href="#/l"><i class="fa fa-angle-left"></i> <span class="sr-only">Calendar</span></a>
+
+  <div class="navbar-header">
+    <a href="#/"><img class="brand-logo-image" src="image/echo_marketing-brand-logo.svg"></a>
+  </div>
+  <div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="actions active"><a class="close-add" href="javascript:void(0)" ng-click="closeForm()"><span
+        class="image-holder"></span>
+        <span class="sr-only">Add Event</span></a></li>
+      <li class="user-details"><a href="#fakelink" class="user-creds">
+        <img src="image/user_face_pic.png" class="profile-image img-circle">
+        <span>{{currentUserId || 'UserName'}}</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- Page Content -->
+<div id="page-content" class="add-event">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <debug val="event" ng-show="debug"></debug>
+        <h1>{{editing?'Edit':'Add'}} Event</h1>
+
+        <div class="row">
+          <p class="col-sm-9">Intro text goes here if needed… Ullamcorper id amet feugiat lobortis consequat ullamcorper
+            suspendisse
+            integer litora ad commodo mattis vitae id adipiscing consequat iaculis vulputate id elementum.</p>
+        </div>
+
+        <div class="row">
+          <div id="container">
+            <div class="col-sm-12 form-elements echo-data-entry">
+              <form role="form" name="eventForm" novalidate>
+                <ng-form name="eventForm.sectionBasic">
+                  <div class="row">
+                    <div class="form-group col-sm-3"
+                         ng-class="{'has-error': eventForm.submitting && eventForm.sectionBasic.eventType.$invalid}">
+                      <label>Type</label>
+                      <select id="eventType"
+                              name="eventType"
+                              class="form-control"
+                              ng-model="event.eventTypeKey"
+                              ng-required="true"
+                              ng-change="event.metadata.productKey=null;event.eventType=((eventTypes | filter:{key:event.eventTypeKey})[0])"
+                              ng-options="et.key as et.name for et in eventTypes">
+                      </select>
+                    </div>
+                    <div class="form-group col-sm-3"
+                         ng-class="{'has-error': eventForm.submitting && eventForm.sectionBasic.category.$invalid}">
+                      <label>Category</label>
+                      <select id="category"
+                              name="category"
+                              class="form-control"
+                              ng-disabled="!event.eventType"
+                              ng-model="event.categoryKey"
+                              ng-required="true"
+                              ng-change="event.category=((event.eventType.categories | filter:{key:event.categoryKey})[0])"
+                              ng-options="cat.key as cat.name for cat in event.eventType.categories">
+                      </select>
+                    </div>
+                    <div class="form-group col-sm-3" ng-class="{'has-error': eventForm.submitting && eventForm.sectionBasic.product.$invalid}">
+                      <label>Product</label>
+                      <select id="product"
+                              name="product" class="form-control"
+                              ng-disabled="!event.eventTypeKey"
+                              ng-model="event.metadata.productKey"
+                              ng-required="event.eventType.products.length"
+                              ng-change="event.metadata.product=((event.eventType.products | filter:{key:event.productKey})[0])"
+                              ng-options="prod.key as prod.name for prod in event.eventType.products">
+                      </select>
+                    </div>
+                    <div class="col-sm-3 validation-msg"
+                         ng-show="eventForm.submitting && eventForm.sectionBasic.$invalid">
+                      <p>Please enter all the required fields</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-7"
+                         ng-class="{'has-error': eventForm.submitting && eventForm.sectionBasic.title.$invalid}">
+                      <label>Title</label>
+                      <input type="text" class="form-control" name="title" placeholder="Eg. Win shopping voucher"
+                             ng-model="event.text" ng-required="true">
+                    </div>
+                    <div class="form-group col-sm-2">
+                      <label>Attendance <span class="optional-field">(optional)</span></label>
+                      <input type="number" class="form-control" name="people" ng-model="event.people">
+                    </div>
+                  </div>
+                </ng-form>
+                <hr>
+                <ng-form name="eventForm.sectionSingleEvent" date-watcher start="event.start" end="event.end"
+                         duration="event.duration" format="event.dateFormat || (event.allDay?'L':'L LT')"
+                         enabled="!loading">
+                  <div class="row" ng-show="!editing">
+                    <div class="form-group col-sm-9">
+                      <label class="block">Occurance</label>
+                      <label class="radio-inline">
+                        <input type="radio" name="occurrence-single" value="single" ng-model="event.occurrence"
+                               ng-required="true"> Single
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="occurrence-multi" value="multiple" ng-model="event.occurrence"
+                               ng-required="true"> Multiple
+                      </label>
+                      <label class="radio-inline disabled">
+                        <input type="radio" name="occurrence-recur" value="recurring" disabled> Recurring
+                        (Coming Soon)
+                      </label>
+                    </div>
+                  </div>
+                  <!-- Start Single Event -->
+                  <div id="single-event" class="row">
+                    <div class="col-sm-3">
+                      <label>Start Date &amp; Time </label>
+                      <label class="align-label"><input type="checkbox" ng-model="event.allDay"> All Day</label>
+
+                      <div class="input-group date" datetimez ng-model="event.start" pick-time="!event.allDay">
+                        <input name="singleStartDateTime" type="text" class="form-control"
+                               ng-required="true"
+                               data-date-format="L LT" ng-model="event.start"
+                               placeholder="dd/mm/yy  |   -- : --"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span
+                              class="glyphicon glyphicon-time" aria-hidden="true"></span></button>
+                        </span>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-sm-3 -->
+                    <div class="form-group col-sm-3 duration" ng-class="{'has-error': event.duration=='Invalid'}">
+                      <label>Duration </label>
+
+                      <div class="dropdown">
+                        <button name="duration" class="btn btn-default dropdown-toggle" type="button"
+                                ng-disabled="!event.start"
+                                data-toggle="dropdown" aria-expanded="true">
+                          {{event.duration.humanize() || 'Select Duration'}}
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li role="presentation" ng-repeat="do in durationOptions" ng-hide="event.allDay && do.small">
+                            <a role="menuitem" tabindex="-1"
+                               ng-click="setDuration(event, do.length, do.unit)">{{do.length}} {{do.unit}}</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <label for="singleEndDateTime">End Date &amp; Time</label>
+
+                      <div class="input-group date" datetimez ng-model="event.end" pick-time="!event.allDay">
+                        <input id="singleEndDateTime"
+                               name="singleEndDateTime"
+                               type="text" class="form-control"
+                               ng-model="event.end"
+                               data-date-format="DD/MM/YYYY H:mm a"
+                               ng-required="true"
+                               placeholder="dd/mm/yy  |   -- : --">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span
+                              class="glyphicon glyphicon-time" aria-hidden="true"></span></button>
+                          </span>
+                      </div>
+                      <!-- /input-group -->
+                    </div>
+                    <!-- /.col-sm-3 -->
+                    <div class="col-sm-3 validation-msg"
+                         ng-show="eventForm.sectionSingleEvent.$invalid && eventForm.submitting">
+                      <p>Please enter start and end date</p>
+                    </div>
+
+                  </div>
+                </ng-form>
+
+                <!-- ./Single Event -->
+
+                <!-- Start Multiple Event -->
+                <div id="multiple-event" class="row" ng-if="event.occurrence=='multiple'">
+                  <div class="row" ng-repeat="me in event.multiEvents">
+                    <ng-form name="eventForm.sectionMultiEvent.event{{$index}}" date-watcher enabled="!loading"
+                             start="me.start"
+                             end="me.end" duration="me.duration" format="event.allDay?'L':'L LT'">
+                      <div class="col-sm-3">
+                        <label>Start Date &amp; Time </label>
+                        <label class="align-label"><input type="checkbox" ng-model="me.allDay"> All Day</label>
+
+                        <div class="input-group date" datetimez
+                             ng-model="me.start"
+                             pick-time="!me.allDay">
+                          <input type="text" class="form-control" data-date-format="DD/MM/YYYY H:mm a"
+                                 ng-model="me.start" ng-required="event.occurrence=='multiple'"
+                                 placeholder="dd/mm/yy  |   -- : --"/>
+                          <span class="input-group-btn">
+                              <button class="btn btn-default" type="button"><span
+                                class="glyphicon glyphicon-time" aria-hidden="true"></span></button>
+                          </span>
+                        </div>
+                        <!-- /input-group -->
+                      </div>
+                      <!-- /.col-sm-3 -->
+                      <div class="form-group col-sm-3 duration" ng-class="{'has-error': me.duration=='Invalid'}">
+                        <label>Duration </label>
+
+                        <div class="dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button"
+                                  ng-disabled="!me.start || me.allDay"
+                                  data-toggle="dropdown" aria-expanded="true">
+                            {{me.duration.humanize() || 'Select Duration'}}
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li role="presentation" ng-repeat="do in durationOptions" ng-hide="me.allDay && do.small">
+                              <a role="menuitem" tabindex="-1"
+                                 ng-click="setDuration(me, do.length, do.unit)">{{do.length}} {{do.unit}}</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <label>End Date &amp; Time</label>
+
+                        <div class="input-group date" datetimez ng-model="me.end" pick-time="!me.allDay">
+                          <input type="text" class="form-control" ng-required="event.occurrence=='multiple'"
+                                 ng-model="me.end" data-date-format="DD/MM/YYYY H:mm a"
+                                 placeholder="dd/mm/yy  |   -- : --">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span
+                              class="glyphicon glyphicon-time" aria-hidden="true"></span></button>
+                          </span>
+                        </div>
+                        <!-- /input-group -->
+                      </div>
+
+                      <div class="form-group col-sm-1">
+                        <label>Remove</label>
+                        <button class="form-control btn btn-danger remove" ng-click="removeEvent($index)"><span
+                          class="image-holder"></span></button>
+                        </button>
+                      </div>
+                      <!-- /.col-sm-3 -->
+                      <div class="col-sm-2 validation-msg"
+                           ng-show="eventForm.sectionMultiEvent.event{{$index}}.$invalid && eventForm.submitting">
+                        <p>Please enter start and end date</p>
+                      </div>
+                    </ng-form>
+
+                  </div>
+                  <!-- /.repeatable-row -->
+
+                  <div class="col-sm-10 add-event">
+                    <button class="btn btn-default" ng-click="addEvent()">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Event
+                    </button>
+                  </div>
+
+                </div>
+                <!-- ./Multiple Event -->
+
+                <hr>
+                <div class="row"
+                     ng-repeat="eventProperty in event.properties | filter:{propertyKey: event.property.key}">
+                  <ng-form name="eventForm.sectionProperty.part{{$index}}">
+                    <div class="form-group col-sm-3">
+                      <label for="property">Property</label>
+                      <select id="property" name="property" class="form-control"
+                              ng-model="eventProperty.propertyKey"
+                              ng-change="eventProperty.property=((properties | filter:{key:eventProperty.propertyKey})[0])"
+                              ng-options="p.id as p.name for p in properties" ng-required="true">
+                      </select>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                      <label for="location_venue">Venue</label>
+                      <select id="location_venue" name="locationVenue"
+                              class="form-control"
+                              ng-disabled="!eventProperty.propertyKey" ng-required="true"
+                              ng-model="eventProperty.venueKey"
+                              ng-change="eventProperty.venue=((eventProperty.property.venues | filter:{key:eventProperty.venueKey})[0])"
+                              ng-options="v.key as v.name for v in eventProperty.property.venues">
+                      </select>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                      <label for="coordinator">Event Co-Ordinator <span class="optional-field">(optional)</span></label>
+                      <input id="coordinator" type="text" class="form-control w-icon" name="coordinator"
+                             placeholder=""
+                             ng-model="eventProperty.coordinator">
+                    </div>
+                    <div class="form-group col-sm-1" ng-show="event.properties.length>1">
+                      <label>Remove</label>
+                      <button class="form-control btn btn-danger remove" ng-click="removeProperty($index)"><span
+                        class="image-holder"></span></button>
+                    </div>
+                    <div class="col-sm-3 validation-msg" ng-class="{'col-sm-2':event.properties.length>1}"
+                         ng-show="eventForm.sectionProperty.part{{$index}}.$invalid && eventForm.submitting">
+                      <p>Please enter all the required fields</p>
+                    </div>
+                  </ng-form>
+                </div>
+
+                <div class="row" ng-show="!editing">
+                  <div class="col-sm-12">
+                    <button class="btn btn-default" ng-click="addProperty()">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Property
+                    </button>
+                  </div>
+                </div>
+                <hr>
+
+                <!-- metadata -->
+                <div class="row" ng-form="eventForm.sectionMetadata">
+                  <div class="col-sm-4">
+                    <ul class="list-unstyled">
+                      <li>
+                        <label>
+                          <input id="entrytime" name="entrytime" type="checkbox" ng-model="event.metadata.hasEntryTime">
+                          Entry Times,Locations &amp; Method <span class="optional-field">(optional)</span>
+                        </label>
+
+                        <div id="entry_time_details" class="form-group well" ng-show="event.metadata.hasEntryTime">
+                          <label for="entrytimes">Entry Date &amp; Time details</label>
+                          <textarea id="entrytimes" name="entryTime" class="form-control"
+                                    focus-me="event.metadata.hasEntryTime"
+                                    ng-model="event.metadata.entryTime.time"></textarea>
+                          <label for="entrylocation">Entry Location details</label>
+                          <textarea id="entrylocation" name="entrylocation" class="form-control"
+                                    ng-model="event.metadata.entryTime.location"></textarea>
+                          <label for="entrymethod">Entry Method details</label>
+                          <textarea id="entrymethod" name="entrymethod" class="form-control"
+                                    ng-model="event.metadata.entryTime.method"></textarea>
+                        </div>
+                      </li>
+                      <li><label class="">
+                        <input name="draw_date" type="checkbox" ng-model="event.metadata.hasDrawDate">
+                        Draw Dates &amp; Times <span class="optional-field">(optional)</span></label>
+
+                        <div id="draw_date_details" class="form-group well" ng-show="event.metadata.hasDrawDate">
+                          <label for="drawday">Draw Day(s)</label>
+                          <textarea id="drawday" name="drawday" class="form-control"
+                                    ng-model="event.metadata.drawDate.day"></textarea>
+                          <label for="drawtime">Draw Time(s)</label>
+                          <textarea id="drawtime" name="drawtime" class="form-control"
+                                    ng-model="event.metadata.drawDate.time"></textarea>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-4">
+                    <ul class="list-unstyled">
+                      <li><label class=""><input name="prize_amount" type="checkbox"
+                                                 ng-model="event.metadata.hasPrizeAmount">
+                        Prize Amounts <span class="optional-field">(optional)</span></label>
+
+                        <div id="prize_amount_details" class="form-group well"
+                             ng-show="event.metadata.hasPrize">
+                          <label for="prizedetails">Prize Details</label>
+                          <textarea id="prizedetails" name="prizedetails" class="form-control"
+                                    ng-model="event.metadata.prize.details"></textarea>
+                        </div>
+                      </li>
+                      <li><label><input name="vip_event" type="checkbox" ng-model="event.metadata.hasCustomer"> VIP or
+                        Loyalty
+                        Event <span class="optional-field">(optional)</span></label>
+
+                        <div id="vip_event_details" class="form-group well" ng-show="event.metadata.hasCustomer">
+                          <label for="eligablecategories">Eligable Members Categories</label>
+                          <select id="eligablecategories"
+                                  name="eligablecategories"
+                                  class="form-control push-down"
+                                  ng-model="event.metadata.customer" ng-options="cs.name for cs in customers">
+                            <option>VIP Only</option>
+                            <option>VIP &amp; Loyalty</option>
+                            <option>Red Tier</option>
+                            <option>Red Tier +</option>
+                            <option>Black Tier</option>
+                            <option>Black Tier +</option>
+                            <option>Pearl Tier</option>
+                            <option>Pearl Tier</option>
+                            <option>Other</option>
+                          </select>
+                          <label for="othervip">Other VIP Details</label>
+                          <textarea id="othervip" name="othervip" class="form-control"
+                                    ng-model="event.metadata.customer.details"></textarea>
+                        </div>
+                      </li>
+
+                      <li><label><input name="entry_criteria" type="checkbox"
+                                        ng-model="event.metadata.hasEntryCriteria">
+                        Entry
+                        Criteria <span
+                          class="optional-field">(optional)</span></label>
+
+                        <div id="entry_criteria_details" class="form-group well"
+                             ng-show="event.metadata.hasEntryCriteria">
+                          <textarea id="entryCriteria" name="entryCriteria" class="form-control"
+                                    placeholder="Details here…"
+                                    ng-model="event.metadata.entryCriteria.detail"></textarea>
+                        </div>
+                      </li>
+                    </ul>
+
+                  </div>
+
+
+                  <div class="col-sm-4 validation-msg" ng-show="eventForm.sectionMetadata.$invalid">
+                    <p>Enter all required fields</p>
+                  </div>
+                </div>
+
+                <hr>
+
+                <!-- ****** Add Artwork ****** -->
+
+                <div class="row" ng-form="eventForm.sectionArtwork"
+                     ng-class="{'has-error':eventForm.sectionArtwork.$invalid}">
+
+                  <div class="col-sm-9">
+                    <label><input name="add_artwork" type="checkbox" ng-model="event.metadata.hasArtwork"> Add Artwork
+                      <span class="optional-field">(optional)</span></label>
+
+                    <div class="form-group well" ng-show="event.metadata.hasArtwork">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div ng-show="artworkUploader.isHTML5" nv-file-drop uploader="artworkUploader"
+                               ng-model="eventForm.selectedArtWork">
+                            <!-- 3. ng-file-drop | ng-file-drop="className" -->
+                            <div class="well my-drop-zone">
+                              <p><i class="fa fa-file-o"></i> Drop images here</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <label for="InputArtworkFile">or, choose images to upload</label>
+                          <input id="InputArtworkFile"
+                                 class="btn-block"
+                                 name="artwork"
+                                 nv-file-select
+                                 type="file"
+                                 size="100"
+                                 uploader="artworkUploader"
+                                 multiple/>
+                          <input type="number" class="hidden" name="numOfArtworks"
+                                 ng-model="eventForm.sectionArtwork.numOfArtworks"
+                                 sync-model="artworkUploader.queue.length"
+                                 ng-min="(event.metadata.hasArtwork && !event.metadata.artworks.length)?1:0">
+
+                          <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12" style="margin-bottom: 20px">
+                          <hr>
+                          <h3>Upload queue</h3>
+
+                          <p>Queue length: {{ artworkUploader.queue.length }}</p>
+
+                          <table class="table">
+                            <thead>
+                            <tr>
+                              <th width="20%"></th>
+                              <th width="50%">Name</th>
+                              <th ng-show="artworkUploader.isHTML5">Size</th>
+                              <th ng-show="artworkUploader.isHTML5 && debug">Progress</th>
+                              <th ng-show="debug">Status</th>
+                              <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in artworkUploader.queue">
+                              <td data-ng-thumb="{file:item._file, width:100}"></td>
+                              <td><strong>{{ item.file.name }}</strong></td>
+                              <td ng-show="artworkUploader.isHTML5" nowrap>{{
+                                item.file.size/1024/1024|number:2 }} MB
+                              </td>
+                              <td ng-show="artworkUploader.isHTML5 && debug">
+                                <div class="progress" style="margin-bottom: 0;">
+                                  <div class="progress-bar" role="progressbar"
+                                       ng-style="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                              </td>
+                              <td class="text-center" ng-show="debug">
+                                <span ng-show="item.isSuccess"><i
+                                  class="glyphicon glyphicon-ok"></i></span>
+                                <span ng-show="item.isCancel"><i
+                                  class="glyphicon glyphicon-ban-circle"></i></span>
+                                <span ng-show="item.isError"><i
+                                  class="glyphicon glyphicon-remove"></i></span>
+                              </td>
+                              <td nowrap>
+                                <button type="button" class="btn btn-success btn-xs" ng-show="debug"
+                                        ng-click="item.upload()"
+                                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                  <span class="glyphicon glyphicon-upload"></span>
+                                  Upload
+                                </button>
+                                <button type="button" class="btn btn-warning btn-xs" ng-show="debug"
+                                        ng-click="item.cancel()"
+                                        ng-disabled="!item.isUploading">
+                                  <span class="glyphicon glyphicon-ban-circle"></span>
+                                  Cancel
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs"
+                                        ng-click="item.remove();">
+                                  <span class="glyphicon glyphicon-trash"></span>
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+
+                          <div ng-show="debug">
+                            <p>
+                              Queue Progress:
+
+                            <div class="progress" style="">
+                              <div class="progress-bar" role="progressbar"
+                                   ng-style="{ 'width': artworkUploader.progress + '%' }"></div>
+                            </div>
+                            </p>
+
+                            <button type="button" class="btn btn-success btn-s hide"
+                                    ng-click="artworkUploader.uploadAll()"
+                                    ng-disabled="!artworkUploader.getNotUploadedItems().length">
+                              <span class="glyphicon glyphicon-upload"></span> Upload all
+                            </button>
+                            <button type="button" class="btn btn-warning btn-s hide"
+                                    ng-click="artworkUploader.cancelAll()"
+                                    ng-disabled="!artworkUploader.isUploading">
+                              <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                              all
+                            </button>
+                            <button type="button" class="btn btn-danger btn-s hide"
+                                    ng-click="artworkUploader.removeAll()"
+                                    ng-disabled="!artworkUploader.queue.length">
+                              <span class="glyphicon glyphicon-trash"></span> Remove all
+                            </button>
+                          </div>
+
+                        </div>
+
+
+                        <div class="col-md-12" ng-show="editing" style="margin-bottom: 40px">
+                          <hr>
+
+                          <h3>Uploaded Files</h3>
+
+                          <table class="table">
+                            <thead>
+                            <tr>
+                              <th width="20%"></th>
+                              <th width="50%">Name</th>
+                              <th>Size</th>
+                              <th ng-show="artworkUploader.isHTML5 && debug">Progress</th>
+                              <th ng-show="debug">Status</th>
+                              <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="aw in event.metadata.artworks">
+                              <td><img ng-src="/api/containers/{{aw.container}}/download/{{aw.file.name}}" width="100"
+                                       class="thumbnail"/></td>
+                              <td>
+                                <a href="/api/containers/{{aw.container}}/download/{{aw.file.name}}"><strong>{{
+                                  aw.file.name }}</strong></a></td>
+                              <td nowrap>{{ aw.file.size/1024/1024|number:2 }} MB</td>
+                              <td>
+                                <button type="button" class="btn btn-danger btn-xs"
+                                        ng-click="deleteFile(event.metadata.artworks, $index)"
+                                        title="Delete the file">
+                                  <span class="glyphicon glyphicon-trash"></span>
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3 validation-msg"
+                       ng-show="eventForm.sectionArtwork.$invalid && eventForm.submitting">
+                    <p>Please select artworks</p>
+                  </div>
+
+                </div>
+
+                <!-- ****** Start Attachments ****** -->
+
+                <div class="row" ng-form="eventForm.sectionAttachment"
+                     ng-class="{'has-error':eventForm.sectionAttachment.$invalid}">
+
+                  <div class="col-sm-9">
+                    <label><input id="add_attachment" name="attachment" type="checkbox"
+                                  ng-model="event.metadata.hasAttachment"> Add
+                      Attachments <!--<span class="optional-field">(optional)</span>--></label>
+
+                    <div id="add_art_control" class="form-group well" ng-show="event.metadata.hasAttachment">
+
+                      <div class="row">
+
+                        <div class="col-sm-6">
+                          <div ng-show="attachmentUploader.isHTML5" over-class="another-file-over-class" nv-file-drop=""
+                               uploader="attachmentUploader">
+                            <!-- 3. ng-file-over | ng-file-over="className" -->
+                            <div class="well my-drop-zone">
+                              <p><i class="fa fa-file-o"></i> Drop file here</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <label for="InputAttacmentFile">or, choose a file to upload</label>
+                          <input id="InputAttacmentFile"
+                                 name="attachment"
+                                 class="btn-block"
+                                 nv-file-select
+                                 type="file"
+                                 size="100"
+                                 multiple
+                                 uploader="attachmentUploader"/>
+                          <input type="number" class="hidden" name="numOfAttachments"
+                                 ng-model="eventForm.sectionAttachment.numOfAttachments"
+                                 sync-model="attachmentUploader.queue.length"
+                                 ng-min="(event.metadata.hasAttachment && !event.metadata.attachments.length)?1:0"/>
+
+                          <p class="help-block"></p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12 mbl">
+                          <hr>
+                          <h3>Upload queue</h3>
+
+                          <p>Queue length: {{ attachmentUploader.queue.length }}</p>
+
+                          <table class="table">
+                            <thead>
+                            <tr>
+                              <th width="50%">Name</th>
+                              <th ng-show="attachmentUploader.isHTML5">Size</th>
+                              <th ng-show="attachmentUploader.isHTML5 && debug">Progress</th>
+                              <th ng-show="debug">Status</th>
+                              <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in attachmentUploader.queue">
+                              <td><strong>{{ item.file.name }}</strong></td>
+                              <td ng-show="attachmentUploader.isHTML5" nowrap>{{
+                                item.file.size/1024/1024|number:2 }} MB
+                              </td>
+                              <td ng-show="attachmentUploader.isHTML5 && debug">
+                                <div class="progress" style="margin-bottom: 0;">
+                                  <div class="progress-bar" role="progressbar"
+                                       ng-style="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                              </td>
+                              <td class="text-center" ng-show="debug">
+                                <span ng-show="item.isSuccess"><i
+                                  class="glyphicon glyphicon-ok"></i></span>
+                                <span ng-show="item.isCancel"><i
+                                  class="glyphicon glyphicon-ban-circle"></i></span>
+                                <span ng-show="item.isError"><i
+                                  class="glyphicon glyphicon-remove"></i></span>
+                              </td>
+                              <td nowrap>
+                                <button type="button" class="btn btn-success btn-xs"
+                                        ng-click="item.upload()" ng-show="debug"
+                                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                  <span class="glyphicon glyphicon-upload"></span>
+                                  Upload
+                                </button>
+                                <button type="button" class="btn btn-warning btn-xs"
+                                        ng-click="item.cancel()" ng-show="debug"
+                                        ng-disabled="!item.isUploading">
+                                  <span class="glyphicon glyphicon-ban-circle"></span>
+                                  Cancel
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs"
+                                        ng-click="item.remove()">
+                                  <span class="glyphicon glyphicon-trash"></span>
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+
+                          <div ng-show="debug">
+                            <p>
+                              Queue Progress:
+
+                            <div class="progress" style="">
+                              <div class="progress-bar" role="progressbar"
+                                   ng-style="{ 'width': attachmentUploader.progress + '%' }"></div>
+                            </div>
+                            </p>
+
+                            <button type="button" class="btn btn-success btn-s hide"
+                                    ng-click="attachmentUploader.uploadAll()"
+                                    ng-disabled="!attachmentUploader.getNotUploadedItems().length">
+                              <span class="glyphicon glyphicon-upload"></span> Upload all
+                            </button>
+                            <button type="button" class="btn btn-warning btn-s hide"
+                                    ng-click="attachmentUploader.cancelAll()"
+                                    ng-disabled="!attachmentUploader.isUploading">
+                              <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                              all
+                            </button>
+                            <button type="button" class="btn btn-danger btn-s hide"
+                                    ng-click="attachmentUploader.removeAll()"
+                                    ng-disabled="!attachmentUploader.queue.length">
+                              <span class="glyphicon glyphicon-trash"></span> Remove all
+                            </button>
+                          </div>
+
+                        </div>
+
+
+
+
+                        <div class="col-md-12" ng-show="editing" style="margin-bottom: 40px">
+                          <hr>
+
+                          <h3>Uploaded Files</h3>
+
+                          <table class="table">
+                            <thead>
+                            <tr>
+                              <th width="50%">Name</th>
+                              <th>Size</th>
+                              <th ng-show="attachmentUploader.isHTML5 && debug">Progress</th>
+                              <th ng-show="debug">Status</th>
+                              <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="aw in event.metadata.attachments">
+                              <td>
+                                <a href="/api/containers/{{aw.container}}/download/{{aw.file.name}}"><strong>{{
+                                  aw.file.name }}</strong></a></td>
+                              <td nowrap>{{ aw.file.size/1024/1024|number:2 }} MB</td>
+                              <td>
+                                <button type="button" class="btn btn-danger btn-xs"
+                                        ng-click="deleteFile(event.metadata.attachments, $index)"
+                                        title="Delete the file">
+                                  <span class="glyphicon glyphicon-trash"></span>
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3 validation-msg"
+                       ng-show="eventForm.sectionAttachment.$invalid && eventForm.submitting">
+                    <p>Please select attachments</p>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <p class="text-info"><i class="fa fa-exclamation-triangle"></i> Have you attached T&amp;C's
+                      and Staff Briefing?</p>
+
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-9">
+                    <label for="otherNotes">Other Event Notes <span class="optional-field">(optional)</span></label>
+                    <textarea id="otherNotes" name="otherNotes" class="form-control push-down"
+                              ng-model="event.metadata.notes"></textarea>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div id="apLval_warning" class="alert alert-warning" role="alert" ng-hide="event.approved">
+                      <strong>Is this event LOTJ (Law of the jungle) Approved?</strong> If this event is not LOTJ
+                      approved it will
+                      <u>not</u> be published to the calendar immediately.
+                    </div>
+                    <label class="mbl"><input id="approved" type="checkbox"
+                                              ng-model="event.approved">
+                      LOTJ Approved </label>
+
+                  </div>
+
+                  <div class="col-sm-12">
+                    <button id="submit_cal_event" type="button" class="btn btn-primary btn-lg"
+                            ng-click="submitForm(eventForm)"
+                            ng-show="!event.id">
+                      Submit Calendar Event
+                    </button>
+                    <!-- For Save Event Page Only -->
+                    <button id="save_cal_event" type="button" ng-click="submitForm(eventForm)"
+                            class="btn btn-primary btn-lg" ng-show="event.id">Save
+                      Calendar Event
+                    </button>
+                    <button id="delete_cal_event" type="button" class="btn btn-danger btn-lg pull-right"
+                            ng-show="event.id" ng-click="deleteEvent()">Delete Calendar
+                      Event
+                    </button>
+
+                  </div>
+
+                </div>
+
+
+              </form>
+            </div>
+          </div>
+          <!-- /.container -->
+
+        </div>
+        <!-- END ROW -->
+
+
+      </div>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+
+</div>

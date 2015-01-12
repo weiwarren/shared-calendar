@@ -1,0 +1,336 @@
+<div id="wrapper" ng-class="{toggled:showFilters}">
+
+  <nav class="navbar navbar-fixed-top navbar-default echo-brand" role="navigation">
+    <a class="navbar-brand filter-control open" ng-class="{open:!showFilters}" ng-click="showFilters = !showFilters"
+       aria-expanded="false">
+      <i class="fa fa-filter"></i> <span class="sr-only">Filters</span></a>
+
+    <div class="navbar-header">
+
+      <a href="#/"><img alt="Echo Entertainment Group Marketing Event Calendar" class="brand-logo-image"
+                        src="image/echo_marketing-brand-logo.svg"></a>
+
+
+    </div>
+
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+
+
+        <li class="actions export"><a class="dropdown-toggle" download href="/api/events"
+                                      aria-expanded="false"><!--<i class="fa fa-share-square-o"></i>--><span
+          class="image-holder"></span><span class="sr-only">Export Report</span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a data-toggle="dropdown" ng-csv="scheduler.exportCSV()" lazy-load="true" filename="export"><i
+              class="fa fa-file-code-o"></i> Export Report as .csv file</a></li>
+            <li class="divider"></li>
+            <li class="disabled"><a href="#fakelink"><i class="fa fa-file-excel-o"></i> Export Report for Excel (Coming
+              Soon)</a></li>
+            <li class="disabled"><a href="#fakelink"><i class="fa fa-area-chart"></i> Export Report for PowerPivot
+              (Coming Soon)</a></li>
+
+          </ul>
+
+
+        </li>
+
+        <li class="actions add-event">
+          <a href="#/addEvent?modal=1" tooltip="Add&nbsp;an&nbsp;event" tooltip-placement="bottom"><span
+            class="image-holder"></span><span class="sr-only">Add Event</span></a>
+        </li>
+
+        <li class="user-details"><a href="#/eventApproval" class="user-creds"><img src="image/user_face_pic.png"
+                                                                                   alt="User Profile Pic"
+                                                                                   class="profile-image img-circle">
+          <span>{{currentUserId || 'UserName'}}</span>
+
+          <div class="badge approval-counter">3</div>
+        </a>
+        </li>
+
+      </ul>
+    </div>
+    <!-- /.nav-collapse -->
+
+  </nav>
+
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+
+
+    <div class="sidebar-nav echo">
+
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">Property</h4><span class="badge">3 of 3</span>
+            </div>
+          </a>
+
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"
+               aria-expanded="true">
+            <div class="panel-body">
+              <form action="#">
+                <fieldset class="property">
+                  <ul class="list-unstyled">
+                    <li><input type="checkbox" id="property1" ng-model="scheduler.filters.TheStar"/><label
+                      for="property1"><span class="ui"></span>The
+                      Star</label><a class="btn btn-sm btn-default pull-right adv-filter"
+                                     ng-click="scheduler.showAdvancedFilter()"
+                      ><i class="fa fa-cog"></i></a>
+                    </li>
+                    <li><input type="checkbox" id="property2" ng-model="scheduler.filters.Jupiters"/><label
+                      for="property2"><span class="ui"></span>Jupiters</label>
+                    </li>
+                    <li><input type="checkbox" id="property3" ng-model="scheduler.filters.Treasury"/><label
+                      for="property3"><span class="ui"></span>The
+                      Treasury</label></li>
+                  </ul>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <a class="" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+
+            <div class="panel-heading" role="tab" id="headingTwo">
+
+              <h4 class="panel-title">Event Types</h4>
+
+            </div>
+          </a>
+
+          <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo"
+               aria-expanded="false">
+            <div class="panel-body">
+              <form action="#">
+                <fieldset class="gaming">
+                  <input type="checkbox" id="gaming-event-group" class="checkall" name="gamingFilter"
+                         ng-model="scheduler.filters.Gaming"/><label
+                  for="gaming-event-group"><span class="ui"></span><h5>Gaming</h5></label>
+                  <ul class="list-unstyled">
+
+                    <li><input type="checkbox" id="event-type-g1" name="gamingFilter"
+                               ng-model="scheduler.filters.GamingPromotion"
+                               sync-model="scheduler.filters.Gaming"/><label
+                      for="event-type-g1"><span class="ui"></span>Promotions</label></li>
+                    <li><input type="checkbox" id="event-type-g2" name="gamingFilter"
+                               ng-model="scheduler.filters.GamingEvent"
+                               sync-model="scheduler.filters.Gaming"/><label
+                      for="event-type-g2"><span class="ui"></span>Events</label></li>
+                    <li><input type="checkbox" id="event-type-g3" name="gamingFilter"
+                               ng-model="scheduler.filters.GamingOffer"
+                               sync-model="scheduler.filters.Gaming"/><label for="event-type-g3"><span
+                      class="ui"></span>Offers &amp; Incentives</label></li>
+
+                    <!-- NEW! Competitor Filter Control -->
+
+                    <li><input type="checkbox" id="event-type-g4" name="gamingFilter"
+                               ng-model="scheduler.filters.GamingCompetitor"
+                               sync-model="scheduler.filters.Gaming"/><label class="competition"
+                                                                             for="event-type-g4"><span
+                      class="ui"></span>Competitor Events</label></li>
+
+                  </ul>
+                </fieldset>
+
+
+                <fieldset class="nongaming">
+                  <input type="checkbox" id="nongaming-event-group" class="checkall"
+                         ng-model="scheduler.filters.NonGaming"/><label
+                  for="nongaming-event-group"><span class="ui"></span><h5>Non&ndash;Gaming</h5></label>
+                  <ul class="list-unstyled">
+                    <li><input type="checkbox" id="event-type-ng1" ng-model="scheduler.filters.NonGamingPromotion"
+                               sync-model="scheduler.filters.NonGaming"/><label for="event-type-ng1"><span
+                      class="ui"></span>Promotions</label></li>
+                    <li><input type="checkbox" id="event-type-ng2" ng-model="scheduler.filters.NonGamingFood"
+                               sync-model="scheduler.filters.NonGaming"/><label for="event-type-ng2"><span
+                      class="ui"></span>Food, Bars &amp; Hotels</label></li>
+                    <li><input type="checkbox" id="event-type-ng3" ng-model="scheduler.filters.NonGamingShows"
+                               sync-model="scheduler.filters.NonGaming"/><label for="event-type-ng3"><span
+                      class="ui"></span>Shows &amp; Concerts</label></li>
+
+                    <!-- NEW! Competitor Filter Control -->
+
+                    <li><input type="checkbox" id="event-type-ng4" name="gamingFilter"
+                               ng-model="scheduler.filters.NonGamingCompetitor"
+                               sync-model="scheduler.filters.NonGaming"/><label class="competition"
+                                                                                for="event-type-ng4"><span
+                      class="ui"></span>Competitor Events</label></li>
+
+
+                  </ul>
+                </fieldset>
+
+
+                <fieldset>
+                  <input type="checkbox" id="public-event-group" class="checkall"
+                         ng-model="scheduler.filters.Public"/><label
+                  for="public-event-group"><span class="ui"></span><h5>Public</h5></label>
+                  <ul class="list-unstyled">
+                    <li><input type="checkbox" id="event-type-p1" ng-model="scheduler.filters.PublicEvent"
+                               sync-model="scheduler.filters.Public"/><label for="event-type-p1"><span
+                      class="ui"></span>Public Events</label></li>
+                    <li><input type="checkbox" id="event-type-p2" ng-model="scheduler.filters.PublicHoliday"
+                               sync-model="scheduler.filters.Public"/><label for="event-type-p2"><span
+                      class="ui"></span>Holidays</label></li>
+                    <li><input type="checkbox" id="event-type-p3" ng-model="scheduler.filters.PublicFestival"
+                               sync-model="scheduler.filters.Public"/><label for="event-type-p3"><span
+                      class="ui"></span>Festivals &amp; Sports</label></li>
+                  </ul>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+
+
+    <div class="container-fluid">
+      <div id="calendarControls" class="row">
+        <div class="col-lg-12">
+
+          <h1 class="sr-only">Calendar</h1>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="btn-group pull-left cal-nav-controls" role="group" aria-label="calendar navigation">
+                <button type="button" class="btn btn-default" ng-click="scheduler.prev()"><span
+                  class="ico_holder left"></span></button>
+                <button type="button" class="btn btn-primary" ng-click="scheduler.today()">Today</button>
+                <button type="button" class="btn btn-default" ng-click="scheduler.next()"><span
+                  class="ico_holder right"></span></button>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="dropdown year-selector">
+                <a class="btn btn-link header dropdown-toggle" show-button-bar="false"
+                   ng-click="openCalendar=!openCalendar" id="dropdownMenuYearSelect"
+                   is-open="openCalendar" datepicker-options="{minMode:'month'}" datepicker-mode="'month'"
+                   datepicker-popup="'shortDate'"
+                   ng-model="scheduler.currentDate" ng-change="scheduler.changeScale('month')">
+                  {{ (scheduler.currentDate | date:'MMMM yyyy') || 'Month Name' }}
+                  <i class="fa fa-angle-down"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="btn-group pull-right view-selector" role="group" aria-label="...">
+                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.momentScale=='day'}"
+                        ng-click="scheduler.changeScale('day')">Day
+                </button>
+                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.momentScale=='week'}"
+                        ng-click="scheduler.changeScale('week')">Week
+                </button>
+                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.momentScale=='month'}"
+                        ng-click="scheduler.changeScale('month')">Month
+                </button>
+                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.momentScale=='year'}"
+                        ng-click="scheduler.changeScale('year')">6 Month
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row" ng-show="form.error">
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+            class="sr-only">Close</span></button>
+          <strong>Alert!</strong> This is an example of an alert message. i.e. A service is currently down.
+        </div>
+
+
+        <div class="alert alert-warning alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span
+            class="sr-only">Close</span></button>
+          <strong>Warning!</strong> This an example of a warning message. i.e. An event assigned to you needs approval
+        </div>
+      </div>
+
+
+      <!-- ADVANCED FILTER RESULTS **** -->
+
+
+      <div class="row filter-display well">
+
+        <div class="col-sm-9">
+            <span ng-repeat="(key,prop) in scheduler.advanceFilters"
+                  ng-init="currentFilter=scheduler.advanceFilters[key]">
+              <span class="label label-primary"
+                    ng-class="{'label-warning': key=='customer','label-danger':key=='venue'}"
+                    ng-show="currentFilter.all">all<button
+                type="button" class="close" ng-click="currentFilter.all=false;scheduler.applyAdvanceFilters()"><span
+                aria-hidden="true">×</span></button></span>
+              <span class="label label-primary"
+                    ng-class="{'label-warning': key=='customer','label-danger':key=='venue'}"
+                    ng-repeat="cfi in currentFilter.include">{{cfi.name}}<button
+                type="button" class="close"
+                ng-click="currentFilter.include.splice($index,1);scheduler.applyAdvanceFilters()"><span
+                aria-hidden="true">×</span></button></span>
+            </span>
+          <div ng-show="debug">
+          <span class="label label-primary">Primary <button type="button" class="close"><span
+            aria-hidden="true">×</span></button></span>
+          <span class="label label-gaming">Gaming Filter Title <button type="button" class="close"><span
+            aria-hidden="true">×</span></button></span>
+          <span class="label label-nongaming">Non–Gaming Filter Title <button type="button" class="close"><span
+            aria-hidden="true">×</span></button></span>
+          <span class="label label-public">Public Filter Title <button type="button" class="close"><span
+            aria-hidden="true">×</span></button></span>
+          <span class="label label-danger">Red Filter Title <button type="button" class="close"><span
+            aria-hidden="true">×</span></button></span>
+          <span class="label label-info">Info Filter <button type="button" class="close"><span
+            aria-hidden="true">×</span></button></span>
+          <span class="label label-warning">Yellow Filter Title <button type="button" class="close"><span
+            aria-hidden="true">×</span></button></span>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <button class="btn btn-sm btn-block btn-primary" ng-click="scheduler.showAdvancedFilter()"><i
+            class="fa fa-cog"></i> Edit Advanced Filters
+          </button>
+        </div>
+
+      </div>
+
+      <!-- /ADVANCED FILTER RESULTS -->
+
+
+      <div class="row">
+
+        <div id="container">
+          <!-- /top -->
+
+          <div id="content">
+
+
+            <!-- DAY PILOT CALENDAR -->
+
+            <daypilot-scheduler id="dp" daypilot-config="scheduler.config"
+                                daypilot-events="events"></daypilot-scheduler>
+            <!-- bottom -->
+          </div>
+        </div>
+
+
+      </div>
+      <!-- END ROW -->
+
+
+    </div>
+  </div>
+</div>
+

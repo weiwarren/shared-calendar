@@ -1,0 +1,2 @@
+fs based blog storage for artworks and attachments
+The structure is based on a guid for events referenced in the db.

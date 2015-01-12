@@ -1,0 +1,132 @@
+<div class="echo">
+  <div class="modal-header">
+    <debug val="event" ng-show="debug"></debug>
+    <button type="button" class="close" ng-click="close()"><span class="image-holder"></span></button>
+    <h2 class="modal-title" id="myModalLabel" data-ng-bind="event.text">Example Event Title</h2>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-8">
+        <dl class="dl-horizontal echo">
+          <dt><i class="fa fa-clock-o"></i></dt>
+          <dd>
+            <ul class="list-inline echo">
+              <li>
+                <div class="btn-block">
+                  {{event.start | date: 'yyyy-MM-dd'}}
+                </div>
+                <div class="btn-block"  ng-show="!event.allDay">
+                  {{event.start | date: 'h:mm a'}}
+                </div>
+              </li>
+              <li style="vertical-align: middle">&mdash;</li>
+              <li>
+                <div class="btn-block">
+                  {{event.end | date: 'yyyy-MM-dd'}}
+                </div>
+                <div class="btn-block"  ng-show="!event.allDay">
+                  {{event.end | date: 'h:mm a'}}
+                </div>
+              </li>
+            </ul>
+
+            <ul class="list-unstyled">
+              <li>{{duration(event.start, event.end)}}</li>
+            </ul>
+
+          </dd>
+          <dt><i class="fa fa-map-marker"></i></dt>
+          <dd>
+            <ul class="list-unstyled">
+              <li>{{event.property.name}}</li>
+              <li>{{event.metadata.venue.name}}</li>
+            </ul>
+          </dd>
+          <dt><i class="fa fa-users sm"></i></dt>
+          <dd>{{event.people}}</dd>
+          <dt><i class="fa fa-clipboard sm"></i></dt>
+          <dd>
+            <h5>Details</h5>
+            <ul class="disc-align">
+              <li class="title" ng-show="event.metadata.hasEntryTime">Entry Times, Locations &amp; Method</li>
+              <li ng-repeat="(key, prop) in event.metadata.entryTime track by key" ng-show="event.metadata.hasEntryTime" data-ng-bind="event.metadata.entryTime[key]">
+              </li>
+              <li class="title" ng-show="event.metadata.hasDrawDate">Draw Dates &amp; Times</li>
+              <li ng-repeat="(key, prop) in event.metadata.drawDate track by key" ng-show="event.metadata.hasDrawDate" data-ng-bind="event.metadata.drawDate[key]"></li>
+              <li class="title" ng-show="event.metadata.hasEntryCriteria">Entry Crieria</li>
+              <li ng-repeat="(key, prop) in event.metadata.entryCriteria track by key" ng-show="event.metadata.hasEntryCriteria" data-ng-bind="event.metadata.entryCriteria[key]"></li>
+            </ul>
+          </dd>
+          <dt ng-show="event.metadata.hasAttachment"><i class="fa fa-paperclip sm"></i></dt>
+          <dd ng-show="event.metadata.hasAttachment">
+            <h5>Attachments</h5>
+            <ul class="list-unstyled">
+              <li ng-repeat="attachment in event.metadata.attachments">
+                <a href="/api/containers/{{attachment.container}}/download/{{attachment.file.name}}" ng-bind="attachment.file.name"></a></li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="col-md-4 image-holder">
+        <!-- SHOW DEFAULT IMAGE
+          <img ng-src="../image/default-artwork.png" class="img-responsive" alt="Event artwork">
+          -->
+        <wrap-owlcarousel class="owl-carousel" ng-model="event.metadata.artworks"
+                          data-options="{autoPlay: 10000, stopOnHover: true, pagination:true, slideSpeed : 300, paginationSpeed : 400, singleItem : true}">
+          <div ng-repeat="artwork in event.metadata.artworks">
+            <img ng-src="/api/containers/{{artwork.container}}/download/{{artwork.file.name}}"
+              class="img-responsive"
+              alt="Event artwork">
+          </div>
+        </wrap-owlcarousel>
+      </div>
+
+
+    </div>
+
+    <div class="row" ng-show="event.metadata.hasVIP || event.metadata.hasPrize || event.metadata.notes">
+
+      <div class="col-sm-12">
+
+        <div class="panel-group" id="moreInfo_accordion" role="tablist" aria-multiselectable="true">
+
+          <div class="panel text-only panel-default">
+            <div class="panel-heading" role="tab" id="moreInfo">
+              <h6 class="panel-title">
+                <a data-toggle="collapse" href="#eventDetailMore" aria-expanded="false" aria-controls="collapseOne"
+                   class="collapsed">
+                  More information
+                </a>
+              </h6>
+            </div>
+            <div id="eventDetailMore" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne"
+                 aria-expanded="false" style="height: 0px;">
+              <div class="panel-body">
+                <ul class="disc-align">
+                  <li class="title" ng-show="event.metadata.product">Product</li>
+                  <li ng-bind="event.metadata.product.name" ng-show="event.metadata.product"></li>
+                  <li class="title" ng-show="event.metadata.hasVIP">VIP Loyalty Event</li>
+                  <li ng-repeat="(key,prop) in event.metadata.vip track by key" ng-bind="event.metadata.vip[key]"></li>
+                  <li class="title" ng-show="event.metadata.hasPrize">Prize Money</li>
+                  <li ng-repeat="(key,prop) in event.metadata.prize track by key" ng-bind="event.metadata.prize[key]"></li>
+                  <li class="title" ng-show="event.metadata.notes">Comments</li>
+                  <li ng-bind="event.metadata.notes" ng-show="event.metadata.notes"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- /Modal body -->
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$close()">Close</button>
+    <a href="#/editEvent/{{event.id}}" class="pull-left btn btn-primary" ng-click="close()">Edit Event</a>
+  </div>
+</div>

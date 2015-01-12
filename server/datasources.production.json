@@ -1,0 +1,21 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongodb": {
+    "name":"mongo_prod",
+    "port":29801,
+    "connector": "loopback-connector-mongodb",
+    "host":"ds029801.mongolab.com",
+    "username":"admin2",
+    "password":"password1",
+    "database":"echo"
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/storage"
+  }
+}

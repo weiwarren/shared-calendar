@@ -1,0 +1,30 @@
+{
+  "restApiRoot": "/api",
+  "host": "echo-calendar.azurewebsites.net",
+  "port":80,
+  "url": "echo-calendar.azurewebsites.net",
+  "remoting": {
+    "context": {
+      "enableHttpContext": false
+    },
+    "rest": {
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "300kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "300kb"
+    },
+    "cors": {
+      "origin": true,
+      "credentials": true
+    },
+    "errorHandler": {
+      "disableStackTrace": false
+    }
+  }
+}

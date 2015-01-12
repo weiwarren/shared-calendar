@@ -1,0 +1,60 @@
+{
+  "name": "property",
+  "plural": "properties",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "scope": {
+    "order": "order",
+    "limit": 100,
+    "where": {}
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "key": {
+      "type": "string",
+      "required": true
+    },
+    "backColor": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "eventTypes": {
+      "type": "embedsMany",
+      "model": "eventType",
+      "property": "children",
+      "options": {
+        "validate": true,
+        "autoId": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "Manager",
+      "permission": "ALLOW",
+      "property": "*"
+    }
+  ],
+  "methods": []
+}

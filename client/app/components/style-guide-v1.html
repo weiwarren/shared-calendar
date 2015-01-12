@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="echoCalendarApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Echo Style Guide v.0.1</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../bower_components/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../bower_components/daypilot/themes/scheduler_white.css">
+  <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>
+  <script src="../bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+    
+            <nav class="navbar navbar-fixed-top navbar-default echo-brand" role="navigation">
+            
+            <a class="navbar-brand back" href="../index.html" target="_self"><i class="fa fa-angle-left"></i> <span class="sr-only">Calendar</span></a>
+
+                    <div class="navbar-header">
+                      
+
+                        <a href="index.html"><img class="brand-logo-image" src="../image/echo_marketing-brand-logo.svg" alt="echo entertainment marketing calendar"></a>
+
+                      
+                    </div>
+            
+                    <div id="navbar" class="collapse navbar-collapse">
+                      <ul class="nav navbar-nav navbar-right">
+
+                      </ul>
+                    </div><!-- /.nav-collapse -->
+
+                </nav>
+    
+    <div class="container styleguide-content">
+        
+        <div class="row header">
+            <div class="col-sm-6">
+                <h1>Echo Entertainment &ndash; Online Styleguide</h1>
+                
+            </div>
+            <div class="col-sm-6">
+                <h1><span class="label label-default">v.0.1</span></h1>
+            </div>
+        
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 id="toc">
+                    Table of contents
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <nav> 
+                <ol>
+                    <li><a href="#grid">Layout</a></li>
+                    <li><a href="#logo">Logo</a></li>
+                    <li><a href="#colors">Colors</a></li>
+                    <li><a href="#typography">Typography</a></li>
+                    <li><a href="#buttons">Buttons</a></li>
+                    <li><a href="#forms">Forms</a></li>
+                    <li><a href="#lists">Lists</a></li>
+                    <li><a href="#components">Components</a></li>
+                    <!--<li><a href="#patterns">Patterns</a></li>-->
+                </ol>
+                </nav> 
+            </div>
+        </div>
+        
+        <a href="#" class="top-link btn btn-default"><i class="fa fa-angle-up"></i></a>
+        
+        
+        
+        <div id="grid" class="row">
+            <hr>
+            <div class="col-sm-12">
+                
+                        <h3>Layout</h3>
+
+                        <h4>The Grid</h4> 
+                
+                <p>The grid is built around three key elements: containers, rows, and columns. Containers create base padding for the page; rows create a max-width and contain the columns; and columns create the final structure.</p>
+                <p>Based on the 12 column <a href="http://getbootstrap.com/">Bootstrap</a> grid. Bootstrap includes a responsive, mobile first fluid grid system that appropriately scales up to 12 columns. Including predefined classes for easy layout options. Echo Calendar layout uses single set of <b>.col-sm-*</b> grid classes, you can create a basic grid system that starts out stacked on mobile devices and tablet devices (the extra small to small range) before becoming horizontal on desktop (medium) devices. Place grid columns in any <b>.row</b>.</p>
+                
+                <div class="bs-docs-grid">
+                    <div class="row show-grid">
+                        <div class="col-sm-12" style="text-align: center;">.col-sm-12 (Based on the Bootstrap 12 Column Grid)</div>
+                    </div>
+                    <div class="row show-grid">
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                      <div class="col-sm-1">.col-sm-1</div>
+                    </div>
+                    <div class="row show-grid">
+                      <div class="col-sm-8">.col-sm-8</div>
+                      <div class="col-sm-4">.col-sm-4</div>
+                    </div>
+                    <div class="row show-grid">
+                      <div class="col-sm-4">.col-sm-4</div>
+                      <div class="col-sm-4">.col-sm-4</div>
+                      <div class="col-sm-4">.col-sm-4</div>
+                    </div>
+                    <div class="row show-grid">
+                      <div class="col-sm-6">.col-sm-6</div>
+                      <div class="col-sm-6">.col-sm-6</div>
+                    </div>
+                </div>
+                
+                <p>In the Grid you can nest columns down as far as you'd like. Just embed rows inside columns and go from there. Each embedded row can contain up to 12 columns
+                    <code>
+                        &lt;div class="row"&gt;
+                      &lt;div class=".col-sm-8"&gt;
+                      &lt;div class=".col-sm-4"&gt;
+                        &lt;/div&gt;
+                    </code>
+                    </p>
+                <p>The layout for the <b>Echo Marketing Calendar</b> is optimized to respond from High Definition Desktop monitors down to  tablet devices (such as iPads &amp; MS Surfaces) only. The Grid is wrapped in a <b>fluid container</b> class <code>class="container-fluid"</code> with a minimum width set to <code>min-device-width : 768px</code></p>
+
+                
+            </div>
+        </div>
+        
+        <div id="logo" class="row">
+            <hr>
+            
+            <div class="col-sm-12">
+                <h3>Logo</h3>
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        
+                        <p class="lead">The Echo Marketing Calendar logo draws a direct relationship the Echo brand &amp; corporate identity</p>
+                        
+                        <h4>Logo Guidelines</h4>
+                        <p class="text-danger">These are yet to be finalised.</p> 
+                            <ul>
+                                <li>There should be sufficient clear space around the logo</li>
+                                <li>Always position the logo for maximum impact to ensure visibility &amp; legibility</li>
+                            </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Sample</h4>
+                        <img src="../image/logoExample_styleguide-01.svg">
+                    </div>
+                
+                </div>
+
+            </div>
+        </div>
+        
+        <div id="colors" class="row">
+            <hr>
+            <div class="col-sm-12">
+                
+                <h3>Colour Scheme</h3>
+                
+                <div class="row">
+                    
+                    <div class="col-sm-8"> 
+                        
+                        <h4>Primary Swatches</h4>
+                        
+                      <div class="row mbl">
+                          
+                        <div class="span2 col-sm-4">
+                          <dl class="palette palette-echoprimary">
+                            <dt>#8b6f4d</dt>
+                            <dd>Echo Brand</dd>
+                          </dl>
+                          <dl class="palette palette-echodark">
+                            <dt>#40301e</dt>
+                            <dd>Echo Dark</dd>
+                          </dl>
+                        </div>
+
+                        <div class="span2 col-sm-4">
+                          <dl class="palette palette-echolightbg">
+                            <dt>#ede9e6</dt>
+                            <dd>Echo BG</dd>
+                          </dl>
+                          <dl class="palette palette-echolight">
+                            <dt>#d8b791</dt>
+                            <dd>Echo Light</dd>
+                          </dl>
+                          
+                        </div>
+                          
+                          
+
+                        <div class="span2 col-sm-4">
+                          <dl class="palette palette-echolink">
+                            <dt>#507a8c</dt>
+                            <dd>Echo Link</dd>
+                          </dl>
+                          <dl class="palette palette-echofocus">
+                            <dt>#183440</dt>
+                            <dd>Echo Focus</dd>
+                          </dl>
+                        </div>
+                          
+                          
+                          
+                      </div> <!-- /color swatches -->
+                        
+                        
+                        
+                     
+                        
+                     <h4>Secondary Swatches</h4>
+                        
+                     <div class="row mbl">
+                         <div class="span2 col-sm-4">
+                          <dl class="palette palette-silver">
+                            <dt>#bdc3c7</dt>
+                            <dd>Silver</dd>
+                          </dl>
+                          <dl class="palette palette-darkgrey">
+                            <dt>#333333</dt>
+                            <dd>Dark Grey</dd>
+                          </dl>
+                        </div>
+
+                        <div class="span2 col-sm-4">
+                          <dl class="palette palette-danger">
+                            <dt>#d9534f</dt>
+                            <dd>Alert Red</dd>
+                          </dl>
+                          <dl class="palette palette-warning">
+                            <dt>#f0ad4e</dt>
+                            <dd>Warning Yelllow</dd>
+                          </dl>
+                        </div>
+
+                        <div class="span2 col-sm-4">
+                          <dl class="palette palette-info">
+                            <dt>#5bc0de</dt>
+                            <dd>Info Blue</dd>
+                          </dl>
+                          <dl class="palette palette-success">
+                            <dt>#5cb85c</dt>
+                            <dd>Success Green</dd>
+                          </dl>
+                        </div>
+                     </div><!-- /Secondary color swatches -->
+                        
+                        <h4>Event Swatches</h4>
+
+                      <div class="row mbl">
+                        <div class="span2 col-sm-4">
+                          <dl class="palette palette-gaming">
+                            <dt>#e2a5a4</dt>
+                            <dd>Gaming Red</dd>
+                          </dl>
+                          <dl class="palette palette-gaminglabel">
+                            <dt>#a77c7b</dt>
+                            <dd>Gaming Label</dd>
+                          </dl>
+                        </div>
+
+                        <div class="span2 col-sm-4">
+                          <dl class="palette palette-nongaming">
+                            <dt>#90b3e6</dt>
+                            <dd>Non Gaming</dd>
+                          </dl>
+                          <dl class="palette palette-nongaminglabel">
+                            <dt>#354f77</dt>
+                            <dd>Non Gaming Label</dd>
+                          </dl>
+                        </div>
+
+                        <div class="span2 col-sm-4">
+                          <dl class="palette palette-public">
+                            <dt>#39d2b4</dt>
+                            <dd>Public</dd>
+                          </dl>
+                          <dl class="palette palette-publiclabel">
+                            <dt>#1e7f6c</dt>
+                            <dd>Public Label</dd>
+                          </dl>
+                        </div><!-- /Event color swatches -->
+                          
+                        <div class="span2 col-sm-4" style="margin-top: 12px;">
+                          <dl class="palette palette-competition">
+                            <dt>#F1C40F</dt>
+                            <dd>Competition</dd>
+                          </dl>
+                          <dl class="palette palette-competitionlabel">
+                            <dt>#F39C12</dt>
+                            <dd>Competition Label</dd>
+                          </dl>
+                        </div><!-- /Event color swatches -->
+                          
+                      </div>
+                        
+                        
+                        
+                    </div>
+
+                    <div class="col-sm-4">
+                      <h6 class="palette-headline">SWATCHES</h6>
+                      <p class="palette-paragraph">
+                        Colors — is almost the most important part of the <strong>Echo Brand</strong>. The <a href="http://adobe.ly/1ANHBaL">Echo Brand Colour Scheme</a> is based on a complimentary colour rule based on a set of design principles that specifically relate to color by using two opposing colors on the color wheel to create a theme with complementary colors.
+                      </p>
+                      <p class="palette-paragraph">
+                        For your convenience we also provide <strong>Swatches Preset</strong> <span>(Echo-Complementary-ColorSwatches.ase in the Pack folder).</span>
+                      </p>
+                      <p class="palette-paragraph">
+                        <strong>No gradients, no shadows.</strong>
+                      </p>
+                        <hr>
+                       <h6 class="palette-headline">Less Variables</h6> 
+                        <code>
+                        @echo-brand: #8b6f4d; <br>
+                            @echo-brand-lt: #d8b791; <br>
+                            @echo-brand-lt-bg: #ede9e6; <br>
+                            @echo-brand-dk: #40301e; <br>
+                            @echo-brand-link: #507a8c; <br>
+                            @echo-brand-focus: #183440; <br>
+                            @event-gaming: #e2a5a4; <br>
+                            @event-gaming-label: #a77c7b; <br>
+                            @event-nongaming: #90b3e6; <br>
+                            @event-nongaming-label: #354f77; <br>
+                            @event-public: #39d2b4; <br>
+                            @event-public-label: #1e7f6c; <br>
+                            @event-competition: #F1C40F; <br>
+                            @event-competition-label: #F39C12;
+                        </code>
+                        
+                    </div> <!-- /swatches desc -->
+                    
+                    
+                  </div>
+            
+            </div>
+        
+        </div>
+        
+        <div id="typography" class="row">
+            <hr>
+            <div class="col-sm-12">
+                <h3>Typography</h3>
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Fonts</h4>
+                        <p>The Echo Online Brand uses two san-serif fonts from the <a href="https://developers.google.com/fonts/?csw=1">Google Font API</a>. Headers use <b>Montserrat</b> and body text such as paragraphs call the <b>Open Sans</b> font.</p>
+                        <p><code>@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300); <br>
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700,400);</code></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Less Variables</h5>
+                        <code>@font-family-sans-serif:  'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;</code> <br>
+                        <code>@headings-font-family:    'Montserrat', sans-serif;</code>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4>Headers</h4>
+                        <h1>Header One</h1>
+                        <h2>Header Two</h2>
+                        <h3>Header Three</h3>
+                        <h4>Header Four</h4>
+                        <h5>Header Five</h5>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="header-align">Headings are used to denote different sections of content, usually consisting of related paragraphs and other HTML elements. They range from h1 to h5 and should be styled in a clear hierarchy (i.e., largest to smallest).</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4>Lead Paragraph</h4>
+                        <p class="lead">A lead paragraph in literature is the opening paragraph of an article, essay, news story or book chapter</p>
+                        <h4>Paragraph</h4>
+                        <p>Paragraphs are block level elements, meaning they stack vertically when repeated. Use them as such.</p>
+                    </div>
+                </div>
+            
+            </div>
+        
+        </div>
+        
+        <div id="buttons" class="row">
+            <hr>
+            <div class="col-sm-6">
+                <h3>Buttons</h3>
+                <h4>When to use</h4>
+                <p>Buttons are tied to an action of some kind (i.e. Submitting a form or closing a modal window).</p>
+                <hr>
+                <h4>When to use Anchor Tags</h4>
+                <p>When you need the button to take you somewhere (e.g. a sign up button), this is the perfect solution.</p>
+                <hr>
+                <h4>Less Variables</h4>
+                <p><code>
+                    .btn-default {
+  .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
+}<br>
+.btn-primary {
+  .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+}
+                    </code>
+                </p>
+                
+            </div>
+            <div class="col-sm-6" style="padding-top: 45px;">
+                <h4>Samples</h4>
+                <div class="push-down">
+                    <button type="button" class="btn btn-default">Default</button>
+                    <button type="button" class="btn btn-primary">Primary</button>
+                    <button type="button" class="btn btn-success">Success</button>
+                    <button type="button" class="btn btn-info">Info</button>
+                    <button type="button" class="btn btn-danger">Danger</button>
+                    <button type="button" class="btn btn-link">Link</button>
+                  </div>
+                  <div class="push-down">
+                      <button type="button" class="btn btn-lg btn-default">Large Button</button>
+                      <button type="button" class="btn btn-lg btn-primary">Large Button</button>
+                      <button type="button" class="btn btn-lg btn-link">Large Link</button>
+                  </div>
+                <div class="push-down">
+                    <button type="button" class="btn btn-sm btn-default">Small Button</button>
+                    <button type="button" class="btn btn-sm btn-primary">Small Button</button>
+                    <button type="button" class="btn btn-sm btn-success">Small Button</button>
+                    <button type="button" class="btn btn-sm btn-link">Small Link</button>
+                  </div>
+                  <div class="push-down">
+                      <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+                  </div>
+                <hr>
+                    <h4>Button Types</h4>
+                    <div class="push-down">
+                        <a class="btn btn-default" href="#" role="button">Link</a>
+                        <button class="btn btn-default" type="submit">Button</button>
+                        <input class="btn btn-default" type="button" value="Input">
+                        <input class="btn btn-default" type="submit" value="Submit">
+                    </div>
+                    <div>
+                        <code>
+                            &lt;a&gt; class="btn btn-default" href="#" role="button"&gt;Link&lt;/a&gt; <br>
+                            &lt;button class="btn btn-default" type="submit"&gt;Button&lt;/button&gt; <br>
+                            &lt;input class="btn btn-default" type="button" value="Input"&gt; <br>
+                            &lt;input class="btn btn-default" type="submit" value="Submit"&gt;<br>
+                        </code>
+                    </div>
+                        
+                    
+            </div>
+        
+        
+        </div>
+        
+        <div id="forms" class="row">
+            <hr>
+            
+            <div class="col-sm-12">
+                <h3>Forms</h3>
+                <h4>Elements</h4>
+                <p>A form should be marked up using it's default HTML properties. The ones we make use of include (in hierarchical order):</p>
+                <ul>
+                    <li>form</li>
+                    <li>label</li>
+                    <li>input</li>
+                    <li>select</li>
+                    <li>textarea</li>
+                    <li>button</li>
+                </ul>
+                
+                <form role="form" class="well">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Label Example</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Details here">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Input">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputFile">File upload</label>
+                    <input type="file" id="exampleInputFile">
+                    <p class="help-block">Example block-level help text here.</p>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> Check me out
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                
+            </div>
+        </div>
+        
+        <div id="lists" class="row">
+            <hr>
+            
+            <div class="col-sm-12">
+                <h3>Lists</h3>
+                
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>Lists are great for presenting a series of related phrases or sentences that need to be read faster (skimming).</p>
+                        <h4>Examples</h4>
+                        <div class="row">
+                            <div class="col-sm-4">
+                           <!--<p class="text-danger">More Coming…</p>-->
+                                <h5>No Bullet Points</h5>
+                                <ul class="list-unstyled">
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-4">
+                                <h5>Bullet Points</h5>
+                                <ul>
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-4">
+                                <h5>Numbered</h5>
+                                <ol>
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                    <li>List item example</li>
+                                </ol>
+                            </div>
+                         </div>
+                        
+                        <div class="row">
+                            
+                            <div class="col-sm-6">
+                                <h5>Data List</h5>
+                                <dl>
+                                  <dt>Description lists</dt>
+                                  <dd>A description list is perfect for defining terms.</dd>
+                                  <dt>Euismod</dt>
+                                  <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                  <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                                  <dt>Malesuada porta</dt>
+                                  <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                                </dl>
+                            </div>
+                        
+                        </div>
+                        
+                    </div>
+                
+                </div>
+
+            </div>
+        </div>
+        
+        <div id="components" class="row">
+            <hr>
+            
+            <div class="col-sm-12">
+                <h3>Components</h3>
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Loading Spinner</h4>
+                        
+                        <div class="example well">
+                            <span class="overlay"></span>
+                            <div class="loading circle"></div>
+                            <p class="lead">Example Text. Shoreditch gastropub distillery Truffaut hella beard +1 hoodie, vinyl tattooed mumblecore fixie ugh.</p>
+                            <p>Austin 90's chambray ennui seitan 8-bit. Bicycle rights pork belly drinking vinegar ennui, bitters meh YOLO Neutra iPhone chambray beard 8-bit.</p>
+                        </div>
+                    
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <h4>Event Type Details</h4>
+                        <p>
+                        <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#ExampleGamingEvent">Launch Gaming Modal</button>
+                            </p>
+                        <p>
+                            <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#ExampleNonGamingEvent">Launch Non&ndash;Gaming Modal</button>
+                        </p>
+                        <p>
+                            <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#ExamplePublicEvent">Launch Public Event Modal</button>
+                        </p>
+                        
+                        <p>
+                            <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#ExampleCompetitorEvent">Launch Competitor Event Modal</button>
+                        </p>
+                    </div>
+                
+                </div>
+            
+            </div>
+        
+        </div>
+        
+        
+    </div>
+    
+    
+    
+<!-- Modals -->
+    
+<!-- Modal - GAMING Event -->
+    
+        <div class="modal fade" id="ExampleGamingEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="echo">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="image-holder"></span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title" id="myModalLabel">Example Event Title</h2>
+              </div>
+              <div class="modal-body">
+                  
+                  <div class="col-sm-12 event-type-badges">
+                      <div class="gaming badge">Gaming</div>
+                      <div class="gaming-subcat badge">Promotion</div>
+                  
+                  </div>
+                  
+                  <div class="row">
+                      
+                      <div class="col-md-8">
+                          
+                          
+                  
+                          <dl class="dl-horizontal echo">
+                              <dt><i class="fa fa-clock-o"></i></dt>
+                              <dd>
+                                  <ul class="list-unstyled">
+                                    <li>Dates</li>
+                                    <li>Times</li>
+                                  </ul>
+                              </dd>
+                              <dt><i class="fa fa-map-marker"></i></dt>
+                              <dd>
+                                  <ul class="list-unstyled">
+                                    <li>Location</li>
+                                    <li>Venue</li>
+                                  </ul>
+                              </dd>
+                              
+<!--    ### ONLY SHOW FOR: Events & Corporate Box -->
+                              
+                              <dt><i class="fa fa-users sm"></i></dt>
+                              <dd>Amount of People</dd>
+                              
+<!--    ### Dynamic content based on Event Type 
+            i.e. Event, Promotion, Campaign, Corporate Box etc... 
+            li.title Header content change based on event type
+-->
+                              
+                              <dt><i class="fa fa-clipboard sm"></i></dt>
+                              <dd><h5>Details</h5>
+                                  <ul class="disc-align">
+                                      <li class="title">Entry Times, Locations &amp; Method</li>
+                                      <li>1 - 6 Dec every 30mins, 12:30 to 14:00, 7 - 12 Dec every 30mins, 19:00 to 20:30</li>
+                                      <li>MGF &amp; PGR</li>
+                                      <li>Play on compatible EGM with your membership card.</li>
+                                      <li class="title">Draw Dates &amp; Times</li>
+                                      <li>Everyday, 1 - 12 Dec</li>
+                                      <li>1 - 6 Dec every 30mins, 12:30 to 14:00, 7 - 12 Dec every 30mins, 19:00 to 20:30</li>
+                                      <li class="title">Entry Crieria</li>
+                                      <li>Random Selection</li>
+                                  </ul>
+                              </dd>
+                            </dl>
+                          
+                        </div>
+                      
+                        <div class="col-md-4">
+                            <img src="../image/default-artwork.png" class="img-responsive" alt="Responsive image">
+                        </div>
+                      
+                      
+                      </div>
+                  
+                    <div class="row">
+
+      <div class="col-sm-12">
+
+        <div class="panel-group" id="moreInfo_accordion" role="tablist" aria-multiselectable="true">
+
+          <div class="panel text-only panel-default">
+            <div class="panel-heading" role="tab" id="moreInfo">
+              <h6 class="panel-title">
+                <a data-toggle="collapse" href="#GamingeventDetailMore" aria-expanded="false" aria-controls="collapseOne" class="collapsed" target="_self">
+                  More information
+                </a>
+              </h6>
+            </div>
+            <div id="GamingeventDetailMore" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+              <div class="panel-body">
+                <ul class="disc-align">
+                  <li class="title">VIP Loyalty Event</li>
+                  <li>Yes – Red &amp; Red+</li>
+                  <li class="title">Prize Money</li>
+                  <li>1 Dec- 4 winners of $500 CD, 2 Dec- 4 winners of $750 CD, 3 Dec- 4 winners of $1000 CD, 4 Dec- 4
+                    winners of $1250 CD, 5 Dec- 4 winners of $1500 CD, 6 Dec- 4 winners of $1750 CD, 7 Dec- 4 winners of
+                    $500 cash, 8 Dec- 4 winners of $750 cash, 9 Dec- 4 winners of $1000 cash, 10 Dec- 4 winners of $1250
+                    cash, 11 Dec- 4 winners of $1500 cash, 12 Dec- 4 winner of $3000 cash
+                  </li>
+                  <li class="title">Comments</li>
+                  <li>Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    Ad vegan excepteur butcher vice lomo.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+                
+              </div>
+                
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="add-event-form.html" type="button" class="pull-left btn btn-primary">Edit Event</a>
+              </div>
+
+                
+                
+            </div>
+            </div>
+          </div>
+        </div>
+
+<!-- Modal - NON GAMING Event -->
+    
+        <div class="modal fade" id="ExampleNonGamingEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="echo">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="image-holder"></span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title" id="myModalLabel">Example Event Title</h2>
+              </div>
+              <div class="modal-body">
+                  
+                  <div class="col-sm-12 event-type-badges">
+                      <div class="nongaming badge">Non&ndash;Gaming</div>
+                      <div class="nongaming-subcat badge">Promotion</div>
+                  
+                  </div>
+                  
+                  <div class="row">
+                      
+                      <div class="col-md-8">
+                          
+                          
+                  
+                          <dl class="dl-horizontal echo">
+                              <dt><i class="fa fa-clock-o"></i></dt>
+                              <dd>
+                                  <ul class="list-unstyled">
+                                    <li>Dates</li>
+                                    <li>Times</li>
+                                  </ul>
+                              </dd>
+                              <dt><i class="fa fa-map-marker"></i></dt>
+                              <dd>
+                                  <ul class="list-unstyled">
+                                    <li>Location</li>
+                                    <li>Venue</li>
+                                  </ul>
+                              </dd>
+                              
+<!--    ### ONLY SHOW FOR: Events & Corporate Box -->
+                              
+                              <dt><i class="fa fa-users sm"></i></dt>
+                              <dd>Amount of People</dd>
+                              
+<!--    ### Dynamic content based on Event Type 
+            i.e. Event, Promotion, Campaign, Corporate Box etc... 
+            li.title Header content change based on event type
+-->
+                              
+                              <dt><i class="fa fa-clipboard sm"></i></dt>
+                              <dd><h5>Details</h5>
+                                  <ul class="disc-align">
+                                      <li class="title">Entry Times, Locations &amp; Method</li>
+                                      <li>1 - 6 Dec every 30mins, 12:30 to 14:00, 7 - 12 Dec every 30mins, 19:00 to 20:30</li>
+                                      <li>MGF &amp; PGR</li>
+                                      <li>Play on compatible EGM with your membership card.</li>
+                                      <li class="title">Draw Dates &amp; Times</li>
+                                      <li>Everyday, 1 - 12 Dec</li>
+                                      <li>1 - 6 Dec every 30mins, 12:30 to 14:00, 7 - 12 Dec every 30mins, 19:00 to 20:30</li>
+                                      <li class="title">Entry Crieria</li>
+                                      <li>Random Selection</li>
+                                  </ul>
+                              </dd>
+                            </dl>
+                          
+                        </div>
+                      
+                        <div class="col-md-4">
+                            <img src="../image/default-artwork.png" class="img-responsive" alt="Responsive image">
+                        </div>
+                      
+                      
+                      </div>
+                  
+                    <div class="row">
+
+      <div class="col-sm-12">
+
+        <div class="panel-group" id="moreInfo_accordion" role="tablist" aria-multiselectable="true">
+
+          <div class="panel text-only panel-default">
+            <div class="panel-heading" role="tab" id="moreInfo">
+              <h6 class="panel-title">
+                <a data-toggle="collapse" href="#NonGamingeventDetailMore" aria-expanded="false" aria-controls="collapseOne" class="collapsed" target="_self">
+                  More information
+                </a>
+              </h6>
+            </div>
+            <div id="NonGamingeventDetailMore" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+              <div class="panel-body">
+                <ul class="disc-align">
+                  <li class="title">VIP Loyalty Event</li>
+                  <li>Yes – Red &amp; Red+</li>
+                  <li class="title">Prize Money</li>
+                  <li>1 Dec- 4 winners of $500 CD, 2 Dec- 4 winners of $750 CD, 3 Dec- 4 winners of $1000 CD, 4 Dec- 4
+                    winners of $1250 CD, 5 Dec- 4 winners of $1500 CD, 6 Dec- 4 winners of $1750 CD, 7 Dec- 4 winners of
+                    $500 cash, 8 Dec- 4 winners of $750 cash, 9 Dec- 4 winners of $1000 cash, 10 Dec- 4 winners of $1250
+                    cash, 11 Dec- 4 winners of $1500 cash, 12 Dec- 4 winner of $3000 cash
+                  </li>
+                  <li class="title">Comments</li>
+                  <li>Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    Ad vegan excepteur butcher vice lomo.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+                
+              </div>
+                
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="add-event-form.html" type="button" class="pull-left btn btn-primary">Edit Event</a>
+              </div>
+
+                
+                
+            </div>
+            </div>
+          </div>
+        </div>
+    
+
+<!-- Modal - PUBLIC Event -->
+    
+        <div class="modal fade" id="ExamplePublicEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="echo">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="image-holder"></span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title" id="myModalLabel">Example Event Title</h2>
+              </div>
+              <div class="modal-body">
+                  
+                  <div class="col-sm-12 event-type-badges">
+                      <div class="public badge">Public</div>
+                      <div class="public-subcat badge">Holiday</div>
+                  
+                  </div>
+                  
+                  <div class="row">
+                      
+                      <div class="col-md-8">
+                          
+                          
+                  
+                          <dl class="dl-horizontal echo">
+                              <dt><i class="fa fa-clock-o"></i></dt>
+                              <dd>
+                                  <ul class="list-unstyled">
+                                    <li>Dates</li>
+                                    <li>Times</li>
+                                  </ul>
+                              </dd>
+                              <dt><i class="fa fa-map-marker"></i></dt>
+                              <dd>
+                                  <ul class="list-unstyled">
+                                    <li>Location</li>
+                                    <li>Venue</li>
+                                  </ul>
+                              </dd>
+                              
+<!--    ### ONLY SHOW FOR: Events & Corporate Box -->
+                              
+                              <dt><i class="fa fa-users sm"></i></dt>
+                              <dd>Amount of People</dd>
+                              
+<!--    ### Dynamic content based on Event Type 
+            i.e. Event, Promotion, Campaign, Corporate Box etc... 
+            li.title Header content change based on event type
+-->
+                              
+                              <dt><i class="fa fa-clipboard sm"></i></dt>
+                              <dd><h5>Details</h5>
+                                  <ul class="disc-align">
+                                      <li class="title">Entry Times, Locations &amp; Method</li>
+                                      <li>1 - 6 Dec every 30mins, 12:30 to 14:00, 7 - 12 Dec every 30mins, 19:00 to 20:30</li>
+                                      <li>MGF &amp; PGR</li>
+                                      <li>Play on compatible EGM with your membership card.</li>
+                                      <li class="title">Draw Dates &amp; Times</li>
+                                      <li>Everyday, 1 - 12 Dec</li>
+                                      <li>1 - 6 Dec every 30mins, 12:30 to 14:00, 7 - 12 Dec every 30mins, 19:00 to 20:30</li>
+                                      <li class="title">Entry Crieria</li>
+                                      <li>Random Selection</li>
+                                  </ul>
+                              </dd>
+                            </dl>
+                          
+                        </div>
+                      
+                        <div class="col-md-4">
+                            <img src="../image/default-artwork.png" class="img-responsive" alt="Responsive image">
+                        </div>
+                      
+                      
+                      </div>
+                  
+                    <div class="row">
+
+      <div class="col-sm-12">
+
+        <div class="panel-group" id="moreInfo_accordion" role="tablist" aria-multiselectable="true">
+
+          <div class="panel text-only panel-default">
+            <div class="panel-heading" role="tab" id="moreInfo">
+              <h6 class="panel-title">
+                <a data-toggle="collapse" href="#PubliceventDetailMore" aria-expanded="false" aria-controls="collapseOne" class="collapsed" target="_self">
+                  More information
+                </a>
+              </h6>
+            </div>
+            <div id="PubliceventDetailMore" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+              <div class="panel-body">
+                <ul class="disc-align">
+                  <li class="title">VIP Loyalty Event</li>
+                  <li>Yes – Red &amp; Red+</li>
+                  <li class="title">Prize Money</li>
+                  <li>1 Dec- 4 winners of $500 CD, 2 Dec- 4 winners of $750 CD, 3 Dec- 4 winners of $1000 CD, 4 Dec- 4
+                    winners of $1250 CD, 5 Dec- 4 winners of $1500 CD, 6 Dec- 4 winners of $1750 CD, 7 Dec- 4 winners of
+                    $500 cash, 8 Dec- 4 winners of $750 cash, 9 Dec- 4 winners of $1000 cash, 10 Dec- 4 winners of $1250
+                    cash, 11 Dec- 4 winners of $1500 cash, 12 Dec- 4 winner of $3000 cash
+                  </li>
+                  <li class="title">Comments</li>
+                  <li>Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    Ad vegan excepteur butcher vice lomo.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+                
+              </div>
+                
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="add-event-form.html" type="button" class="pull-left btn btn-primary">Edit Event</a>
+              </div>
+
+                
+                
+            </div>
+            </div>
+          </div>
+        </div>    
+    
+ <!-- Modal - Competitor Event -->
+    
+        <div class="modal fade" id="ExampleCompetitorEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="echo">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="image-holder"></span><span class="sr-only">Close</span></button>
+                <h2 class="modal-title" id="myModalLabel">Example Event Title</h2>
+              </div>
+              <div class="modal-body">
+                  
+                  <div class="col-sm-12 event-type-badges">
+                      <div class="competition badge">Competitor Event</div>
+                      <div class="gaming badge">Gaming</div>
+                      <div class="gaming-subcat badge">Promotion</div>
+                  
+                  </div>
+                  
+                  <div class="row">
+                      
+                      <div class="col-md-8">
+                          
+                          
+                  
+                          <dl class="dl-horizontal echo">
+                              <dt><i class="fa fa-clock-o"></i></dt>
+                              <dd>
+                                  <ul class="list-unstyled">
+                                    <li>Dates</li>
+                                    <li>Times</li>
+                                  </ul>
+                              </dd>
+                              <dt><i class="fa fa-map-marker"></i></dt>
+                              <dd>
+                                  <ul class="list-unstyled">
+                                    <li>Location</li>
+                                    <li>Venue</li>
+                                  </ul>
+                              </dd>
+                              
+<!--    ### ONLY SHOW FOR: Events & Corporate Box -->
+                              
+                              <dt><i class="fa fa-users sm"></i></dt>
+                              <dd>Amount of People</dd>
+                              
+<!--    ### Dynamic content based on Event Type 
+            i.e. Event, Promotion, Campaign, Corporate Box etc... 
+            li.title Header content change based on event type
+-->
+                              
+                              <dt><i class="fa fa-clipboard sm"></i></dt>
+                              <dd><h5>Details</h5>
+                                  <ul class="disc-align">
+                                      <li class="title">Entry Times, Locations &amp; Method</li>
+                                      <li>1 - 6 Dec every 30mins, 12:30 to 14:00, 7 - 12 Dec every 30mins, 19:00 to 20:30</li>
+                                      <li>MGF &amp; PGR</li>
+                                      <li>Play on compatible EGM with your membership card.</li>
+                                      <li class="title">Draw Dates &amp; Times</li>
+                                      <li>Everyday, 1 - 12 Dec</li>
+                                      <li>1 - 6 Dec every 30mins, 12:30 to 14:00, 7 - 12 Dec every 30mins, 19:00 to 20:30</li>
+                                      <li class="title">Entry Crieria</li>
+                                      <li>Random Selection</li>
+                                  </ul>
+                              </dd>
+                            </dl>
+                          
+                        </div>
+                      
+                        <div class="col-md-4">
+                            <img src="../image/default-artwork.png" class="img-responsive" alt="Responsive image">
+                        </div>
+                      
+                      
+                      </div>
+                  
+                    <div class="row">
+
+      <div class="col-sm-12">
+
+        <div class="panel-group" id="moreInfo_accordion" role="tablist" aria-multiselectable="true">
+
+          <div class="panel text-only panel-default">
+            <div class="panel-heading" role="tab" id="moreInfo">
+              <h6 class="panel-title">
+                <a data-toggle="collapse" href="#CompeventDetailMore" aria-expanded="false" aria-controls="collapseOne" class="collapsed" target="_self">
+                  More information
+                </a>
+              </h6>
+            </div>
+            <div id="CompeventDetailMore" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+              <div class="panel-body">
+                <ul class="disc-align">
+                  <li class="title">VIP Loyalty Event</li>
+                  <li>Yes – Red &amp; Red+</li>
+                  <li class="title">Prize Money</li>
+                  <li>1 Dec- 4 winners of $500 CD, 2 Dec- 4 winners of $750 CD, 3 Dec- 4 winners of $1000 CD, 4 Dec- 4
+                    winners of $1250 CD, 5 Dec- 4 winners of $1500 CD, 6 Dec- 4 winners of $1750 CD, 7 Dec- 4 winners of
+                    $500 cash, 8 Dec- 4 winners of $750 cash, 9 Dec- 4 winners of $1000 cash, 10 Dec- 4 winners of $1250
+                    cash, 11 Dec- 4 winners of $1500 cash, 12 Dec- 4 winner of $3000 cash
+                  </li>
+                  <li class="title">Comments</li>
+                  <li>Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    Ad vegan excepteur butcher vice lomo.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+                
+              </div>
+                
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a href="add-event-form.html" type="button" class="pull-left btn btn-primary">Edit Event</a>
+              </div>
+
+                
+                
+            </div>
+            </div>
+          </div>
+        </div>
+    
+<!-- END Modals -->
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../bower_components/moment/moment.js"></script>
+  <script src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-cookies/angular-cookies.min.js"></script>
+
+  <script src="../bower_components/angular-route/angular-route.js"></script>
+  <script src="../bower_components/angular-moment/angular-moment.min.js"></script>
+  <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+  <script src="../bower_components/angular-file-upload/angular-file-upload.js"></script>
+  <script src="../bower_components/angular-strap/dist/angular-strap.min.js"></script>
+  <script src="../bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+  <script src="../bower_components/daypilot/js/daypilot-all.min.js?v=1338"></script>
+
+  <script src="../app.js"></script>
+  <script src="../services/lb-services.js"></script>
+  <script src="../views/view1/view1.js"></script>
+  <script src="../views/view2/view2.js"></script>
+  <script src="../views/home/home.js"></script>
+  <script src="../views/home/advance-filter.js"></script>
+  <script src="../views/event/add-event-form.js"></script>
+
+  <script src="../auth/auth.js"></script>
+
+  <script src="../views/event/event-details.js"></script>
+  <script src="../components/version/version.js"></script>
+  <script src="../components/version/version-directive.js"></script>
+  <script src="../components/version/interpolate-filter.js"></script>
+
+
+</body>
+</html>

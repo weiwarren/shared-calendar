@@ -1,0 +1,29 @@
+{
+  "restApiRoot": "/api",
+  "host": "local.echo-kloud.com",
+  "url": "local.echo-kloud.com",
+  "remoting": {
+    "context": {
+      "enableHttpContext": false
+    },
+    "rest": {
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "300kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "300kb"
+    },
+    "cors": {
+      "origin": true,
+      "credentials": true
+    },
+    "errorHandler": {
+      "disableStackTrace": false
+    }
+  }
+}

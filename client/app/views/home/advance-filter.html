@@ -1,0 +1,92 @@
+<div class="modal-content echo">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$close()"><span class="image-holder"></span><span class="sr-only">Close</span>
+    </button>
+    <h2 class="modal-title">Advanced Filters</h2>
+  </div>
+  <div class="modal-body filter-set">
+    <fieldset>
+      <h4><label><input type="checkbox" class="checkall" ng-model="filters.product.all"
+                        ng-change="checkAll(filters.product, products)"> Products</label>
+      </h4>
+
+      <div class="row">
+        <div class="col-md-4" ng-repeat="p in products">
+          <ul class="list-unstyled">
+            <li><label><input type="checkbox" ng-model="p.checked" ng-checked="p.checked"
+                              ng-change="updateFilter(filters.product,products)">
+              {{p.name}}</label></li>
+          </ul>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <h4><label><input type="checkbox" class="checkall" ng-model="filters.customer.all"
+                        ng-change="checkAll(filters.customer, customers)"> Customers</label></h4>
+
+      <div class="row">
+        <div class="col-md-4" ng-repeat="c in customers">
+          <ul class="list-unstyled">
+            <li><label><input type="checkbox" ng-model="c.checked" ng-checked="c.checked"
+                              ng-change="updateFilter(filters.customer,customers)">
+              {{c.name}}</label></li>
+          </ul>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <h4><label><input type="checkbox" class="checkall" ng-model="filters.venue.all"
+                        ng-change="checkAll(filters.venue, venues)"> Venues</label></h4>
+
+      <div class="row">
+        <div class="col-md-4" ng-repeat="v in venues track by $index">
+          <ul class="list-unstyled">
+            <li><label><input type="checkbox" ng-model="v.checked" ng-checked="v.checked"
+                              ng-change="updateFilter(filters.venue,venues)">
+              {{v.name}}</label></li>
+          </ul>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset ng-show="debug">
+      <h4><label><input type="checkbox" class="checkall" checked> Geographic</label></h4>
+
+      <div class="row">
+        <div class="col-md-4">
+          <ul class="list-unstyled">
+            <li><label><input type="checkbox" checked> Local (Syd)</label></li>
+            <li><label><input type="checkbox" checked> Domestic</label></li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <ul class="list-unstyled">
+            <li><label><input type="checkbox" checked> Local (GC)</label></li>
+            <li><label><input type="checkbox" checked> Regional</label></li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <ul class="list-unstyled">
+            <li><label><input type="checkbox" checked> Local (Bris)</label></li>
+            <li><label><input type="checkbox" checked> International</label></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+
+
+  <div class="modal-footer">
+    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+    <button type="button" class="btn btn-primary btn-lg pull-left" ng-click="apply()">Apply</button>
+  </div>
+
+
+</div>

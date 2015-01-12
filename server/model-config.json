@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "public": false
+  },
+  "user": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "accessToken": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "userCredential": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "userIdentity": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "event": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "category": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "property": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "container": {
+    "dataSource": "storage",
+    "public": true
+  },
+  "eventType": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "product":{
+    "dataSource":"mongodb",
+    "public": true
+  },
+  "customer":{
+    "dataSource":"mongodb",
+    "public": true
+  },
+  "tier": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "duration": {
+    "dataSource": "mongodb",
+    "public": true
+  }
+}

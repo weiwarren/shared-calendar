@@ -1,0 +1,21 @@
+extends ../layouts/layout
+
+block head
+  title WhenHub API Server
+
+block content
+  .row
+    .col-md-6.col-md-offset-3
+      h1 Login:
+      form(role='form', action='/auth/adfs', method='post')
+        ul.list-unstyled
+          li
+            a.btn.btn-primary(href='/local') Login with local account
+          li.hidden
+            a.btn.btn-primary(href="/auth/facebook") Login with Facebook
+          li.hidden
+            a.btn.btn-primary(href="/auth/google") Login with Google
+          li.hidden
+            a.btn.btn-primary(href="/auth/twitter") Login with Twitter
+          li
+            button.btn.btn-primary(type='submit') Login wtih ADFS

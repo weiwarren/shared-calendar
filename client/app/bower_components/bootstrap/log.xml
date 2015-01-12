@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<entries>
+  <entry time="2015-01-11T23:19:23.6570316Z" id="bf08df0d-7d7d-45b7-8e78-d49cf1ff507e" type="0">
+    <message>Updating submodules.</message>
+  </entry>
+  <entry time="2015-01-11T23:19:23.8132782Z" id="02fa2c47-5ece-4f8e-bc27-128b008a3df0" type="0">
+    <message>Preparing deployment for commit id '0cffea1517'.</message>
+  </entry>
+  <entry time="2015-01-11T23:19:26.7697345Z" id="149030a5-5c3a-4c30-b362-9a1f78a660b0" type="0">
+    <message>Generating deployment script.</message>
+    <entry time="2015-01-11T23:19:26.8947269Z" id="6f6b83d1-4625-42f1-a2dc-e994726c43d9" type="0">
+      <message>Using the following command to generate deployment script: 'azure site deploymentscript -y --no-dot-deployment -r "D:\home\site\repository" -o "D:\home\site\deployments\tools" --node --sitePath "D:\home\site\repository"'.</message>
+    </entry>
+    <entry time="2015-01-11T23:19:27.3634711Z" id="1e0b2e77-1b51-4351-8580-c82edbfb5845" type="0">
+      <message>Generating deployment script for node.js Web Site</message>
+    </entry>
+  </entry>
+  <entry time="2015-01-11T23:19:27.5665933Z" id="000ef17c-382a-4c5b-ae19-e5968e6fec2f" type="1">
+    <message>Running deployment command...</message>
+    <entry time="2015-01-11T23:19:27.597848Z" id="189b8929-fba7-4382-814f-8393926d90ab" type="0">
+      <message>Command: "D:\home\site\deployments\tools\deploy.cmd"</message>
+    </entry>
+    <entry time="2015-01-11T23:19:28.222844Z" id="3d3a293f-063b-4edc-9d3f-1366f1b1f245" type="0">
+      <message>Handling node.js deployment.</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.2853193Z" id="75e65917-baed-4dbd-9d89-2ae083269d25" type="0">
+      <message>KuduSync.NET from: 'D:\home\site\repository' to: 'D:\home\site\wwwroot'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.3165778Z" id="9597bede-0b15-437e-b523-c68f36108654" type="0">
+      <message>Deleting file: 'hostingstart.html'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.3478272Z" id="385d55cb-4f34-492b-b6f4-a63d0f69efff" type="0">
+      <message>Copying file: '.editorconfig'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.3790747Z" id="ae5a6c6a-133a-46d8-b516-4307d73bd1ef" type="0">
+      <message>Copying file: '.gitignore'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.4259437Z" id="1070d30f-a291-48cf-a35c-a724f09d829b" type="0">
+      <message>Copying file: '.jshintignore'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.4728247Z" id="4e4c9ac2-ee88-47c2-a468-c9abf4e60ab8" type="0">
+      <message>Copying file: '.jshintrc'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.5040731Z" id="82223200-4933-4be1-abd3-96581323a82f" type="0">
+      <message>Copying file: '.npmignore'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.5509465Z" id="59321bcb-a9d3-4c2f-9437-a6d26845e7c7" type="0">
+      <message>Copying file: 'iisnode.js'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.5665699Z" id="b5203d72-cb7b-413c-9545-ec679f71b618" type="0">
+      <message>Copying file: 'package.json'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.5978147Z" id="0fef1df7-97f8-448a-8bca-d9e752ce2eca" type="0">
+      <message>Copying file: 'package.json.template'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.6290667Z" id="7a4b1d4e-09cf-4c68-848d-d921861f6c64" type="0">
+      <message>Copying file: 'package.production.json'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.6915749Z" id="268c8704-d170-41d3-801d-3963113ebfa0" type="0">
+      <message>Copying file: 'Procfile'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.7228149Z" id="ea7e181e-28e5-4806-a6f4-4199d1380fff" type="0">
+      <message>Copying file: 'saml.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.7704588Z" id="91ca68e5-6983-4dbc-bac4-4d94db8428a7" type="0">
+      <message>Copying file: 'strongloop.json'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.8017083Z" id="e7d19e83-5f50-4355-84ae-c88db29a9c77" type="0">
+      <message>Copying file: 'web.config'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.848583Z" id="fbc5e42a-35ae-46cb-a948-d40f97d4bcf9" type="0">
+      <message>Copying file: '.idea\.name'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:29.9423456Z" id="d212ece3-3be4-405f-8e31-bdfbdad5766e" type="0">
+      <message>Copying file: '.idea\encodings.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.0048348Z" id="d28b5f08-b1d5-4e55-b76d-6e19882ee5ed" type="0">
+      <message>Copying file: '.idea\jsLibraryMappings.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.0985874Z" id="57890b09-966e-4b6a-9870-53dc2b349095" type="0">
+      <message>Copying file: '.idea\misc.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.1454543Z" id="5139bd43-4ca5-4d7e-b3c9-a00aaac28ddc" type="0">
+      <message>Copying file: '.idea\modules.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.2079607Z" id="81730e90-b9ca-4fbe-9f68-a44bb7ced6cd" type="0">
+      <message>Copying file: '.idea\SharedCalendar.iml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.254828Z" id="c385c1af-5b00-4192-9ae5-bbbe7430dd4f" type="0">
+      <message>Copying file: '.idea\vcs.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.3017105Z" id="85f22207-e69d-4b42-bbb0-4c92b36d5f4a" type="0">
+      <message>Copying file: '.idea\watcherTasks.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.3485824Z" id="72a92bfc-ab5f-4d82-ad8d-2c060909b595" type="0">
+      <message>Copying file: '.idea\workspace.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.3954663Z" id="4faa07c9-cec8-447d-8db6-2275f0470370" type="0">
+      <message>Copying file: '.idea\libraries\SC_node_modules.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.4423254Z" id="ae82c02d-6250-4618-8097-e865b6cd37ff" type="0">
+      <message>Copying file: '.idea\scopes\Bootstrap.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.4892002Z" id="d40b8637-405b-41e5-9e58-a45a3b74065c" type="0">
+      <message>Copying file: '.idea\scopes\scope_settings.xml'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.5204499Z" id="ef567a70-d31d-4c03-8056-771ea1675f0a" type="0">
+      <message>Copying file: 'client\bower.json'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.5673241Z" id="7afa4f05-38c6-4f5b-8eb2-6383dfffb286" type="0">
+      <message>Copying file: 'client\karma.conf.js'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.6141981Z" id="cf481b06-edcd-4631-aa11-c09d722f36f8" type="0">
+      <message>Copying file: 'client\LICENSE'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.6923304Z" id="6123557e-1693-40e3-9125-72e486e7c236" type="0">
+      <message>Copying file: 'client\package.json'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.7548208Z" id="f0f9cbf5-8fdd-4792-9341-8989dbc9c144" type="0">
+      <message>Copying file: 'client\README.md'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.8016968Z" id="d16facd8-1b91-4e24-a61c-660e14973760" type="0">
+      <message>Copying file: 'client\app\app.css'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.8329462Z" id="36d41b8c-167f-4860-8d62-57cde21eba58" type="0">
+      <message>Copying file: 'client\app\app.js'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.8641961Z" id="4d12c445-e522-4289-94d8-f8d29c8dec69" type="0">
+      <message>Copying file: 'client\app\config.codekit'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.895445Z" id="b8c66e6e-12d1-4f73-9944-6c0b95cb6643" type="0">
+      <message>Copying file: 'client\app\index-async.html'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.9267021Z" id="426a83e9-543b-47f2-a744-59c7f5be6bca" type="0">
+      <message>Copying file: 'client\app\index.html'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:30.9579458Z" id="33fb9a85-a0cc-4cfe-a0a5-283813f7af4e" type="0">
+      <message>Copying file: 'client\app\auth\auth.html'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.0048209Z" id="6816b486-a1e7-4880-b06c-27c3795890b0" type="0">
+      <message>Copying file: 'client\app\auth\auth.js'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.0985691Z" id="fc8272d8-1009-4afa-a44e-b1f832a7635d" type="0">
+      <message>Copying file: 'client\app\bower_components\angular\.bower.json'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.1454438Z" id="4c184c15-14a5-4ec7-a0cd-f90eb48fcbe1" type="0">
+      <message>Copying file: 'client\app\bower_components\angular\angular-csp.css'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.1923151Z" id="baa90d84-2866-42bf-8caf-a4dfc6ee125a" type="0">
+      <message>Copying file: 'client\app\bower_components\angular\angular.js'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.2235651Z" id="6cc486d3-3f93-4bc0-9e78-2503f11b5bf0" type="0">
+      <message>Copying file: 'client\app\bower_components\angular\angular.min.js'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.2860654Z" id="2a1e5dc0-dc97-4f9c-a4ad-fd77e86a6d4e" type="0">
+      <message>Copying file: 'client\app\bower_components\angular\angular.min.js.gzip'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.3173226Z" id="bfe6eb7c-edb5-4412-8fd3-15185ebe4a90" type="0">
+      <message>Copying file: 'client\app\bower_components\angular\angular.min.js.map'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.379821Z" id="974d28c0-1175-4cfc-8448-2cf475019953" type="0">
+      <message>Copying file: 'client\app\bower_components\angular\bower.json'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.4266881Z" id="c526e6b1-a5c7-46d2-909b-8414158e4153" type="0">
+      <message>Copying file: 'client\app\bower_components\angular\README.md'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.4735687Z" id="5c861d15-ea41-451b-99e8-d6ec0fff3849" type="0">
+      <message>Copying file: 'client\app\bower_components\angular-animate\.bower.json'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.5204369Z" id="059d5915-e465-442f-8455-9b5486f046fe" type="0">
+      <message>Copying file: 'client\app\bower_components\angular-animate\angular-animate.js'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.5516861Z" id="6dafeea9-1474-42f8-831a-7e632bcc6d67" type="0">
+      <message>Copying file: 'client\app\bower_components\angular-animate\angular-animate.min.js'</message>
+    </entry>
+    <entry time="2015-01-11T23:19:31.6141918Z" id="bf1367e8-0168-4337-bd6d-d113a52aefa7" type="0">
+      <message>Omitting next output lines...</message>
+    </entry>
+    <entry time="2015-01-11T23:19:50.4015406Z" id="bd619f47-ff3f-44c1-82fa-25d03ed203c1" type="0">
+      <message>Processed 573 files...</message>
+    </entry>
+    <entry time="2015-01-11T23:20:10.4205599Z" id="c47764b4-f042-4624-ae5a-c0a50c8e7123" type="0">
+      <message>Processed 1079 files...</message>
+    </entry>
+    <entry time="2015-01-11T23:20:21.8750658Z" id="753071c1-ee18-4787-92a6-0efc6bd5dc3d" type="0">
+      <message>Node.js versions available on the platform are: 0.6.17, 0.6.20, 0.8.2, 0.8.19, 0.8.26, 0.8.27, 0.8.28, 0.10.5, 0.10.18, 0.10.21, 0.10.24, 0.10.26, 0.10.28, 0.10.29, 0.10.31, 0.10.32.</message>
+    </entry>
+    <entry time="2015-01-11T23:20:21.9219465Z" id="254a0e4b-a93b-44d5-9c3a-9a932eed6c16" type="0">
+      <message>Selected node.js version 0.10.32. Use package.json file to choose a different version.</message>
+    </entry>
+    <entry time="2015-01-11T23:20:21.9692295Z" id="8de489e6-cb3a-4fba-a4a7-dc133623b148" type="0">
+      <message>Updating iisnode.yml at D:\home\site\wwwroot\iisnode.yml</message>
+    </entry>
+    <entry time="2015-01-11T23:20:26.4844101Z" id="c189ac33-6a1e-460e-a206-3c2501458f77" type="1">
+      <message>npm WARN deprecated strong-cli@2.6.4: The strong-cli package has been renamed to strongloop. Please uninstall strong-cli and install strongloop instead.</message>
+    </entry>
+    <entry time="2015-01-11T23:20:55.9245829Z" id="b1be3c83-1c03-4f60-aaf9-48c3ab6b0aca" type="1">
+      <message>npm WARN deprecated object-keys@0.2.0: Please update to the latest object-keys</message>
+    </entry>
+    <entry time="2015-01-11T23:21:07.6588818Z" id="b240cc43-98ec-4760-a59f-9ef435d5dcff" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:07.7213833Z" id="ac6040d0-2bc5-4a43-a7e4-3cd3493fb705" type="0">
+      <message>&gt; node-syslog@1.1.7 install D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\node-syslog</message>
+    </entry>
+    <entry time="2015-01-11T23:21:07.9713825Z" id="0c6d8d61-f4ef-47df-b0be-e30fabdd00d6" type="0">
+      <message>&gt; node-gyp rebuild</message>
+    </entry>
+    <entry time="2015-01-11T23:21:08.0963806Z" id="5a60eadb-97c9-4136-be05-e8f35ace1407" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:08.1901306Z" id="a4f9a731-6e5d-489d-a474-02d799c65ec4" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:08.2682523Z" id="00658c3f-0e7b-418a-a03a-1fb7d3b3f61b" type="0">
+      <message>D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\node-syslog&gt;node "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild </message>
+    </entry>
+    <entry time="2015-01-11T23:21:44.5927651Z" id="17461443-b019-4710-b318-63083846e259" type="0">
+      <message>Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.</message>
+    </entry>
+    <entry time="2015-01-11T23:21:44.8427593Z" id="400a7edc-79e3-46d2-a1dd-04bda4825649" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\node-syslog\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:21:44.9677581Z" id="e4f4815d-cd71-46d8-95be-695e2f7cc291" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:45.0146319Z" id="36eab722-88ea-4c0a-93e5-c8df61fd18d8" type="0">
+      <message>&gt; bcrypt@0.7.8 install D:\home\site\wwwroot\node_modules\passport-ldapauth\node_modules\ldapauth-fork\node_modules\bcrypt</message>
+    </entry>
+    <entry time="2015-01-11T23:21:45.061507Z" id="2730307d-e86b-467a-9489-f229c9496156" type="0">
+      <message>&gt; node-gyp rebuild</message>
+    </entry>
+    <entry time="2015-01-11T23:21:45.1396325Z" id="f2ad5269-dd7a-49d3-b63d-a26c5fe5f83f" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:45.3740033Z" id="56f4f125-54cf-4cd6-ba59-520805d528e4" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:45.4208786Z" id="73805e2d-a5c6-469b-8dab-496995462b1b" type="0">
+      <message>D:\home\site\wwwroot\node_modules\passport-ldapauth\node_modules\ldapauth-fork\node_modules\bcrypt&gt;node "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild </message>
+    </entry>
+    <entry time="2015-01-11T23:21:45.436539Z" id="e6bf8cab-e395-490b-b8ca-f99f3be6f3d5" type="1">
+      <message>npm WARN engine hawk@0.10.2: wanted: {"node":"0.8.x"} (current: {"node":"0.10.32","npm":"1.4.28"})</message>
+    </entry>
+    <entry time="2015-01-11T23:21:45.5458973Z" id="4688303d-1af4-480a-a79b-a2eab0aded81" type="1">
+      <message>npm WARN optional dep failed, continuing node-syslog@1.1.7</message>
+    </entry>
+    <entry time="2015-01-11T23:21:49.8895713Z" id="77caa1e3-ee56-42da-8ed1-c619d86586e5" type="0">
+      <message>Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.</message>
+    </entry>
+    <entry time="2015-01-11T23:21:50.1083164Z" id="ef3ce0e7-68f8-4ca4-bf03-746397ea806c" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\passport-ldapauth\node_modules\ldapauth-fork\node_modules\bcrypt\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:21:50.2217063Z" id="0c67cb8e-4d7f-4fee-b441-cfb7277650a2" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:50.2958204Z" id="9cc1fe03-4476-4c69-9aff-76f6a8fb8995" type="0">
+      <message>&gt; heapdump@0.2.10 install D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\heapdump</message>
+    </entry>
+    <entry time="2015-01-11T23:21:50.3739388Z" id="58ff5e5a-257d-412f-b536-4160742a8378" type="0">
+      <message>&gt; node-gyp rebuild</message>
+    </entry>
+    <entry time="2015-01-11T23:21:50.6708106Z" id="2c5b1ca7-a410-49e7-95ed-bbbc9d7123e5" type="1">
+      <message>npm WARN optional dep failed, continuing bcrypt@0.7.8</message>
+    </entry>
+    <entry time="2015-01-11T23:21:50.7176857Z" id="2f6b9362-9016-48c9-9678-d1e8906174a6" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:50.7645584Z" id="7562d9f8-94e1-4c38-91c4-e47ccea460bd" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:21:50.8114337Z" id="70151599-8607-4be7-a86b-32945918c3fa" type="0">
+      <message>D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\heapdump&gt;node "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild </message>
+    </entry>
+    <entry time="2015-01-11T23:21:54.4676371Z" id="d9018484-34a5-474d-906b-684f34dacce7" type="0">
+      <message>Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.</message>
+    </entry>
+    <entry time="2015-01-11T23:21:54.7020076Z" id="d8a72a1f-9f82-4035-b16f-97454ef6a886" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\heapdump\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:21:56.0301163Z" id="cc0e9a9f-48ae-4d1b-bc1e-1d091ac84383" type="1">
+      <message>npm WARN engine cryptiles@0.1.3: wanted: {"node":"0.8.x"} (current: {"node":"0.10.32","npm":"1.4.28"})</message>
+    </entry>
+    <entry time="2015-01-11T23:21:56.1088011Z" id="818925e6-9fad-4255-b56a-23c2aa40d26c" type="1">
+      <message>npm WARN engine sntp@0.1.4: wanted: {"node":"0.8.x"} (current: {"node":"0.10.32","npm":"1.4.28"})</message>
+    </entry>
+    <entry time="2015-01-11T23:21:56.2347744Z" id="da7d79f2-1ee0-4807-8cdd-37d19d3947a9" type="1">
+      <message>npm WARN engine boom@0.3.8: wanted: {"node":"0.8.x"} (current: {"node":"0.10.32","npm":"1.4.28"})</message>
+    </entry>
+    <entry time="2015-01-11T23:21:56.405111Z" id="82160617-66f1-402b-a3b5-869ed05939dc" type="1">
+      <message>npm WARN engine hoek@0.7.6: wanted: {"node":"0.8.x"} (current: {"node":"0.10.32","npm":"1.4.28"})</message>
+    </entry>
+    <entry time="2015-01-11T23:22:00.8894297Z" id="4fc674f5-276b-4bc5-9de8-0404047f52f6" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:00.9519309Z" id="1fc6d3c8-e9f7-42c4-9871-bb61aa2877f0" type="0">
+      <message>&gt; strong-agent@0.4.14 install D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\strong-agent</message>
+    </entry>
+    <entry time="2015-01-11T23:22:01.0300538Z" id="9ddf47a5-1747-4063-aca7-a34e55651245" type="0">
+      <message>&gt; node-gyp rebuild || exit 0</message>
+    </entry>
+    <entry time="2015-01-11T23:22:01.2644255Z" id="2b3a3aa3-8617-4629-99b1-7d319b830226" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:01.4519211Z" id="f3ea7ee3-f0b1-46b0-b126-2b2a943cea35" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:01.5456695Z" id="e5b2d666-5eae-40c9-a79d-40e399adea16" type="0">
+      <message>D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\strong-agent&gt;node "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild </message>
+    </entry>
+    <entry time="2015-01-11T23:22:05.4049958Z" id="fa67b2e1-30e3-4e4a-9e38-f45c338bd751" type="0">
+      <message>Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.</message>
+    </entry>
+    <entry time="2015-01-11T23:22:05.7174917Z" id="05f963e5-9989-4181-9d19-ba761ccef937" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\strong-supervisor\node_modules\strong-agent\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:22:05.8426968Z" id="0527558c-0ac5-4c0f-992f-348415d798bd" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:05.9049906Z" id="a828c068-edce-4d0f-97d2-6c3d343e9a47" type="0">
+      <message>&gt; dtrace-provider@0.2.8 install D:\home\site\wwwroot\node_modules\passport-ldapauth\node_modules\ldapauth-fork\node_modules\ldapjs\node_modules\dtrace-provider</message>
+    </entry>
+    <entry time="2015-01-11T23:22:05.9525732Z" id="8086c548-2e42-4409-9671-b5677d6796ff" type="0">
+      <message>&gt; node-gyp rebuild</message>
+    </entry>
+    <entry time="2015-01-11T23:22:06.264361Z" id="767d4568-9a2c-40ac-b7b7-683cf77b2f06" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:06.3268605Z" id="a1996a93-8fbc-4139-9f57-b14d0a8c0a1b" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:06.3893599Z" id="04140752-8dfe-4604-a15c-8b5a41a86407" type="0">
+      <message>D:\home\site\wwwroot\node_modules\passport-ldapauth\node_modules\ldapauth-fork\node_modules\ldapjs\node_modules\dtrace-provider&gt;node "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild </message>
+    </entry>
+    <entry time="2015-01-11T23:22:10.9205512Z" id="a1c98fc2-4bb0-4a44-8850-e4d4f80135c9" type="0">
+      <message>Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.</message>
+    </entry>
+    <entry time="2015-01-11T23:22:11.1549234Z" id="f2c5c72c-ad97-4157-bbdf-f895b44f1654" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\passport-ldapauth\node_modules\ldapauth-fork\node_modules\ldapjs\node_modules\dtrace-provider\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:22:11.2959737Z" id="5c0cf5be-fcce-4c01-af2a-9f9a69c86eb1" type="1">
+      <message>npm WARN optional dep failed, continuing dtrace-provider@0.2.8</message>
+    </entry>
+    <entry time="2015-01-11T23:22:25.4246405Z" id="10f71aa7-00d5-45b1-a5af-09bbdb4ce7d3" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:25.5183947Z" id="57d34e1b-6353-49cc-94fa-70297d3edb4e" type="0">
+      <message>&gt; kerberos@0.0.7 install D:\home\site\wwwroot\node_modules\loopback-connector-mongodb\node_modules\mongodb\node_modules\kerberos</message>
+    </entry>
+    <entry time="2015-01-11T23:22:25.5972709Z" id="42aa3cd0-c8a8-4f69-8004-1dad0b232818" type="0">
+      <message>&gt; (node-gyp rebuild 2&gt; builderror.log) || (exit 0)</message>
+    </entry>
+    <entry time="2015-01-11T23:22:25.6746385Z" id="a5a9c1a2-9f00-4643-9704-a8eee7e0098e" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:25.8777592Z" id="36e6c433-0dcb-494c-8aa6-704751d0c361" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:26.0027594Z" id="dd8e24d0-03de-4807-839f-eff758500978" type="0">
+      <message>D:\home\site\wwwroot\node_modules\loopback-connector-mongodb\node_modules\mongodb\node_modules\kerberos&gt;node "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild </message>
+    </entry>
+    <entry time="2015-01-11T23:22:30.6589488Z" id="7228c47d-88a4-443d-89ba-0eb72f12d9c5" type="0">
+      <message>Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.</message>
+    </entry>
+    <entry time="2015-01-11T23:22:30.9401958Z" id="fbe19554-1203-418a-8917-ef17a6f15017" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\loopback-connector-mongodb\node_modules\mongodb\node_modules\kerberos\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:22:46.8800457Z" id="97f66792-dd20-4fea-9c42-0a2d4cfd4a4b" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:46.9273419Z" id="1eb53fa4-6504-46ee-ad29-1a11bc7b34d6" type="0">
+      <message>&gt; bson@0.2.16 install D:\home\site\wwwroot\node_modules\loopback-connector-mongodb\node_modules\mongodb\node_modules\bson</message>
+    </entry>
+    <entry time="2015-01-11T23:22:46.9737944Z" id="026b97af-144c-4513-9cf0-cf429f307d85" type="0">
+      <message>&gt; (node-gyp rebuild 2&gt; builderror.log) || (exit 0)</message>
+    </entry>
+    <entry time="2015-01-11T23:22:47.0206721Z" id="792248c0-dfda-46e0-a635-b01679d1e4ad" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:47.098794Z" id="ca303b51-cab4-4f8d-acfb-4612fdebae38" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:22:47.3331728Z" id="205946aa-7888-447a-914d-de82ec33f2ec" type="0">
+      <message>D:\home\site\wwwroot\node_modules\loopback-connector-mongodb\node_modules\mongodb\node_modules\bson&gt;node "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild </message>
+    </entry>
+    <entry time="2015-01-11T23:22:52.4112321Z" id="a116a30b-efe7-47f7-a236-f6b7c7d2a9d3" type="0">
+      <message>Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.</message>
+    </entry>
+    <entry time="2015-01-11T23:22:52.6612227Z" id="002c0d64-3696-4efa-ab3f-f6cda0b3372c" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\loopback-connector-mongodb\node_modules\mongodb\node_modules\bson\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:23:37.8256322Z" id="488175fb-7f65-419a-9fb3-e57bd3c7a99b" type="1">
+      <message>npm ERR! registry error parsing json</message>
+    </entry>
+    <entry time="2015-01-11T23:23:57.016404Z" id="7e143d19-9aff-4a4d-9f87-49b1b1ebec8d" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:23:57.0945266Z" id="f68492a6-cd76-410d-bbdf-eafd773188af" type="0">
+      <message>&gt; ws@0.4.32 install D:\home\site\wwwroot\node_modules\node-inspector\node_modules\ws</message>
+    </entry>
+    <entry time="2015-01-11T23:23:57.1570277Z" id="632f6d7e-80c5-4643-b1ed-a66c6edcc3fa" type="0">
+      <message>&gt; (node-gyp rebuild 2&gt; builderror.log) || (exit 0)</message>
+    </entry>
+    <entry time="2015-01-11T23:23:57.4382738Z" id="42ab36f4-b7c8-432f-9c02-30844419784c" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:23:57.500771Z" id="d33c5d25-deb9-49fa-a869-a392c9874632" type="0">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:23:57.5476473Z" id="90173a62-638b-4dc4-b0b8-99d0b08dbb2e" type="0">
+      <message>D:\home\site\wwwroot\node_modules\node-inspector\node_modules\ws&gt;node "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild </message>
+    </entry>
+    <entry time="2015-01-11T23:24:02.5788327Z" id="0dd1cf03-0ab8-401d-9800-555a1b9c6c75" type="0">
+      <message>Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.</message>
+    </entry>
+    <entry time="2015-01-11T23:24:02.8600789Z" id="087002d7-28c0-43bb-942b-5ab2867618d5" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\node-inspector\node_modules\ws\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:24:02.9225777Z" id="269e34c0-b399-474b-9207-87bab66f0dd1" type="0">
+      <message>MSBUILD : error MSB3428: Could not load the Visual C++ component "VCBuild.exe". To fix this, 1) install the .NET Framework 2.0 SDK, 2) install Microsoft Visual Studio 2005 or 3) add the location of the component to the system path if it is installed elsewhere.  [D:\home\site\wwwroot\node_modules\node-inspector\node_modules\ws\build\binding.sln]</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.0052096Z" id="0f263032-c8fd-48ca-abe8-9aaea516e3b3" type="1">
+      <message>npm ERR! heapdump@0.2.10 install: `node-gyp rebuild`</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.0652125Z" id="6172bb5e-99b6-4e63-9179-076c2ed23891" type="1">
+      <message>npm ERR! Exit status 1</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.1120888Z" id="df0432db-2688-4ca9-a6e6-ecdff9309f4d" type="1">
+      <message>npm ERR! </message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.1433309Z" id="d3c0a4c3-3297-48d8-a7df-fa798b6b0157" type="1">
+      <message>npm ERR! Failed at the heapdump@0.2.10 install script.</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.190214Z" id="30271365-3cf5-4c2c-8902-40382174747d" type="1">
+      <message>npm ERR! This is most likely a problem with the heapdump package,</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.2214632Z" id="ccef05c7-c6c4-4b85-bbe1-18f47ebf1e3f" type="1">
+      <message>npm ERR! not with npm itself.</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.2683315Z" id="069032ba-f01e-47fe-a37f-27c73450c19a" type="1">
+      <message>npm ERR! Tell the author that this fails on your system:</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.3308374Z" id="d93a8cc2-d46b-4f19-b769-0f5c7ff9d6be" type="1">
+      <message>npm ERR!     node-gyp rebuild</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.3777055Z" id="0800d25c-c794-421f-b45d-389aa9940f95" type="1">
+      <message>npm ERR! You can get their info via:</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.4245808Z" id="5df1713c-eb0a-4859-a536-87276154e31d" type="1">
+      <message>npm ERR!     npm owner ls heapdump</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.4558356Z" id="fec76ea6-b7f9-4ef2-a56d-96c6576acfd0" type="1">
+      <message>npm ERR! There is likely additional logging output above.</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.5027058Z" id="42bac9e6-d67c-4ec8-9cbe-3ad1683ae96e" type="1">
+      <message></message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.5495801Z" id="0c3d313e-387b-4f32-9320-c8569af504e4" type="1">
+      <message>npm ERR! System Windows_NT 6.2.9200</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.5808306Z" id="1ef86f0a-5ee3-41b1-8353-9456ab5b0b25" type="1">
+      <message>npm ERR! command "D:\\Program Files (x86)\\nodejs\\0.10.32\\node.exe" "D:\\Program Files (x86)\\npm\\1.4.28\\node_modules\\npm\\bin\\npm-cli.js" "install" "--production"</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.6277104Z" id="4a5efd25-15bb-41be-ad22-4f15efaf1648" type="1">
+      <message>npm ERR! cwd D:\home\site\wwwroot</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.6589552Z" id="813a9258-9dbb-4c18-b61c-5771f8f49b0e" type="1">
+      <message>npm ERR! node -v v0.10.32</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.7058366Z" id="d2158477-d0fa-4ce0-97ee-7a2a9b1ee00e" type="1">
+      <message>npm ERR! npm -v 1.4.28</message>
+    </entry>
+    <entry time="2015-01-11T23:27:54.7377004Z" id="c51fa021-aeed-4dc8-b9df-594b93fe6a2a" type="1">
+      <message>npm ERR! code ELIFECYCLE</message>
+    </entry>
+    <entry time="2015-01-11T23:27:59.213699Z" id="cd52b4cf-6528-442a-add5-ab87177b4ac8" type="0">
+      <message>Failed exitCode=1, command="D:\Program Files (x86)\nodejs\0.10.32\node.exe" "D:\Program Files (x86)\npm\1.4.28\node_modules\npm\bin\npm-cli.js" install --production</message>
+    </entry>
+    <entry time="2015-01-11T23:27:59.2605748Z" id="e4fbeef0-edf4-409d-a6aa-11d92aeaedf9" type="0">
+      <message>An error has occurred during web site deployment.</message>
+    </entry>
+  </entry>
+</entries>
