@@ -9,11 +9,11 @@
       "required": true
     },
     "start": {
-      "type": "date",
+      "type": "string",
       "required": true
     },
     "end": {
-      "type": "date",
+      "type": "string",
       "required": true
     },
     "description": {

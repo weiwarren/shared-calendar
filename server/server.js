@@ -111,6 +111,10 @@ app.get('/auth/logout', function (req, res, next) {
   res.redirect('/');
 });
 
+app.get('/hello', function(req,res){
+  console.log("hello back");
+  res.send('hello back');
+});
 
 // -- Mount static files here--
 // All static middleware should be registered at the end, as all requests
@@ -141,10 +145,10 @@ app.start = function (httpOnly) {
     server = http.createServer(app);
   }
 
-  server.listen(/*app.get('port')*/process.env.PORT, function () {
-    var baseUrl = (httpOnly ? 'http://' : 'https://') + app.get('host') + ':' + app.get('port');
+  server.listen(/*app.get('port')*/(process.env.PORT || app.get('port')), function () {
+    var baseUrl = (httpOnly ? 'http://' : 'https://') + app.get('host') + ':' + (process.env.PORT || app.get('port'));
     app.emit('started', baseUrl);
-    console.log('LoopBack server listening @ %s%s', baseUrl, '/');
+    console.log('Server listening @ %s%s', baseUrl, '/');
   });
   return server;
 };

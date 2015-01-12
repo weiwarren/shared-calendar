@@ -27,10 +27,10 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       config: {
         scale: "Day",
         headerHeight: 28,
-        locale: "en-au",
         startDate: moment().startOf('year').format('YYYY-MM-DD'),
         days: 365,
         //layout:"TableBased",
+        //locale:'en-au',
         theme: "echo",
         groupConcurrentEvents: true,
         groupAllEvents: true,

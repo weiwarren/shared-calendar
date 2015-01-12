@@ -63,7 +63,8 @@
                               ng-options="cat.key as cat.name for cat in event.eventType.categories">
                       </select>
                     </div>
-                    <div class="form-group col-sm-3" ng-class="{'has-error': eventForm.submitting && eventForm.sectionBasic.product.$invalid}">
+                    <div class="form-group col-sm-3"
+                         ng-class="{'has-error': eventForm.submitting && eventForm.sectionBasic.product.$invalid}">
                       <label>Product</label>
                       <select id="product"
                               name="product" class="form-control"
@@ -260,16 +261,15 @@
 
                 </div>
                 <!-- ./Multiple Event -->
-
                 <hr>
                 <div class="row"
-                     ng-repeat="eventProperty in event.properties | filter:{propertyKey: event.property.key}">
+                     ng-repeat="eventProperty in eventProperties">
                   <ng-form name="eventForm.sectionProperty.part{{$index}}">
                     <div class="form-group col-sm-3">
                       <label for="property">Property</label>
                       <select id="property" name="property" class="form-control"
                               ng-model="eventProperty.propertyKey"
-                              ng-change="eventProperty.property=((properties | filter:{key:eventProperty.propertyKey})[0])"
+                              ng-change="eventProperty.property= ((properties | filter:{key:eventProperty.propertyKey})[0])"
                               ng-options="p.id as p.name for p in properties" ng-required="true">
                       </select>
                     </div>
@@ -730,8 +730,6 @@
                         </div>
 
 
-
-
                         <div class="col-md-12" ng-show="editing" style="margin-bottom: 40px">
                           <hr>
 
@@ -765,7 +763,6 @@
                             </tbody>
                           </table>
                         </div>
-
 
 
                       </div>

@@ -1,6 +1,7 @@
 {
   "restApiRoot": "/api",
   "host": "local.echo-kloud.com",
+  "port":443,
   "url": "local.echo-kloud.com",
   "remoting": {
     "context": {

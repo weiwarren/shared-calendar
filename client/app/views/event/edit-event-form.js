@@ -74,16 +74,19 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     $scope.getEventForProperty = function (ep) {
       var event = {};
       angular.copy($scope.event, event);
+      var localDateFormat = event.allDay ? 'DD/MM/YYYY' : 'DD/MM/YYYY hh:mm a';
+      var dbDateFormat = event.allDay ? 'YYYY-MM-DD' : 'YYYY-MM-DD hh:mm';
       if (event.occurrence == 'single') {
         delete event.multiEvents;
       }
-      event.start = moment(event.start, 'L LT').toISOString();
-      event.end = moment(event.end, 'L LT').toISOString();
+      event.start = moment(event.start, localDateFormat).format(dbDateFormat);
+      event.end = moment(event.end, localDateFormat).format(dbDateFormat);
       event.duration = event.duration.humanize();
       event.resource = (ep.property.key + "-" + event.eventType.key + "-" + event.category.key);
       event.cssClass = (ep.property.key + " " + event.eventType.key + " " + event.category.key + " Item");
       event.coordinator = ep.coordinator;
       event.property = ep.property;
+      event.properties = event.properties || $scope.eventProperties;
       event.metadata.venue = ep.venue;
       return event;
     };
@@ -91,8 +94,10 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     $scope.getMultiEvent = function (event, me) {
       var e1 = {};
       angular.copy(event, e1);
-      e1.start = moment(me.start, 'L LT').toISOString();
-      e1.end = moment(me.end, 'L LT').toISOString();
+      var localDateFormat = e1.allDay ? 'L' : 'LT';
+      //var dbDateFormat = e1.allDay ? 'YYYY-MM-DD' : 'YYYY-MM-DD hh:mm';
+      e1.start = moment(me.start, localDateFormat).toISOString();
+      e1.end = moment(me.end, localDateFormat).toISOString();
       return e1;
     };
 
@@ -205,7 +210,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     }
 
     $scope.hideLoading = function () {
-      if($scope.loadingModal)
+      if ($scope.loadingModal)
         $scope.loadingModal.close();
     }
 
@@ -253,7 +258,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       var eventsPromises = [];
 
       //multi property
-      $scope.event.properties.forEach(function (ep) {
+      $scope.eventProperties.forEach(function (ep) {
         var event = $scope.getEventForProperty(ep);
         eventsPromises.push(Event.create(event).$promise.then(function (response) {
           console.log(response);
@@ -303,11 +308,14 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     $scope.loading = true;
     //load event
     $scope.event = eventItem;
-    $scope.dateFormat = event.allDay ? 'L' : 'L LT';
-    $scope.event.start = moment(event.start).format($scope.dateFormat);
-    $scope.event.end = moment(event.end).format($scope.dateFormat);
-    $scope.event.duration = moment.duration(moment(event.end, $scope.dateFormat).diff(moment(event.start, $scope.dateFormat)));
+    $scope.dateFormat = $scope.event.allDay ? 'L' : 'L LT';
+    $scope.event.start = moment($scope.event.start).format($scope.dateFormat);
+    $scope.event.end = moment($scope.event.end).format($scope.dateFormat);
+    $scope.event.duration = moment.duration(moment($scope.event.end, $scope.dateFormat).diff(moment($scope.event.start, $scope.dateFormat)));
     $scope.containerId = $scope.event.metadata.containerId || $scope.guid();
+    $scope.eventProperties = $scope.event.properties.filter(function (item) {
+      return item.propertyKey == $scope.event.property.key;
+    });
     $scope.loading = false;
     $scope.initFileUploader();
 
@@ -326,7 +334,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     };
 
     var saveEvent = function () {
-      $scope.event.properties.forEach(function (ep) {
+      $scope.eventProperties.forEach(function (ep) {
         $scope.getEventForProperty(ep).$save(function () {
           $scope.closeForm();
         });
