@@ -34,7 +34,6 @@
     "node-inspector": "^0.7.4",
     "passport": "^0.2.1",
     "passport-azure-ad": "^0.0.3",
-    "passport-ldapauth": "^0.2.3",
     "passport-local": "^1.0.0",
     "passport-saml": "^0.6.1",
     "serve-favicon": "^2.1.7",
