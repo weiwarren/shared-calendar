@@ -12,28 +12,27 @@ angular.module('echoCalendarApp', [
   'echoCalendarApp.auth',
   'echoCalendarApp.home',
   'echoCalendarApp.editEvent',
-  'echoCalendarApp.view2',
   'echoCalendarApp.eventDetails',
   'echoCalendarApp.advanceFilter',
   'echoCalendarApp.version',
-  'echoCalendarApp.eventApproval'
-]).
-  config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider',
+  'echoCalendarApp.eventApproval',
+  'echoCalendarApp.error'
+])
+  .config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider',
     function ($routeProvider, $httpProvider, LoopBackResourceProvider) {
-      $routeProvider.when('/404', {
-        templateUrl: 'views/home/404.html',
-        controller: 'homeCtrl'
-      }).otherwise({redirectTo: '/home'});
-      // Use a custom auth header instead of the default 'Authorization'
+      $routeProvider.when('/', {redirectTo: '/home'}).otherwise({redirectTo: '/error/404'});
+// Use a custom auth header instead of the default 'Authorization'
       LoopBackResourceProvider.setAuthHeader('X-Access-Token');
 
-      // Change the URL where to access the LoopBack REST API server
+// Change the URL where to access the LoopBack REST API server
       LoopBackResourceProvider.setUrlBase('/api');
 
       $httpProvider.interceptors.push(function ($q, $window, $location) {
         return {
+
           responseError: function (rejection) {
             if (rejection.status == 401) {
+              console.log($location);
               $location.nextAfterLogin = $location.path();
               $location.path('/login');
             }
@@ -128,7 +127,7 @@ angular.module('echoCalendarApp', [
       }
     }
   })
-  .directive('dateWatcher', function () {
+  .directive('dateWatcher', function ($timeout) {
     return {
       restrict: '',
       scope: {
@@ -140,19 +139,39 @@ angular.module('echoCalendarApp', [
       },
       link: function (scope, element, attrs) {
         //this is not the best way as in event editing, data prepopulates, and this causes multiple watchers
+        scope.updating = false;
+
         scope.$watch('start', function (nv, ov) {
-          if (nv && scope.duration && scope.enabled) {
+          if (nv && scope.duration && scope.enabled && !scope.updating) {
+            scope.updating = true;
             scope.end = moment(nv, scope.format).add(scope.duration).format(scope.format);
+          }
+          else if (scope.updating) {
+            scope.updaing = false;
           }
         });
         scope.$watch('duration', function (nv, ov) {
-          if (nv && scope.start && scope.enabled) {
-           // scope.end = moment(scope.start, scope.format).add(nv).format(scope.format);
+          if (nv && scope.start && scope.enabled && !scope.updating) {
+            scope.updating = true;
+            scope.end = moment(scope.start, scope.format).add(nv).format(scope.format);
+          }
+          else if (scope.updating) {
+            scope.updating = false;
           }
         });
         scope.$watch('end', function (nv, ov) {
-          if (nv && scope.start && scope.enabled)
-            scope.duration = moment.duration(moment(nv, scope.format).diff(moment(scope.start, scope.format)));
+          if (nv && scope.start && scope.enabled && !scope.updating) {
+            scope.updating = true;
+            if (moment(scope.end, scope.format).diff(moment(scope.start, scope.format)) < 0) {
+              scope.end = null;
+            }
+            else {
+              scope.duration = moment.duration(moment(nv, scope.format).diff(moment(scope.start, scope.format)));
+            }
+          }
+          else if (scope.updating) {
+            scope.updating = false;
+          }
         });
       }
     }
@@ -181,6 +200,26 @@ angular.module('echoCalendarApp', [
           if (nv) {
             setTimeout(function () {
               element.focus();
+            }, 100);
+          }
+        })
+      }
+    }
+  })
+  .directive('formFocusError', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        scope.$watch(attrs.formFocusError, function (nv) {
+          if (nv) {
+            setTimeout(function () {
+              var el = $(element).find('.form-control.ng-invalid:first');
+              if(el.is('.hidden')){
+                el.removeClass('hidden').focus().addClass('hidden');
+              }
+              else{
+                el.focus();
+              }
             }, 100);
           }
         })
@@ -316,12 +355,21 @@ angular.module('echoCalendarApp', [
       }
     }
   })
-  .run(function ($rootScope, $cookies, $route, $location, $modal, LoopBackAuth) {
+  .run(function ($rootScope, $injector, $cookies, $route, $location, $modal, LoopBackAuth) {
     LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], {userName: $cookies['userName']});
     LoopBackAuth.rememberMe = false;
     LoopBackAuth.save();
     $rootScope.currentUserId = LoopBackAuth.currentUserData.userName || "Anonymous";
-    console.log("token", $cookies['access_token']);
+    $rootScope.accessToken = LoopBackAuth.accessTokenId;
+
+    $injector.get("$http").defaults.transformRequest = function (data, headersGetter) {
+      headersGetter()['X-Access-Token'] = LoopBackAuth.accessTokenId;
+      if (data) {
+        return angular.toJson(data);
+      }
+    };
+
+    console.dir("token", $cookies['access_token']);
     //modalservice
     $rootScope.$on("$locationChangeStart", function (event, next) {
       //detect when the page is to be loaded using modal dialog
