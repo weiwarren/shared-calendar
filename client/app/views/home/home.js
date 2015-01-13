@@ -280,7 +280,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       }
     }, true);
 
-    $scope.getConfigURL = function(ConfigState){
+    $scope.saveConfigState = function(ConfigState){
     }
     $scope.scheduler.init();
   })
