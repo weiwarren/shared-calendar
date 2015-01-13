@@ -2,8 +2,6 @@
 
 angular.module('echoCalendarApp.eventDetails',['ui.bootstrap'])
   .controller('eventDetailCtrl', function ($scope, $modalInstance, event, Property, Container) {
-    event.start = new Date(event.start);
-    event.end = new Date(event.end);
     $scope.event = event;
 
     $scope.artworks = [];

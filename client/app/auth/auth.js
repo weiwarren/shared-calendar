@@ -14,17 +14,15 @@ angular.module('echoCalendarApp.auth', ['ngRoute', 'ui.bootstrap'])
       controller: 'authCBCtrl'
     });
   }])
-  .controller('loginCtrl', function ($scope, $window, $location, User) {
+  .controller('loginCtrl', function ($scope, $window) {
     if (!$scope.formAuth) {
       $window.location.href = '/auth/adfs';
     }
   })
-  .controller('logoutCtrl', function ($scope, $location, User) {
-    User.logout(function () {
-      var next = $location.nextAfterLogin || '/';
-      $location.nextAfterLogin = null;
-      $location.path(next);
-    });
+  .controller('logoutCtrl', function ($scope, $window, LoopBackAuth) {
+    LoopBackAuth.clearUser();
+    LoopBackAuth.clearStorage();
+    $window.location.href = '/auth/adfs/logout';
   })
   .controller('authCBCtrl', function ($scope, $cookies, $location, LoopBackAuth) {
 
