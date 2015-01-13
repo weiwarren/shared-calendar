@@ -75,7 +75,7 @@
         <wrap-owlcarousel class="owl-carousel" ng-model="event.metadata.artworks"
                           data-options="{autoPlay: 10000, stopOnHover: true, pagination:true, slideSpeed : 300, paginationSpeed : 400, singleItem : true}">
           <div ng-repeat="artwork in event.metadata.artworks">
-            <img ng-src="/api/containers/{{artwork.container}}/download/{{artwork.file.name}}"
+            <img ng-src="/api/containers/{{artwork.container}}/download/{{artwork.file.name}}?access_token={{accessToken}}"
               class="img-responsive"
               alt="Event artwork">
           </div>
@@ -116,9 +116,7 @@
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
 

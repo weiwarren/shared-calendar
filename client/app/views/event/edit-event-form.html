@@ -1,5 +1,5 @@
 <nav class="navbar navbar-fixed-top navbar-default echo-brand" role="navigation">
-  <a class="navbar-brand back" href="#/l"><i class="fa fa-angle-left"></i> <span class="sr-only">Calendar</span></a>
+  <a class="navbar-brand back" href="#/"><i class="fa fa-angle-left"></i> <span class="sr-only">Calendar</span></a>
 
   <div class="navbar-header">
     <a href="#/"><img class="brand-logo-image" src="image/echo_marketing-brand-logo.svg"></a>
@@ -35,7 +35,7 @@
         <div class="row">
           <div id="container">
             <div class="col-sm-12 form-elements echo-data-entry">
-              <form role="form" name="eventForm" novalidate>
+              <form role="form" name="eventForm" novalidate form-focus-error="eventForm.submitting">
                 <ng-form name="eventForm.sectionBasic">
                   <div class="row">
                     <div class="form-group col-sm-3"
@@ -46,6 +46,7 @@
                               class="form-control"
                               ng-model="event.eventTypeKey"
                               ng-required="true"
+                              focus-me="eventForm.submitting && eventForm.sectionBasic.eventType.$invalid"
                               ng-change="event.metadata.productKey=null;event.eventType=((eventTypes | filter:{key:event.eventTypeKey})[0])"
                               ng-options="et.key as et.name for et in eventTypes">
                       </select>
@@ -291,12 +292,12 @@
                              placeholder=""
                              ng-model="eventProperty.coordinator">
                     </div>
-                    <div class="form-group col-sm-1" ng-show="event.properties.length>1">
+                    <div class="form-group col-sm-1" ng-show="eventProperties.length>1">
                       <label>Remove</label>
                       <button class="form-control btn btn-danger remove" ng-click="removeProperty($index)"><span
                         class="image-holder"></span></button>
                     </div>
-                    <div class="col-sm-3 validation-msg" ng-class="{'col-sm-2':event.properties.length>1}"
+                    <div class="col-sm-3 validation-msg" ng-class="{'col-sm-2':eventProperty.length>1}"
                          ng-show="eventForm.sectionProperty.part{{$index}}.$invalid && eventForm.submitting">
                       <p>Please enter all the required fields</p>
                     </div>
@@ -445,10 +446,6 @@
                                  size="100"
                                  uploader="artworkUploader"
                                  multiple/>
-                          <input type="number" class="hidden" name="numOfArtworks"
-                                 ng-model="eventForm.sectionArtwork.numOfArtworks"
-                                 sync-model="artworkUploader.queue.length"
-                                 ng-min="(event.metadata.hasArtwork && !event.metadata.artworks.length)?1:0">
 
                           <p class="help-block"></p>
                         </div>
@@ -558,17 +555,16 @@
                               <th width="20%"></th>
                               <th width="50%">Name</th>
                               <th>Size</th>
-                              <th ng-show="artworkUploader.isHTML5 && debug">Progress</th>
-                              <th ng-show="debug">Status</th>
                               <th></th>
+                              <th ng-show="debug"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="aw in event.metadata.artworks">
-                              <td><img ng-src="/api/containers/{{aw.container}}/download/{{aw.file.name}}" width="100"
+                              <td><img ng-src="/api/containers/{{aw.container}}/download/{{aw.file.name}}?access_token={{accessToken}}" width="100"
                                        class="thumbnail"/></td>
                               <td>
-                                <a href="/api/containers/{{aw.container}}/download/{{aw.file.name}}"><strong>{{
+                                <a href="/api/containers/{{aw.container}}/download/{{aw.file.name}}?access_token={{accessToken}}"><strong>{{
                                   aw.file.name }}</strong></a></td>
                               <td nowrap>{{ aw.file.size/1024/1024|number:2 }} MB</td>
                               <td>
@@ -579,6 +575,13 @@
                                   Remove
                                 </button>
                               </td>
+                              <td ng-show="debug">
+                                <button type="button" class="btn btn-danger btn-xs"
+                                                            ng-click="recycleFile(aw.file.name)"
+                                                            title="Delete the file">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                Recycle
+                              </button></td>
                             </tr>
                             </tbody>
                           </table>
@@ -591,6 +594,11 @@
 
                   <div class="col-sm-3 validation-msg"
                        ng-show="eventForm.sectionArtwork.$invalid && eventForm.submitting">
+                    <input type="number" class="form-control hidden" name="numOfArtworks"
+                           ng-model="eventForm.sectionArtwork.numOfArtworks"
+                           sync-model="artworkUploader.queue.length"
+                           ng-min="(event.metadata.hasArtwork && !event.metadata.artworks.length)?1:0">
+
                     <p>Please select artworks</p>
                   </div>
 
@@ -630,11 +638,6 @@
                                  size="100"
                                  multiple
                                  uploader="attachmentUploader"/>
-                          <input type="number" class="hidden" name="numOfAttachments"
-                                 ng-model="eventForm.sectionAttachment.numOfAttachments"
-                                 sync-model="attachmentUploader.queue.length"
-                                 ng-min="(event.metadata.hasAttachment && !event.metadata.attachments.length)?1:0"/>
-
                           <p class="help-block"></p>
                         </div>
                       </div>
@@ -740,9 +743,7 @@
                             <tr>
                               <th width="50%">Name</th>
                               <th>Size</th>
-                              <th ng-show="attachmentUploader.isHTML5 && debug">Progress</th>
-                              <th ng-show="debug">Status</th>
-                              <th></th>
+                              <th ng-show="attachmentUploader.isHTML5 && debug"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -771,6 +772,11 @@
 
                   <div class="col-sm-3 validation-msg"
                        ng-show="eventForm.sectionAttachment.$invalid && eventForm.submitting">
+                    <input type="number" class="form-control hidden" name="numOfAttachments"
+                           ng-model="eventForm.sectionAttachment.numOfAttachments"
+                           sync-model="attachmentUploader.queue.length"
+                           ng-min="(event.metadata.hasAttachment && !event.metadata.attachments.length)?1:0"/>
+
                     <p>Please select attachments</p>
                   </div>
 

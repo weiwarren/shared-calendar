@@ -21,8 +21,8 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
           eventItem: function ($q, Event, $route, $location) {
             return Event.get({id: $route.current.params.id}).$promise.then(function (item) {
               return item;
-            }, function () {
-              $location.path('/404');
+            }, function (response) {
+              $location.path('/error/' + response.status);
             });
           }
         }
@@ -62,31 +62,35 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     };
 
     $scope.addProperty = function () {
-      if (!$scope.event.properties) {
-        $scope.event.properties = [];
+      if (!$scope.eventProperties) {
+        $scope.eventProperties = [];
       }
-      $scope.event.properties.push({});
+      $scope.eventProperties.push({});
     };
     $scope.removeProperty = function (index) {
-      $scope.event.properties.splice(index, 1);
+      $scope.eventProperties.splice(index, 1);
     };
 
-    $scope.$watch('event.allDay',function(nv){
-      if(nv){
-        $scope.event.dateFormat =  'DD/MM/YYYY';
+    $scope.$watch('event.allDay', function (nv) {
+      if (nv) {
+        $scope.event.dateFormat = 'DD/MM/YYYY';
+        $scope.dbDateFormat = 'YYYY-MM-DDT00:00:00'
       }
-      else{
+      else {
         $scope.event.dateFormat = 'DD/MM/YYYY hh:mm a';
+        $scope.dbDateFormat = 'YYYY-MM-DDTHH:mm:ss'
       }
-    })
+    });
+
     $scope.getEventForProperty = function (ep) {
       var event = {};
       angular.copy($scope.event, event);
       if (event.occurrence == 'single') {
         delete event.multiEvents;
       }
-      event.start = moment(event.start, $scope.event.dateFormat).format();
-      event.end = moment(event.end, $scope.event.dateFormat).format();
+      event.start = moment(event.start, $scope.event.dateFormat).format($scope.dbDateFormat);
+      event.end = moment(event.end, $scope.event.dateFormat).format($scope.dbDateFormat);
+      event.timezone = moment().zone();
       event.duration = event.duration.humanize();
       event.resource = (ep.property.key + "-" + event.eventType.key + "-" + event.category.key);
       event.cssClass = (ep.property.key + " " + event.eventType.key + " " + event.category.key + " Item");
@@ -101,15 +105,15 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       var e1 = {};
       angular.copy(event, e1);
       //var dbDateFormat = e1.allDay ? 'YYYY-MM-DD' : 'YYYY-MM-DD hh:mm';
-      e1.start = moment(me.start, $scope.event.dateFormat).format();
-      e1.end = moment(me.end, $scope.event.dateFormat).format();
+      e1.start = moment(me.start, $scope.event.dateFormat).format($scope.dbDateFormat);
+      e1.end = moment(me.end, $scope.event.dateFormat).format($scope.dbDateFormat);
       return e1;
     };
 
     $scope.initFileUploader = function () {
       //artwork uploader handler
       var artworkUploader = $scope.artworkUploader = new FileUploader({
-        url: '/api/containers/' + $scope.containerId + '/upload',
+        url: '/api/containers/' + $scope.containerId + '/upload?access_token=' + $scope.accessToken,
         formData: [
           {key: 'value'}
         ],
@@ -132,13 +136,13 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       };
 
       artworkUploader.onCompleteAll = function () {
-        $scope.artworkUploaded = true;
+        $scope.artworksUploaded = true;
         $scope.$emit('uploadAllCompleted');
       };
 
       //attachment uploader handler
       var attachmentUploader = $scope.attachmentUploader = new FileUploader({
-        url: '/api/containers/' + $scope.containerId + '/upload',
+        url: '/api/containers/' + $scope.containerId + '/upload?access_token=' + $scope.accessToken,
         formData: [
           {key: 'value'}
         ]
@@ -169,7 +173,15 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
         collection.splice(index, 1);
       };
 
-      $scope.removeFiles = function () {
+      $scope.recycleFile = function (file) {
+        Container.removeFile({container: $scope.containerId, file: file}, function () {
+          alert('done!');
+        }, function () {
+          alert('error');
+        });
+      }
+
+      $scope.recycleFiles = function () {
         var defer = $q.defer();
         var qs = [];
         $scope.filesToBeRemoved.forEach(function (rm) {
@@ -193,16 +205,19 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     };
 
     $scope.uploadFiles = function () {
+      $scope.event.metadata.containerId = $scope.containerId;
       //create a folder for the attachments before upload, this container id will be associated with the event object
       Container.getContainer({container: $scope.containerId}, function (container) {
-        $scope.event.metadata.containerId = $scope.containerId;
-        $scope.attachmentUploader.uploadAll();
-        $scope.artworkUploader.uploadAll();
+        if ($scope.attachmentUploader.queue.length)
+          $scope.attachmentUploader.uploadAll();
+        if ($scope.artworkUploader.queue.length)
+          $scope.artworkUploader.uploadAll();
       }, function () {
         Container.create({name: $scope.containerId}, function () {
-          $scope.event.metadata.containerId = $scope.containerId;
-          $scope.attachmentUploader.uploadAll();
-          $scope.artworkUploader.uploadAll();
+          if ($scope.attachmentUploader.queue.length)
+            $scope.attachmentUploader.uploadAll();
+          if ($scope.artworkUploader.queue.length)
+            $scope.artworkUploader.uploadAll();
         });
       });
     };
@@ -225,7 +240,6 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     $scope.eventProperties = [{}];
     $scope.event = {
       occurrence: 'single',
-      properties: [{}],
       multiEvents: [{}],
       metadata: {
         artworks: [],
@@ -286,16 +300,15 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     };
 
     $scope.submitForm = function (form) {
-      form.submitting = true;
+      form.submitting = (new Date());
       if (form.$valid) {
         $scope.showLoading();
         //upload files
         if ($scope.event.metadata.hasArtwork || $scope.event.metadata.hasAttachment) {
-
           $scope.uploadFiles();
           $scope.$on('uploadAllCompleted', function (e, items) {
             //make sure both attachment and artworks are saved
-            var canSave = (!$scope.event.metadata.hasArtwork || $scope.artworkUploaded) && (!$scope.event.metadata.hasAttachment || $scope.attachmentsUploaded)
+            var canSave = (!$scope.event.metadata.hasArtwork || $scope.artworksUploaded) && (!$scope.event.metadata.hasAttachment || $scope.attachmentsUploaded)
             if (canSave) {
               saveEvent();
             }
@@ -306,7 +319,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
         }
       }
     };
-  }) 
+  })
   .controller('editEventCtrl', function ($scope, $route, isModal, $location, eventItem, $controller, $routeParams, Event, Property, EventType) {
     $controller('eventCtrl', {$scope: $scope});
     $scope.editing = true;
@@ -339,25 +352,27 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
 
     var saveEvent = function () {
       $scope.eventProperties.forEach(function (ep) {
-        $scope.getEventForProperty(ep).$save(function () {
+        var event = $scope.getEventForProperty(ep);
+        console.log(event);
+        event.$save(function () {
           $scope.closeForm();
         });
       })
     };
 
     $scope.submitForm = function (form) {
-      form.submitting = true;
+      form.submitting = (new Date());
       if (form.$valid) {
         $scope.showLoading();
         //remove file from the fs first
-        $scope.removeFiles().then(function () {
+        $scope.recycleFiles().then(function () {
           if (($scope.event.metadata.hasArtwork && $scope.artworkUploader.queue.length) || ($scope.event.metadata.hasAttachment && $scope.attachmentUploader.queue.length)) {
             //upload new files
             $scope.uploadFiles();
             $scope.$on('uploadAllCompleted', function (e, items) {
               //make sure both attachment and artworks are saved
-              var artworkSaved = !$scope.event.metadata.hasArtwork || ($scope.artworkUploaded) || !$scope.artworkUploader.queue.length;
-              var attachmentSaved = !$scope.event.metadata.hasAttachment || $scope.attachmentsUploaded || !$scope.artworkUploader.queue.length;
+              var artworkSaved = !$scope.event.metadata.hasArtwork || ($scope.artworksUploaded) || !$scope.artworkUploader.queue.length;
+              var attachmentSaved = !$scope.event.metadata.hasAttachment || $scope.attachmentsUploaded || !$scope.attachmentUploader.queue.length;
               var canSave = artworkSaved && attachmentSaved;
               if (canSave) {
                 saveEvent();

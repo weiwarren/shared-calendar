@@ -4,19 +4,18 @@
     <a class="navbar-brand filter-control open" ng-class="{open:!showFilters}" ng-click="showFilters = !showFilters"
        aria-expanded="false">
       <i class="fa fa-filter"></i> <span class="sr-only">Filters</span></a>
-
     <div class="navbar-header">
-
       <a href="#/"><img alt="Echo Entertainment Group Marketing Event Calendar" class="brand-logo-image"
                         src="image/echo_marketing-brand-logo.svg"></a>
-
-
     </div>
 
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
 
-
+        <li class="actions export">
+          <a tooltip="Send&nbsp;URL" ng-click="saveConfigState()"
+             tooltip-placement="bottom"><span
+            class="image-holder"></span><span class="sr-only">Send URL</span></a></li>
         <li class="actions export"><a class="dropdown-toggle" download href="/api/events"
                                       aria-expanded="false"><!--<i class="fa fa-share-square-o"></i>--><span
           class="image-holder"></span><span class="sr-only">Export Report</span></a>
@@ -30,8 +29,6 @@
               (Coming Soon)</a></li>
 
           </ul>
-
-
         </li>
 
         <li class="actions add-event">
@@ -112,14 +109,15 @@
                   for="gaming-event-group"><span class="ui"></span><h5>Gaming</h5></label>
                   <ul class="list-unstyled">
 
-                    <li><input type="checkbox" id="event-type-g1" name="gamingFilter"
-                               ng-model="scheduler.filters.GamingPromotion"
-                               sync-model="scheduler.filters.Gaming"/><label
-                      for="event-type-g1"><span class="ui"></span>Promotions</label></li>
                     <li><input type="checkbox" id="event-type-g2" name="gamingFilter"
                                ng-model="scheduler.filters.GamingEvent"
                                sync-model="scheduler.filters.Gaming"/><label
                       for="event-type-g2"><span class="ui"></span>Events</label></li>
+
+                    <li><input type="checkbox" id="event-type-g1" name="gamingFilter"
+                               ng-model="scheduler.filters.GamingPromotion"
+                               sync-model="scheduler.filters.Gaming"/><label
+                      for="event-type-g1"><span class="ui"></span>Promotions</label></li>
                     <li><input type="checkbox" id="event-type-g3" name="gamingFilter"
                                ng-model="scheduler.filters.GamingOffer"
                                sync-model="scheduler.filters.Gaming"/><label for="event-type-g3"><span
@@ -184,6 +182,16 @@
               </form>
             </div>
           </div>
+        </div>
+        <div class="panel panel-default">
+          <a class="" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+
+            <div class="panel-heading" role="tab" id="headingThree">
+
+              <h4 class="panel-title">Collaboration</h4>
+
+            </div>
+          </a>
         </div>
       </div>
 
@@ -280,6 +288,7 @@
                 ng-click="currentFilter.include.splice($index,1);scheduler.applyAdvanceFilters()"><span
                 aria-hidden="true">×</span></button></span>
             </span>
+
           <div ng-show="debug">
           <span class="label label-primary">Primary <button type="button" class="close"><span
             aria-hidden="true">×</span></button></span>

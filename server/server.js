@@ -31,7 +31,12 @@ boot(app, __dirname);
 // attempt to build the providers/passport config
 var config = {};
 try {
-  config = require('./providers.json');
+  if (app.settings.env == 'product') {
+    config = require('./providers.production.json');
+  }
+  else {
+    config = require('./providers.json');
+  }
 } catch (err) {
   console.trace(err);
   process.exit(1); // fatal
@@ -43,7 +48,7 @@ app.use(loopback.session({
   saveUninitialized: true,
   resave: true,
   rolling: true,
-  cookie: {maxAge: 10000}
+  cookie: {maxAge: (1000*60*10)}
 }));
 app.use(bodyParser.json());
 
@@ -72,10 +77,26 @@ for (var s in config) {
   c.session = c.session !== false;
   passportConfigurator.configureProvider(s, c);
 }
-var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
+//adfs authentication
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 app.get('/', ensureLoggedIn('/auth/adfs'), function (req, res, next) {
   res.redirect('/app');
+});
+
+app.get('/auth/adfs/fail', ensureLoggedIn('/auth/adfs'), function (req, res, next) {
+  res.redirect("/app/#/error/401");
+});
+
+app.get('/auth/adfs/success', ensureLoggedIn('/auth/adfs'), function (req, res, next) {
+  res.redirect("/app");
+});
+
+app.get('/auth/adfs/logout', function (req, res, next) {
+  res.cookie('access_token');
+  res.cookie('userId');
+  res.cookie('userName');
+  res.redirect(config.adfs.exitPoint);
 });
 
 app.get('/auth/account', ensureLoggedIn('/auth/adfs'), function (req, res, next) {
@@ -85,35 +106,9 @@ app.get('/auth/account', ensureLoggedIn('/auth/adfs'), function (req, res, next)
   });
 });
 
-app.get('/local', function (req, res, next) {
-  res.render('pages/local', {
-    user: req.user,
-    url: req.url
-  });
-});
-
-app.get('/signup', function (req, res, next) {
-  res.render('pages/signup', {
-    user: req.user,
-    url: req.url
-  });
-});
-
-app.get('/login', function (req, res, next) {
-  res.render('pages/login', {
-    user: req.user,
-    url: req.url
-  });
-});
-
-app.get('/auth/logout', function (req, res, next) {
-  req.logout();
-  res.redirect('/');
-});
-
-app.get('/hello', function(req,res){
-  console.log("hello back");
-  res.send('hello back');
+app.get('/echo', function (req, res) {
+  console.log("echo echo echo....");
+  res.send('echo echo echo....');
 });
 
 // -- Mount static files here--
@@ -155,7 +150,7 @@ app.start = function (httpOnly) {
 
 // start the server if `$ node server.js`
 /*if (require.main === module) {
-  app.start();
-}
-*/
+ app.start();
+ }
+ */
 app.start();

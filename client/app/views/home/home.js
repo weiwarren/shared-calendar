@@ -7,7 +7,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       controller: 'homeCtrl'
     });
   }])
-  .controller('homeCtrl', function ($scope, $q, $modal, $timeout, $location, $window, Event, Property) {
+  .controller('homeCtrl', function ($scope, $q, $modal, $timeout, $location, $window, Event, Property, ConfigState) {
     $scope.scheduler = {
       momentScale: 'month',
       currentDate: new Date(),
@@ -116,14 +116,14 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         onRowClick: function () {
         },
         onEventSelected: function (args) {
-          $scope.selectedEvents = $scope.dp.multiselect.events();
-          if ($scope.selectedEvents.length == 1) {
+          var selectedEvent = $scope.dp.multiselect.events();
+          if (selectedEvent.length == 1) {
             $modal.open({
               templateUrl: 'views/event/event-details.html',
               controller: 'eventDetailCtrl',
               resolve: {
                 event: function () {
-                  return $scope.selectedEvents[0].data;
+                  return selectedEvent[0].data;
                 }
               }
             });
@@ -227,7 +227,6 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         event.start = event.start.addDays(1);
         event.end = event.end.addDays(1);
       },
-
       init: function () {
         $timeout(function () {
           $scope.scheduler.changeScale('month', (new Date()));
@@ -281,6 +280,8 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       }
     }, true);
 
+    $scope.saveConfigState = function(ConfigState){
+    }
     $scope.scheduler.init();
   })
 ;
