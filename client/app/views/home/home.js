@@ -7,7 +7,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       controller: 'homeCtrl'
     });
   }])
-  .controller('homeCtrl', function ($scope, $q, $modal, $timeout, $location, $window, Event, Property, ConfigState) {
+  .controller('homeCtrl', function ($scope, $q, $modal, $timeout, $location, $window, Event, Property) {
     $scope.scheduler = {
       momentScale: 'month',
       currentDate: new Date(),
@@ -280,7 +280,8 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       }
     }, true);
 
-    $scope.saveConfigState = function(ConfigState){
+    $scope.saveConfigState = function(){
+
     }
     $scope.scheduler.init();
   })
