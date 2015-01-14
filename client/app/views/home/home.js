@@ -2,12 +2,12 @@
 
 angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
   .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/home', {
+    $routeProvider.when('/home/:configId?', {
       templateUrl: 'views/home/home.html',
       controller: 'homeCtrl'
     });
   }])
-  .controller('homeCtrl', function ($scope, $q, $modal, $timeout, $location, $window, Event, Property) {
+  .controller('homeCtrl', function ($scope, $q, $modal, $timeout, $routeParams, $location, $window, Event, Property, ConfigState) {
     $scope.scheduler = {
       momentScale: 'month',
       currentDate: new Date(),
@@ -228,6 +228,12 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         event.end = event.end.addDays(1);
       },
       init: function () {
+        if ($routeParams.configId) {
+          ConfigState.findById({id: $routeParams.configId}, function (config) {
+            console.dir(config);
+            angular.extend($scope.scheduler, config);
+          })
+        }
         $timeout(function () {
           $scope.scheduler.changeScale('month', (new Date()));
         });
@@ -236,7 +242,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       },
       showAdvancedFilter: function () {
         $modal.open({
-          templateUrl: 'views/home/advance-filter.html',
+          templateUrl: 'partials/advance-filter.html',
           controller: 'advanceFilterCtrl',
           resolve: {
             filters: function () {
@@ -248,7 +254,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
             $scope.scheduler.applyAdvanceFilters();
           });
       },
-      applyAdvanceFilters: function(){
+      applyAdvanceFilters: function () {
         var query = {};
         for (var key in $scope.scheduler.advanceFilters) {
           var currentProp = $scope.scheduler.advanceFilters[key];
@@ -257,7 +263,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
             currentProp.include.forEach(function (af) {
               currentInclude.push(af.key);
             });
-            query["metadata."+key + ".key"] = {in: currentInclude};
+            query["metadata." + key + ".key"] = {in: currentInclude};
           }
         }
         query = angular.equals(query, {}) ? {} : {"filter": {"where": query}};
@@ -280,9 +286,27 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       }
     }, true);
 
-    $scope.saveConfigState = function(){
+    $scope.guid = $routeParams.configId || $scope.guid();
+    $scope.saveConfigState = function () {
+      ConfigState.upsert({
+        id: $scope.guid,
+        momentScale: $scope.scheduler.momentScale,
+        currentDate: $scope.scheduler.currentDate,
+        filters: $scope.scheduler.filters,
+        config: $scope.scheduler.config
+      }).$promise.then(function () {
+          $modal.open({
+            templateUrl: 'partials/modal.html',
+            controller: 'modalCtrl',
+            resolve: {
+              item: function () {
+                return {title: $window.location.origin + $window.location.pathname + '#/home/' + $scope.guid}
+              }
+            }
+          });
+        });
+    };
 
-    }
     $scope.scheduler.init();
   })
 ;

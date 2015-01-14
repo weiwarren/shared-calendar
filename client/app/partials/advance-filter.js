@@ -1,4 +1,4 @@
-angular.module('echoCalendarApp.advanceFilter', ['ui.bootstrap'])
+angular.module('echoCalendarApp.advanceFilter', [])
   .controller('advanceFilterCtrl', function ($scope, $modal, $timeout, $modalInstance, filters, Product, Property, Customer) {
     $scope.filters = filters;
     //angular.copy(filters, $scope.filters);

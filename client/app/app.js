@@ -6,9 +6,11 @@ angular.module('echoCalendarApp', [
   'ngCookies',
   'lbServices',
   'ngResource',
+  'ngClipboard',
   'daypilot',
   'angularMoment',
   'mgcrea.ngStrap.modal',
+  'echoCalendarApp.modal',
   'echoCalendarApp.auth',
   'echoCalendarApp.home',
   'echoCalendarApp.editEvent',
@@ -18,8 +20,8 @@ angular.module('echoCalendarApp', [
   'echoCalendarApp.eventApproval',
   'echoCalendarApp.error'
 ])
-  .config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider',
-    function ($routeProvider, $httpProvider, LoopBackResourceProvider) {
+  .config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider','ngClipProvider',
+    function ($routeProvider, $httpProvider, LoopBackResourceProvider,ngClipProvider) {
       $routeProvider.when('/', {redirectTo: '/home'}).otherwise({redirectTo: '/error/404'});
 // Use a custom auth header instead of the default 'Authorization'
       LoopBackResourceProvider.setAuthHeader('X-Access-Token');
@@ -41,6 +43,8 @@ angular.module('echoCalendarApp', [
         };
       });
 
+      ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
+
       moment.locale('en-AU', {
         longDateFormat: {
           LT: "h:mm a",
@@ -49,7 +53,8 @@ angular.module('echoCalendarApp', [
           LL: "D MMMM YYYY",
           LLL: "D MMMM YYYY LT",
           LLLL: "dddd D MMMM YYYY LT",
-          F: "YYYY-MM-DD"
+          F: "YYYY-MM-DD",
+          FT: "YYYY-MM-DD HH:mm"
         }
       });
       moment.locale('en-AU');

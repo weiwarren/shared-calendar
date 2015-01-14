@@ -74,5 +74,9 @@
   "duration": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "configState":{
+    "dataSource": "mongodb",
+    "public": true
   }
 }
