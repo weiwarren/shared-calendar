@@ -232,7 +232,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           $scope.scheduler.changeScale('month', (new Date()));
         });
 
-        $scope.scheduler.queryResources().then(function(){
+        $scope.scheduler.queryResources().then(function () {
           if ($routeParams.configId) {
             ConfigState.findById({id: $routeParams.configId}, function (config) {
               angular.extend($scope.scheduler, config);
@@ -240,7 +240,9 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
             })
           }
         });
-        $scope.scheduler.queryEvents();
+        if (!$routeParams.configId) {
+          $scope.scheduler.queryEvents();
+        }
       },
       showAdvancedFilter: function () {
         $modal.open({
