@@ -85,7 +85,7 @@
 
     </div>
 
-    <div class="row" ng-show="event.metadata.hasVIP || event.metadata.hasPrize || event.metadata.notes">
+    <div class="row" ng-show="event.metadata.hasCustomer || event.metadata.hasPrizeAmount || event.metadata.notes">
 
       <div class="col-sm-12">
 
@@ -106,10 +106,11 @@
                 <ul class="disc-align">
                   <li class="title" ng-show="event.metadata.product">Product</li>
                   <li ng-bind="event.metadata.product.name" ng-show="event.metadata.product"></li>
-                  <li class="title" ng-show="event.metadata.hasVIP">VIP Loyalty Event</li>
-                  <li ng-repeat="(key,prop) in event.metadata.vip track by key" ng-bind="event.metadata.vip[key]"></li>
-                  <li class="title" ng-show="event.metadata.hasPrize">Prize Money</li>
-                  <li ng-repeat="(key,prop) in event.metadata.prize track by key" ng-bind="event.metadata.prize[key]"></li>
+                  <li class="title" ng-show="event.metadata.hasCustomer">VIP Loyalty Event</li>
+                  <li ng-bind="event.metadata.customer.name"></li>
+                  <li ng-bind="event.metadata.customer.details"></li>
+                  <li class="title" ng-show="event.metadata.hasPrizeAmount">Prize Money</li>
+                  <li ng-repeat="(key,prop) in event.metadata.prize" ng-bind="event.metadata.prize[key]"></li>
                   <li class="title" ng-show="event.metadata.notes">Comments</li>
                   <li ng-bind="event.metadata.notes" ng-show="event.metadata.notes"></li>
                 </ul>
