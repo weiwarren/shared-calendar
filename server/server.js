@@ -31,7 +31,7 @@ boot(app, __dirname);
 // attempt to build the providers/passport config
 var config = {};
 try {
-  if (app.settings.env == 'product') {
+  if (app.settings.env == 'production') {
     config = require('./providers.production.json');
   }
   else {
@@ -140,8 +140,8 @@ app.start = function (httpOnly) {
     server = http.createServer(app);
   }
 
-  server.listen(/*app.get('port')*/(process.env.PORT || app.get('port')), function () {
-    var baseUrl = (httpOnly ? 'http://' : 'https://') + app.get('host') + ':' + (process.env.PORT || app.get('port'));
+  server.listen(process.env.PORT , function () {
+    var baseUrl = (httpOnly ? 'http://' : 'https://') + app.get('host') + ':' + process.env.PORT;
     app.emit('started', baseUrl);
     console.log('Server listening @ %s%s', baseUrl, '/');
   });
