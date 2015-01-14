@@ -271,20 +271,18 @@
 
 
       <div class="row filter-display well">
-
         <div class="col-sm-9">
-            <span ng-repeat="(key,prop) in scheduler.advanceFilters"
-                  ng-init="currentFilter=scheduler.advanceFilters[key]">
+            <span ng-repeat="(key,prop) in scheduler.advanceFilters">
               <span class="label label-primary"
                     ng-class="{'label-warning': key=='customer','label-danger':key=='venue'}"
-                    ng-show="currentFilter.all">all<button
-                type="button" class="close" ng-click="currentFilter.all=false;scheduler.applyAdvanceFilters()"><span
+                    ng-show="scheduler.advanceFilters[key].all">all<button
+                type="button" class="close" ng-click="scheduler.advanceFilters[key].all=false;scheduler.applyAdvanceFilters()"><span
                 aria-hidden="true">×</span></button></span>
               <span class="label label-primary"
                     ng-class="{'label-warning': key=='customer','label-danger':key=='venue'}"
-                    ng-repeat="cfi in currentFilter.include">{{cfi.name}}<button
+                    ng-repeat="cfi in scheduler.advanceFilters[key].include">{{cfi.name}}<button
                 type="button" class="close"
-                ng-click="currentFilter.include.splice($index,1);scheduler.applyAdvanceFilters()"><span
+                ng-click="scheduler.advanceFilters[key].include.splice($index,1);scheduler.applyAdvanceFilters()"><span
                 aria-hidden="true">×</span></button></span>
             </span>
 

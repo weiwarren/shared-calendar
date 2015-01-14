@@ -139,12 +139,12 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         ]
       },
       queryResources: function () {
-        Property.query().$promise.then(function (results) {
+        return Property.query().$promise.then(function (results) {
           $scope.scheduler.config.resources = $scope.scheduler.orgionalResources = results;
         });
       },
       queryEvents: function () {
-        Event.query($scope.scheduler.currentQuery).$promise.then(function (results) {
+        return Event.query($scope.scheduler.currentQuery).$promise.then(function (results) {
           $scope.events = results;
         });
       },
@@ -228,16 +228,18 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         event.end = event.end.addDays(1);
       },
       init: function () {
-        if ($routeParams.configId) {
-          ConfigState.findById({id: $routeParams.configId}, function (config) {
-            console.dir(config);
-            angular.extend($scope.scheduler, config);
-          })
-        }
         $timeout(function () {
           $scope.scheduler.changeScale('month', (new Date()));
         });
-        $scope.scheduler.queryResources();
+
+        $scope.scheduler.queryResources().then(function(){
+          if ($routeParams.configId) {
+            ConfigState.findById({id: $routeParams.configId}, function (config) {
+              angular.extend($scope.scheduler, config);
+              $scope.scheduler.applyAdvanceFilters();
+            })
+          }
+        });
         $scope.scheduler.queryEvents();
       },
       showAdvancedFilter: function () {
@@ -293,6 +295,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         momentScale: $scope.scheduler.momentScale,
         currentDate: $scope.scheduler.currentDate,
         filters: $scope.scheduler.filters,
+        advanceFilters: $scope.scheduler.advanceFilters,
         config: $scope.scheduler.config
       }).$promise.then(function () {
           $modal.open({
