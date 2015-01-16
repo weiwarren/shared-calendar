@@ -20,9 +20,9 @@ angular.module('echoCalendarApp', [
   'echoCalendarApp.eventApproval',
   'echoCalendarApp.error'
 ])
-  .config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider','ngClipProvider',
-    function ($routeProvider, $httpProvider, LoopBackResourceProvider,ngClipProvider) {
-      $routeProvider.when('/', {redirectTo: '/home'}).otherwise({redirectTo: '/error/404'});
+  .config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider', 'ngClipProvider',
+    function ($routeProvider, $httpProvider, LoopBackResourceProvider, ngClipProvider) {
+      $routeProvider.when('/', {redirectTo: '/home'});
 // Use a custom auth header instead of the default 'Authorization'
       LoopBackResourceProvider.setAuthHeader('X-Access-Token');
 
@@ -127,6 +127,9 @@ angular.module('echoCalendarApp', [
                 scope.$apply();
               }
             });
+            if (ngModelCtrl.$viewValue) {
+              element.data('DateTimePicker').setDate(scope.ngModel);
+            }
           }
         );
       }
@@ -219,10 +222,10 @@ angular.module('echoCalendarApp', [
           if (nv) {
             setTimeout(function () {
               var el = $(element).find('.form-control.ng-invalid:first');
-              if(el.is('.hidden')){
+              if (el.is('.hidden')) {
                 el.removeClass('hidden').focus().addClass('hidden');
               }
-              else{
+              else {
                 el.focus();
               }
             }, 100);
@@ -360,7 +363,7 @@ angular.module('echoCalendarApp', [
       }
     }
   })
-  .run(function ($rootScope, $injector, $cookies, $route, $location, $modal, LoopBackAuth) {
+  .run(function ($rootScope, $injector, $cookies, $route, $location, $modal, LoopBackAuth, Event) {
     LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], {userName: $cookies['userName']});
     LoopBackAuth.rememberMe = false;
     LoopBackAuth.save();
@@ -375,6 +378,9 @@ angular.module('echoCalendarApp', [
     };
 
     console.dir("token", $cookies['access_token']);
+
+    $rootScope.debug = $location.search().debug;
+
     //modalservice
     $rootScope.$on("$locationChangeStart", function (event, next) {
       //detect when the page is to be loaded using modal dialog
@@ -384,6 +390,11 @@ angular.module('echoCalendarApp', [
       }
     });
 
+    $rootScope.checkApproval = function () {
+      Event.count({filter: {where: {approved: {ne: true}}}}, function (response) {
+        $rootScope.waitApproval = response.count;
+      });
+    };
 
     $rootScope.modal = function (path, params) {
       angular.forEach($route.routes, function (item) {

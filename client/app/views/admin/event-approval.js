@@ -7,14 +7,14 @@ angular.module('echoCalendarApp.eventApproval', ['ngRoute'])
       controller: 'eventApprovalCtrl'
     });
   }])
-  .controller('eventApprovalCtrl', function ($scope, $modal, $location, FileUploader, Event, Property, EventType, Container) {
-    $scope.events = [];
+  .controller('eventApprovalCtrl', function ($scope, $modal, $q, $location, Event) {
+    var queryEvent = function () {
+      Event.find({filter: {where: {approved: {ne: true}}}}, function (events) {
+        $scope.events = events;
+      });
+    };
 
-    Event.query(function(events){
-      $scope.events = events
-    });
-
-    $scope.showDetail =function(event){
+    $scope.showDetail = function (event) {
       $modal.open({
         templateUrl: 'views/event/event-details.html',
         controller: 'eventDetailCtrl',
@@ -25,7 +25,32 @@ angular.module('echoCalendarApp.eventApproval', ['ngRoute'])
         }
       });
     };
-    $scope.publish = function(event){
-      event.published = !event.published;
-    }
+
+    $scope.checkAll = function (val) {
+      if ($scope.events) {
+        $scope.events.forEach(function (event) {
+          event.approved = val;
+        })
+      }
+    };
+
+    $scope.approveAll = function () {
+      var events = $scope.events.filter(function (item) {
+        return item.approved == true;
+      });
+      var qs = [];
+      events.forEach(function (event) {
+        qs.push($scope.approve(event));
+      });
+      $q.all(qs).then(function () {
+        queryEvent();
+      });
+    };
+
+    $scope.approve = function (event) {
+      event.approved = true;
+      return event.$save();
+    };
+
+    queryEvent();
   });

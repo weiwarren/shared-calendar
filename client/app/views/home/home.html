@@ -3,6 +3,7 @@
     <a class="navbar-brand filter-control open" ng-class="{open:!showFilters}" ng-click="showFilters = !showFilters"
        aria-expanded="false">
       <i class="fa fa-filter"></i> <span class="sr-only">Filters</span></a>
+
     <div class="navbar-header">
       <a href="#/"><img alt="Echo Entertainment Group Marketing Event Calendar" class="brand-logo-image"
                         src="image/echo_marketing-brand-logo.svg"></a>
@@ -10,8 +11,6 @@
 
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-
-
         <li class="actions export"><a class="dropdown-toggle" download href="/api/events"
                                       aria-expanded="false"><!--<i class="fa fa-share-square-o"></i>--><span
           class="image-holder"></span><span class="sr-only">Export Report</span></a>
@@ -23,12 +22,11 @@
               Soon)</a></li>
             <li class="disabled"><a><i class="fa fa-area-chart"></i> Export Report for PowerPivot
               (Coming Soon)</a></li>
-
           </ul>
         </li>
 
         <li class="actions add-event">
-          <a href="#/addEvent?modal=1" tooltip="Add&nbsp;an&nbsp;event" tooltip-placement="bottom"><span
+          <a href="#/addEvent" tooltip="Add&nbsp;an&nbsp;event" tooltip-placement="bottom"><span
             class="image-holder"></span><span class="sr-only">Add Event</span></a>
         </li>
         <li class="actions export">
@@ -40,7 +38,7 @@
                                                                                    class="profile-image img-circle">
           <span>{{currentUserId || 'UserName'}}</span>
 
-          <div class="badge approval-counter" ng-show="false">3</div>
+          <div class="badge approval-counter" ng-show="waitApproval>0" data-ng-bind="waitApproval"></div>
         </a>
         </li>
 
@@ -52,10 +50,7 @@
 
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
-
-
     <div class="sidebar-nav echo">
-
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
           <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
@@ -101,96 +96,20 @@
           <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo"
                aria-expanded="false">
             <div class="panel-body">
-              <form action="#">
-                <fieldset class="gaming">
-                  <input type="checkbox" id="gaming-event-group" class="checkall" name="gamingFilter"
-                         ng-model="scheduler.filters.Gaming"/><label
-                  for="gaming-event-group"><span class="ui"></span><h5>Gaming</h5></label>
-                  <ul class="list-unstyled">
-
-                    <li><input type="checkbox" id="event-type-g2" name="gamingFilter"
-                               ng-model="scheduler.filters.GamingEvent"
-                               sync-model="scheduler.filters.Gaming"/><label
-                      for="event-type-g2"><span class="ui"></span>Events</label></li>
-
-                    <li><input type="checkbox" id="event-type-g1" name="gamingFilter"
-                               ng-model="scheduler.filters.GamingPromotion"
-                               sync-model="scheduler.filters.Gaming"/><label
-                      for="event-type-g1"><span class="ui"></span>Promotions</label></li>
-                    <li><input type="checkbox" id="event-type-g3" name="gamingFilter"
-                               ng-model="scheduler.filters.GamingOffer"
-                               sync-model="scheduler.filters.Gaming"/><label for="event-type-g3"><span
-                      class="ui"></span>Offers &amp; Incentives</label></li>
-
-                    <!-- NEW! Competitor Filter Control -->
-
-                    <li><input type="checkbox" id="event-type-g4" name="gamingFilter"
-                               ng-model="scheduler.filters.GamingCompetitor"
-                               sync-model="scheduler.filters.Gaming"/><label class="competition"
-                                                                             for="event-type-g4"><span
-                      class="ui"></span>Competitor Events</label></li>
-
-                  </ul>
-                </fieldset>
-
-
-                <fieldset class="nongaming">
-                  <input type="checkbox" id="nongaming-event-group" class="checkall"
-                         ng-model="scheduler.filters.NonGaming"/><label
-                  for="nongaming-event-group"><span class="ui"></span><h5>Non&ndash;Gaming</h5></label>
-                  <ul class="list-unstyled">
-                    <li><input type="checkbox" id="event-type-ng1" ng-model="scheduler.filters.NonGamingPromotion"
-                               sync-model="scheduler.filters.NonGaming"/><label for="event-type-ng1"><span
-                      class="ui"></span>Promotions</label></li>
-                    <li><input type="checkbox" id="event-type-ng2" ng-model="scheduler.filters.NonGamingFood"
-                               sync-model="scheduler.filters.NonGaming"/><label for="event-type-ng2"><span
-                      class="ui"></span>Food, Bars &amp; Hotels</label></li>
-                    <li><input type="checkbox" id="event-type-ng3" ng-model="scheduler.filters.NonGamingShows"
-                               sync-model="scheduler.filters.NonGaming"/><label for="event-type-ng3"><span
-                      class="ui"></span>Shows &amp; Concerts</label></li>
-
-                    <!-- NEW! Competitor Filter Control -->
-
-                    <li><input type="checkbox" id="event-type-ng4" name="gamingFilter"
-                               ng-model="scheduler.filters.NonGamingCompetitor"
-                               sync-model="scheduler.filters.NonGaming"/><label class="competition"
-                                                                                for="event-type-ng4"><span
-                      class="ui"></span>Competitor Events</label></li>
-
-
-                  </ul>
-                </fieldset>
-
-
-                <fieldset>
-                  <input type="checkbox" id="public-event-group" class="checkall"
-                         ng-model="scheduler.filters.Public"/><label
-                  for="public-event-group"><span class="ui"></span><h5>Public</h5></label>
-                  <ul class="list-unstyled">
-                    <li><input type="checkbox" id="event-type-p1" ng-model="scheduler.filters.PublicEvent"
-                               sync-model="scheduler.filters.Public"/><label for="event-type-p1"><span
-                      class="ui"></span>Public Events</label></li>
-                    <li><input type="checkbox" id="event-type-p2" ng-model="scheduler.filters.PublicHoliday"
-                               sync-model="scheduler.filters.Public"/><label for="event-type-p2"><span
-                      class="ui"></span>Holidays</label></li>
-                    <li><input type="checkbox" id="event-type-p3" ng-model="scheduler.filters.PublicFestival"
-                               sync-model="scheduler.filters.Public"/><label for="event-type-p3"><span
-                      class="ui"></span>Festivals &amp; Sports</label></li>
-                  </ul>
-                </fieldset>
-              </form>
+              <fieldset class="{{eventType.key | lowercase}}" ng-repeat="eventType in eventTypes">
+                <input type="checkbox" id="{{eventType.key | lowercase}}-event-group" class="checkall"
+                       name="{{eventType.key | lowercase}}Filter" ng-model="scheduler.filters[eventType.key]"/><label
+                for="{{eventType.key | lowercase}}-event-group"><span class="ui"></span><h5>{{eventType.name}}</h5></label>
+                <ul class="list-unstyled">
+                  <li ng-repeat="category in eventType.categories">
+                    <input type="checkbox" id="{{eventType.key+category.key}}-category" name="{{eventType.key | lowercase}}Filter"
+                           ng-model="scheduler.filters[eventType.key+category.key]"
+                           sync-model="scheduler.filters[eventType.key]"/><label for="{{eventType.key+category.key}}-category"><span
+                    class="ui"></span>{{category.name}}</label></li>
+                </ul>
+              </fieldset>
             </div>
           </div>
-        </div>
-        <div class="panel panel-default">
-          <a class="" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-
-            <div class="panel-heading" role="tab" id="headingThree">
-
-              <h4 class="panel-title">Collaboration</h4>
-
-            </div>
-          </a>
         </div>
       </div>
 
@@ -276,7 +195,8 @@
               <span class="label label-primary"
                     ng-class="{'label-warning': key=='customer','label-danger':key=='venue'}"
                     ng-show="scheduler.advanceFilters[key].all">all<button
-                type="button" class="close" ng-click="scheduler.advanceFilters[key].all=false;scheduler.applyAdvanceFilters()"><span
+                type="button" class="close"
+                ng-click="scheduler.advanceFilters[key].all=false;scheduler.applyAdvanceFilters()"><span
                 aria-hidden="true">×</span></button></span>
               <span class="label label-primary"
                     ng-class="{'label-warning': key=='customer','label-danger':key=='venue'}"
@@ -314,6 +234,7 @@
 
       <!-- /ADVANCED FILTER RESULTS -->
 
+      <debug val="scheduler" ng-show="debug"></debug>
 
       <div class="row">
 

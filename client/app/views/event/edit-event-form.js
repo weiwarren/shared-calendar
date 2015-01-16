@@ -29,23 +29,43 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       });
     }])
   .controller('eventCtrl', function ($scope, $q, $location, $modal, Property, EventType, Duration, Customer, Container, FileUploader) {
-    $scope.debug = $location.search().debug;
+
     $scope.filesToBeRemoved = [];
+    //TODO: security settings on this
+    $scope.checkApproval();
 
     //load event types
     EventType.query(function (eventTypes) {
       $scope.eventTypes = eventTypes;
+      if ($scope.queryParams.eventTypeKey) {
+        $scope.event.eventTypeKey = $scope.queryParams.eventTypeKey;
+        $scope.event.eventType = $scope.eventTypes.filter(function (item) {
+          return item.key == $scope.event.eventTypeKey
+        })[0];
+      }
+      if ($scope.queryParams.categoryKey) {
+        $scope.event.categoryKey = $scope.queryParams.categoryKey;
+      }
     });
 
     Customer.query(function (customers) {
       $scope.customers = customers;
     });
+
     Duration.query(function (durations) {
       $scope.durationOptions = durations;
     });
+
     //load properties
     Property.query(function (properties) {
       $scope.properties = properties;
+      if ($scope.queryParams.propertyKey) {
+        $scope.eventProperties = [{
+          propertyKey: $scope.queryParams.propertyKey, property: properties.filter(function (item) {
+            return item.key == $scope.queryParams.propertyKey
+          })[0]
+        }];
+      }
     });
 
     //update the duration based on start and end date
@@ -53,6 +73,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       event.duration = moment.duration(length, unit);
       //element.data('DateTimePicker').setDate(d);
     };
+
     $scope.addEvent = function () {
       $scope.event.multiEvents.push({});
     };
@@ -67,6 +88,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       }
       $scope.eventProperties.push({});
     };
+
     $scope.removeProperty = function (index) {
       $scope.eventProperties.splice(index, 1);
     };
@@ -227,15 +249,14 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
         template: '<div class="modal-body">One moment, please ...</div>',
         backdrop: 'backdrop'
       });
-    }
+    };
 
     $scope.hideLoading = function () {
       if ($scope.loadingModal)
         $scope.loadingModal.close();
     }
-
   })
-  .controller('addEventCtrl', function ($scope, $location, $route, isModal, $controller, Event, Property, EventType, Container, $q) {
+  .controller('addEventCtrl', function ($scope, $location, $route, $routeParams, isModal, $controller, Event, Property, EventType, Container, $q) {
     $controller('eventCtrl', {$scope: $scope});
     $scope.eventProperties = [{}];
     $scope.event = {
@@ -263,6 +284,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     (function parseDateFromUrl() {
       var start = $location.search().start;
       var end = $location.search().end;
+      var resource = $location.search().resource;
       if (start) {
         $scope.event.start = moment(start);
       }
@@ -271,6 +293,12 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       }
       if (start && end) {
         $scope.event.duration = moment.duration($scope.event.start.diff($scope.event.end));
+      }
+      if (resource) {
+        var keys = resource.split('-');
+        if (keys && keys.length) {
+          $scope.queryParams = {propertyKey: keys[0], eventTypeKey: keys[1], categoryKey: keys[2]};
+        }
       }
     })();
 

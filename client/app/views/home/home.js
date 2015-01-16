@@ -7,7 +7,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       controller: 'homeCtrl'
     });
   }])
-  .controller('homeCtrl', function ($scope, $q, $modal, $timeout, $routeParams, $location, $window, Event, Property, ConfigState) {
+  .controller('homeCtrl', function ($scope, $q, $modal, $timeout, $routeParams, $location, $window, Event, EventType, Property, ConfigState) {
     $scope.scheduler = {
       momentScale: 'month',
       currentDate: new Date(),
@@ -38,7 +38,10 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         dynamicEventRenderingCacheSweeping: true,
         eventMoveHandling: 'Disabled',
         onTimeRangeSelected: function (args) {
-          $window.location.href = '#/addEvent?start=' + args.start.value + '&end=' + args.end.value;
+          console.log(args);
+          $timeout(function () {
+            $window.location = '#/addEvent/?start=' + args.start.value + '&end=' + args.end.value + '&resource=' + args.resource;
+          });
         },
         onResourceHeaderClicked: function (args) {
         },
@@ -148,6 +151,11 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           $scope.events = results;
         });
       },
+      queryEventTypes: function () {
+        return EventType.find().$promise.then(function (results) {
+          $scope.eventTypes = results;
+        })
+      },
       filterResources: function (filters, resources) {
         resources = resources.filter(function (res) {
           var filtered = true;
@@ -190,7 +198,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           case 'month':
             $scope.scheduler.config.timeHeaders = [
               {groupBy: "Month"},
-              {groupBy: "Week", format: "Week"},
+              {groupBy: "Week", format: "Week ww"},
               {groupBy: "Day", format: "dd"}];
             $scope.scheduler.config.startDate = moment($scope.scheduler.currentDate).startOf('Month').format('YYYY-MM-DD');
             $scope.scheduler.config.days = moment($scope.scheduler.config.startDate).daysInMonth();
@@ -228,19 +236,27 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         event.end = event.end.addDays(1);
       },
       init: function () {
+        //default scale
         $timeout(function () {
           $scope.scheduler.changeScale('month', (new Date()));
         });
 
-        $scope.scheduler.queryResources().then(function () {
-          if ($routeParams.configId) {
-            ConfigState.findById({id: $routeParams.configId}, function (config) {
-              angular.extend($scope.scheduler, config);
+        //query resource
+        if ($routeParams.configId) {
+          $q.all([
+            ConfigState.findById({id: $routeParams.configId}).$promise,
+            $scope.scheduler.queryEventTypes(),
+            $scope.scheduler.queryResources()
+          ])
+            .then(function (responses) {
+              angular.extend($scope.scheduler, responses[0]);
+              //query events with filter
               $scope.scheduler.applyAdvanceFilters();
-            })
-          }
-        });
-        if (!$routeParams.configId) {
+            });
+        }
+        else {
+          $scope.scheduler.queryEventTypes();
+          $scope.scheduler.queryResources();
           $scope.scheduler.queryEvents();
         }
       },
@@ -291,6 +307,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
     }, true);
 
     $scope.guid = $routeParams.configId || $scope.guid();
+
     $scope.saveConfigState = function () {
       ConfigState.upsert({
         id: $scope.guid,
@@ -311,6 +328,8 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           });
         });
     };
+
+    $scope.checkApproval();
 
     $scope.scheduler.init();
   })
