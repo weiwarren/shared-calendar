@@ -9,9 +9,13 @@
       <li class="actions active"><a class="close-add" href="javascript:void(0)" ng-click="closeForm()"><span
         class="image-holder"></span>
         <span class="sr-only">Add Event</span></a></li>
-      <li class="user-details"><a href="#fakelink" class="user-creds">
+      <li class="user-details"><a ng-href="#/eventApproval" class="user-creds">
         <img src="image/user_face_pic.png" class="profile-image img-circle">
-        <span>{{currentUserId || 'UserName'}}</span></a></li>
+        <span>{{currentUserId || 'UserName'}}</span>
+        <div class="badge approval-counter" ng-show="waitApproval>0" data-ng-bind="waitApproval"></div>
+      </a>
+      </li>
+
     </ul>
   </div>
 </nav>
@@ -57,7 +61,7 @@
                       <select id="category"
                               name="category"
                               class="form-control"
-                              ng-disabled="!event.eventType"
+                              ng-disabled="!event.eventTypeKey"
                               ng-model="event.categoryKey"
                               ng-required="true"
                               ng-change="event.category=((event.eventType.categories | filter:{key:event.categoryKey})[0])"
@@ -124,6 +128,7 @@
                       <div class="input-group date" datetimez ng-model="event.start" pick-time="!event.allDay">
                         <input name="singleStartDateTime" type="text" class="form-control"
                                ng-required="true"
+
                                data-date-format="L LT" ng-model="event.start"
                                placeholder="dd/mm/yy  |   -- : --"/>
                         <span class="input-group-btn">
