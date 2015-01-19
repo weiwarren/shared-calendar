@@ -37,14 +37,29 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         groupConcurrentEventsLimit: 1,
         dynamicEventRenderingCacheSweeping: true,
         eventMoveHandling: 'Disabled',
+        contextMenu: new DayPilot.Menu({
+          items: [
+            {
+              text: "View event details in full screen", onclick: function () {
+              //problem with conflict of lib and angularjs
+              //$scope.scheduler.viewItemDetails(1234);
+            }
+            }
+          ]
+        }),
+        onTimeRangeSelect: function (args) {},
         onTimeRangeSelected: function (args) {
-          console.log(args);
-          $timeout(function () {
-            $window.location = '#/addEvent/?start=' + args.start.value + '&end=' + args.end.value + '&resource=' + args.resource;
+          var menu = new DayPilot.Menu({
+            items: [
+              {
+                text: "Add an event",
+                href: '#/addEvent/?start=' + args.start.value + '&end=' + args.end.value + '&resource=' + args.resource
+              }
+            ]
           });
+          menu.show(args);
         },
-        onResourceHeaderClicked: function (args) {
-        },
+        onResourceHeaderClicked: function (args) {},
         onResourceCollapse: function (args) {
           var selector = $("div[class$='_event_group'][resource^='" + args.resource.id + "']");
           selector.trigger('click');
@@ -119,19 +134,12 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         onRowClick: function () {
         },
         onEventSelected: function (args) {
-          var selectedEvent = $scope.dp.multiselect.events();
-          if (selectedEvent.length == 1) {
-            $modal.open({
-              templateUrl: 'views/event/event-details.html',
-              controller: 'eventDetailCtrl',
-              resolve: {
-                event: function () {
-                  return selectedEvent[0].data;
-                }
-              }
-            });
-            $scope.$apply();
-          }
+          /*var selectedEvent = $scope.dp.multiselect.events();
+           if (selectedEvent.length == 1) {
+           console.log(args);
+           $scope.scheduler.viewItemDetails(selectedEvent[0].data);
+           }*/
+          $scope.scheduler.viewItemDetails(args.e.id());
         },
         timeHeaders: [
           {groupBy: "Month"}, {groupBy: "Week", format: "Week - ww"}
@@ -141,18 +149,31 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           {color: "#8b6f4d", width: 10, opacity: 30, location: (new Date()).toISOString(), layer: "BelowEvents"}
         ]
       },
+      viewItemDetails: function (id) {
+        if (id) {
+          $modal.open({
+            templateUrl: 'views/event/event-details.html',
+            controller: 'eventDetailCtrl',
+            resolve: {
+              eventId: function () {
+                return id;
+              }
+            }
+          });
+        }
+      },
       queryResources: function () {
         return Property.query().$promise.then(function (results) {
           $scope.scheduler.config.resources = $scope.scheduler.orgionalResources = results;
         });
       },
       queryEvents: function () {
-        return Event.query($scope.scheduler.currentQuery).$promise.then(function (results) {
-          $scope.events = results;
+        return Event.schedulerList($scope.scheduler.currentQuery).$promise.then(function (results) {
+          $scope.events = results.events;
         });
       },
       queryEventTypes: function () {
-        return EventType.find().$promise.then(function (results) {
+        return EventType.query().$promise.then(function (results) {
           $scope.eventTypes = results;
         })
       },
@@ -311,11 +332,13 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
     $scope.saveConfigState = function () {
       ConfigState.upsert({
         id: $scope.guid,
-        momentScale: $scope.scheduler.momentScale,
-        currentDate: $scope.scheduler.currentDate,
-        filters: $scope.scheduler.filters,
-        advanceFilters: $scope.scheduler.advanceFilters,
-        config: $scope.scheduler.config
+        state: {
+          momentScale: $scope.scheduler.momentScale,
+          currentDate: $scope.scheduler.currentDate,
+          filters: $scope.scheduler.filters,
+          advanceFilters: $scope.scheduler.advanceFilters,
+          config: $scope.scheduler.config
+        }
       }).$promise.then(function () {
           $modal.open({
             templateUrl: 'partials/modal.html',

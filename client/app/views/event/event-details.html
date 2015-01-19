@@ -1,8 +1,8 @@
 <div class="echo">
   <div class="modal-header">
     <debug val="event" ng-show="debug"></debug>
-    <button type="button" class="close" ng-click="close()"><span class="image-holder"></span></button>
-    <h2 class="modal-title" id="myModalLabel" data-ng-bind="event.text">Example Event Title</h2>
+    <button type="button" class="close" ng-click="close()" ng-show="isModal"><span class="image-holder"></span></button>
+    <h2 class="modal-title" id="myModalLabel" data-ng-bind="event.text"></h2>
   </div>
   <div class="modal-body">
     <div class="row">
@@ -125,7 +125,7 @@
   <!-- /Modal body -->
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="$close()">Close</button>
-    <a href="#/editEvent/{{event.id}}" class="pull-left btn btn-primary" ng-click="close()">Edit Event</a>
+    <button type="button" class="btn btn-default" ng-click="close()">Close</button>
+    <a href="#/editEvent/{{event.id}}" class="pull-left btn btn-primary">Edit Event</a>
   </div>
 </div>

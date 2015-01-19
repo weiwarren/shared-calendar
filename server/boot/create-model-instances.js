@@ -1,6 +1,6 @@
 var debug = require('debug')('boot:create-model-instances');
 
-module.exports = function(app) {
+module.exports = function (app) {
   var User = app.models.user;
   var Role = app.models.Role;
   var RoleMapping = app.models.RoleMapping;
@@ -8,12 +8,12 @@ module.exports = function(app) {
     {username: 'admin', email: 'admin@gmail.com', password: 'opensesame'},
     {username: 'contributor', email: 'contributor@gmail.com', password: 'opensesame'},
     {username: 'viewer', email: 'viewer@gmail.com', password: 'opensesame'}
-  ], function(err, users) {
+  ], function (err, users) {
     if (err) return debug(users);
     //create the admin role
     Role.create({
       name: 'admin'
-    }, function(err, role) {
+    }, function (err, role) {
       if (err) return debug(err);
       //console.log(role);
 
@@ -22,7 +22,7 @@ module.exports = function(app) {
       role.principals.create({
         principalType: RoleMapping.USER,
         principalId: users[0].id
-      }, function(err, principal) {
+      }, function (err, principal) {
         if (err) return debug(err);
         debug(principal);
       });
@@ -30,16 +30,14 @@ module.exports = function(app) {
 
     Role.create({
       name: 'contributor'
-    }, function(err, role) {
+    }, function (err, role) {
       if (err) return debug(err);
-      //console.log(role);
-
       //debug(role);
       //make admin
       role.principals.create({
         principalType: RoleMapping.USER,
         principalId: users[1].id
-      }, function(err, principal) {
+      }, function (err, principal) {
         if (err) return debug(err);
         //debug(principal);
       });

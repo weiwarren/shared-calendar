@@ -17,9 +17,28 @@
       "type": "string",
       "required": true
     },
-    "backColor": {
-      "type": "string",
-      "required": false
+    "cssClass": {
+      "type": "string"
+    },
+    "expanded": {
+      "type": "boolean",
+      "default": "true"
+    },
+    "venues": {
+      "type": "array"
+    },
+    "children": {
+      "type": "array"
+    },
+    "order": {
+      "type": "number",
+      "required": true
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
     }
   },
   "validations": [],

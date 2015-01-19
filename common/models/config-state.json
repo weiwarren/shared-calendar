@@ -3,7 +3,18 @@
   "plural": "configStates",
   "base": "PersistedModel",
   "idInjection": true,
-  "properties": {},
+  "properties": {
+    "state": {
+      "type": "object",
+      "required": true
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [

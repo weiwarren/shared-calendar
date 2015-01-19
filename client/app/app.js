@@ -98,7 +98,7 @@ angular.module('echoCalendarApp', [
       }
     }
   })
-  .directive('datetimez', function () {
+  .directive('datetimez', function ($rootScope) {
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -118,15 +118,18 @@ angular.module('echoCalendarApp', [
             if (ngModelCtrl.$viewValue) {
               scope.ngModel = moment(ngModelCtrl.$viewValue, scope.f).format(scope.f);
             }
+
             element.datetimepicker({
               language: 'en-AU',
               pickTime: nv
             }).on('dp.change', function (e) {
-              scope.ngModel = e.date.format(scope.f);
-              if (!scope.$$phase) {
-                scope.$apply();
-              }
+              setTimeout(function(){
+                scope.$apply(function() {
+                  scope.ngModel = e.date.format(scope.f);
+                });
+              })
             });
+
             if (ngModelCtrl.$viewValue) {
               element.data('DateTimePicker').setDate(scope.ngModel);
             }

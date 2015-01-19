@@ -45,6 +45,9 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
       }
       if ($scope.queryParams.categoryKey) {
         $scope.event.categoryKey = $scope.queryParams.categoryKey;
+        $scope.event.category =$scope.event.eventType.categories.filter(function (item) {
+          return item.key == $scope.event.categoryKey
+        })[0];
       }
     });
 
@@ -282,6 +285,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     $scope.initFileUploader();
     //get start end date from url
     (function parseDateFromUrl() {
+      $scope.queryParams = {};
       var start = $location.search().start;
       var end = $location.search().end;
       var resource = $location.search().resource;

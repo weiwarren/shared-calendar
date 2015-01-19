@@ -12,9 +12,11 @@
       "type": "string",
       "required": true
     },
-    "backColor": {
-      "type": "string",
-      "required": false
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
     }
   },
   "validations": [],

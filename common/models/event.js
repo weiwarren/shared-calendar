@@ -1,5 +1,28 @@
-
 module.exports = function (Event) {
+
+  Event.schedulerList = function (filter, cb) {
+    Event.find({
+      where: filter,
+      fields: {
+        id: true,
+        text: true,
+        start: true,
+        cssClass:true,
+        end: true,
+        resource: true
+      }
+    }, cb);
+  };
+
+  Event.remoteMethod(
+    'schedulerList',
+    {
+      accepts: {arg: 'filter', type: 'object'},
+      returns: {arg: 'events', type: 'array'},
+      http: {verb: 'get'}
+    }
+  );
+
   Event.groupBy = function (filter, cb) {
     Event.dataSource.connector.db.collection("event").aggregate([
         {$project: {_id: 0, id: "$_id", text: 1, start: 1, end: 1, resource: 1, description: 1, backColor: 1}},
@@ -29,12 +52,6 @@ module.exports = function (Event) {
         }
       });
   };
-
-  Event.exportCSV = function (filter, cb) {
-   Event.all(function(data){
-     cb(data);
-   })
-  };
   Event.remoteMethod(
     'groupBy',
     {
@@ -43,4 +60,11 @@ module.exports = function (Event) {
       http: {verb: 'get'}
     }
   );
+
+  Event.exportCSV = function (filter, cb) {
+    Event.all(function (data) {
+      cb(data);
+    })
+  };
+
 };

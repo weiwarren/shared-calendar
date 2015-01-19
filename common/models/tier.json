@@ -11,6 +11,12 @@
     "key": {
       "type": "string",
       "required": true
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
     }
   },
   "validations": [],

@@ -59,12 +59,12 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "product":{
-    "dataSource":"mongodb",
+  "product": {
+    "dataSource": "mongodb",
     "public": true
   },
-  "customer":{
-    "dataSource":"mongodb",
+  "customer": {
+    "dataSource": "mongodb",
     "public": true
   },
   "tier": {
@@ -75,8 +75,12 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "configState":{
+  "configState": {
     "dataSource": "mongodb",
+    "public": true
+  },
+  "test": {
+    "dataSource": "db",
     "public": true
   }
 }

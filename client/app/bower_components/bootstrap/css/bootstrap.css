@@ -9201,11 +9201,11 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3), inset 0px 0px 2px rgba(255, 255, 255, 0.8);
   background: #fff;
   /*background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eeeeee));
-    background: -moz-linear-gradient(top, #ffffff 0%, #eeeeee);
-    background: -ms-linear-gradient(top, #ffffff 0%, #eeeeee);
-    background: -webkit-linear-gradient(top, #ffffff 0%, #eeeeee);
-    background: linear-gradient(top, #ffffff 0%, #eeeeee);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", endColorStr="#eeeeee"); */
+  background: -moz-linear-gradient(top, #ffffff 0%, #eeeeee);
+  background: -ms-linear-gradient(top, #ffffff 0%, #eeeeee);
+  background: -webkit-linear-gradient(top, #ffffff 0%, #eeeeee);
+  background: linear-gradient(top, #ffffff 0%, #eeeeee);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", endColorStr="#eeeeee"); */
 }
 .echo_event_continueright .echo_event_inner {
   border-top-right-radius: 0px;
@@ -9228,11 +9228,11 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   border: 1px solid #d8d0ca;
   background: #ab0000;
   /* background: -webkit-gradient(linear, left top, left bottom, from(#ff2819), to(#ab0000));
-    background: -moz-linear-gradient(top, #ff2819 0%, #ab0000);
-    background: -ms-linear-gradient(top, #ff2819 0%, #ab0000);
-    background: -webkit-linear-gradient(top, #ff2819 0%, #ab0000);
-    background: linear-gradient(top, #ff2819 0%, #ab0000);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ff2819", endColorStr="#ab0000"); */
+   background: -moz-linear-gradient(top, #ff2819 0%, #ab0000);
+   background: -ms-linear-gradient(top, #ff2819 0%, #ab0000);
+   background: -webkit-linear-gradient(top, #ff2819 0%, #ab0000);
+   background: linear-gradient(top, #ff2819 0%, #ab0000);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ff2819", endColorStr="#ab0000"); */
 }
 .echo_timeheader {
   cursor: default;
@@ -9245,37 +9245,37 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   color: #ffffff;
   background: #ffa216;
   /* background: -webkit-gradient(linear, left top, left bottom, from(#ffa216), to(#ff8400));
-    background: -moz-linear-gradient(top, #ffa216 0%, #ff8400);
-    background: -ms-linear-gradient(top, #ffa216 0%, #ff8400);
-    background: -webkit-linear-gradient(top, #ffa216 0%, #ff8400);
-    background: linear-gradient(top, #ffa216 0%, #ff8400);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffa216", endColorStr="#ff8400");*/
+   background: -moz-linear-gradient(top, #ffa216 0%, #ff8400);
+   background: -ms-linear-gradient(top, #ffa216 0%, #ff8400);
+   background: -webkit-linear-gradient(top, #ffa216 0%, #ff8400);
+   background: linear-gradient(top, #ffa216 0%, #ff8400);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffa216", endColorStr="#ff8400");*/
 }
 .echo_timeheadergroup,
 .echo_timeheadercol {
   /*text-align: center;
 
         color: #666;
-	background: #eee;
-	background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#dddddd));
-	background: -moz-linear-gradient(top, #eeeeee 0%, #dddddd);
-	background: -ms-linear-gradient(top, #eeeeee 0%, #dddddd);
-	background: -webkit-linear-gradient(top, #eeeeee 0%, #dddddd);
-	background: linear-gradient(top, #eeeeee 0%, #dddddd);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#eeeeee", endColorStr="#dddddd");*/
+    background: #eee;
+    background: -webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#dddddd));
+    background: -moz-linear-gradient(top, #eeeeee 0%, #dddddd);
+    background: -ms-linear-gradient(top, #eeeeee 0%, #dddddd);
+    background: -webkit-linear-gradient(top, #eeeeee 0%, #dddddd);
+    background: linear-gradient(top, #eeeeee 0%, #dddddd);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#eeeeee", endColorStr="#dddddd");*/
   /*	text-shadow: 0px -1px 1px rgba(000,000,000,0.2), 0px 1px 0px rgba(255,255,255,0.3); */
   padding: 10px;
 }
 .echo_rowheader,
 .echo_corner {
   /*color: #666;
-    background: #eee;
-    background: -webkit-gradient(linear, left top, right top, from(#eeeeee), to(#dddddd));
-    background: -moz-linear-gradient(left, #eeeeee 0%, #dddddd);
-    background: -ms-linear-gradient(left, #eeeeee 0%, #dddddd);
-    background: -webkit-linear-gradient(left, #eeeeee 0%, #dddddd);
-    background: linear-gradient(left, #eeeeee 0%, #dddddd);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#eeeeee", endColorStr="#dddddd", GradientType=1);*/
+  background: #eee;
+  background: -webkit-gradient(linear, left top, right top, from(#eeeeee), to(#dddddd));
+  background: -moz-linear-gradient(left, #eeeeee 0%, #dddddd);
+  background: -ms-linear-gradient(left, #eeeeee 0%, #dddddd);
+  background: -webkit-linear-gradient(left, #eeeeee 0%, #dddddd);
+  background: linear-gradient(left, #eeeeee 0%, #dddddd);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#eeeeee", endColorStr="#dddddd", GradientType=1);*/
   zoom: 1;
   /*	text-shadow: 0px -1px 1px rgba(000,000,000,0.2), 0px 1px 0px rgba(255,255,255,0.3);*/
 }
@@ -9369,11 +9369,11 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
 }
 .echo_columnheader_cell {
   /*background: -webkit-gradient(linear, left top, right top, from(#eeeeee), to(#dddddd));
-    background: -moz-linear-gradient(left, #eeeeee 0%, #dddddd);
-    background: -ms-linear-gradient(left, #eeeeee 0%, #dddddd);
-    background: -webkit-linear-gradient(left, #eeeeee 0%, #dddddd);
-    background: linear-gradient(left, #eeeeee 0%, #dddddd);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#eeeeee", endColorStr="#dddddd", GradientType=1);*/
+  background: -moz-linear-gradient(left, #eeeeee 0%, #dddddd);
+  background: -ms-linear-gradient(left, #eeeeee 0%, #dddddd);
+  background: -webkit-linear-gradient(left, #eeeeee 0%, #dddddd);
+  background: linear-gradient(left, #eeeeee 0%, #dddddd);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#eeeeee", endColorStr="#dddddd", GradientType=1);*/
 }
 .echo_columnheader_splitter {
   background-color: #666;
@@ -9637,6 +9637,20 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
 }
 .Item.Public .echo_event_bar_inner {
   background-color: #1e7f6c;
+}
+.echoApp .menu_default_main {
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #ede9e6;
+}
+.echoApp .menu_default_main a {
+  padding: 5px 5px 4px 30px;
+}
+.echoApp .menu_default_main a :before {
+  font-family: FontAwesome;
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  content: "\f067";
 }
 .top-link {
   color: #507a8c;

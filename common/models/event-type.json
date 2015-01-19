@@ -15,12 +15,20 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "key": {
+      "type": "string",
+      "required": true
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
     }
   },
   "validations": [],
-  "relations": {
-
-  },
+  "relations": {},
   "acls": [
     {
       "accessType": "*",

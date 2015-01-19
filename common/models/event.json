@@ -3,6 +3,12 @@
   "plural": "events",
   "base": "PersistedModel",
   "idInjection": true,
+  "scope": {
+    "limit": 500000,
+    "where": {
+      "published": true
+    }
+  },
   "properties": {
     "text": {
       "type": "string",
@@ -16,6 +22,9 @@
       "type": "string",
       "required": true
     },
+    "timezone": {
+      "type": "string"
+    },
     "description": {
       "type": "string"
     },
@@ -28,10 +37,18 @@
       "required": false
     },
     "campaign": {
-      "type": {
-        "type": "string",
-        "required": false
-      }
+      "type": "string",
+      "required": false
+    },
+    "published": {
+      "type": "boolean",
+      "default": true
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
     }
   },
   "validations": [],

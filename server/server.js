@@ -80,15 +80,15 @@ for (var s in config) {
 
 //adfs authentication
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
-app.get('/', ensureLoggedIn('/auth/adfs'), function (req, res, next) {
+app.get('/', function (req, res, next) {
   res.redirect('/app');
 });
 
-app.get('/auth/adfs/fail', ensureLoggedIn('/auth/adfs'), function (req, res, next) {
+app.get('/auth/adfs/fail', function (req, res, next) {
   res.redirect("/app/#/error/401");
 });
 
-app.get('/auth/adfs/success', ensureLoggedIn('/auth/adfs'), function (req, res, next) {
+app.get('/auth/adfs/success', function (req, res, next) {
   res.redirect("/app");
 });
 
