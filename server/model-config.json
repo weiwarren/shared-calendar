@@ -78,9 +78,5 @@
   "configState": {
     "dataSource": "mongodb",
     "public": true
-  },
-  "test": {
-    "dataSource": "db",
-    "public": true
   }
 }
