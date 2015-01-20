@@ -37,17 +37,19 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     //load event types
     EventType.query(function (eventTypes) {
       $scope.eventTypes = eventTypes;
-      if ($scope.queryParams.eventTypeKey) {
-        $scope.event.eventTypeKey = $scope.queryParams.eventTypeKey;
-        $scope.event.eventType = $scope.eventTypes.filter(function (item) {
-          return item.key == $scope.event.eventTypeKey
-        })[0];
-      }
-      if ($scope.queryParams.categoryKey) {
-        $scope.event.categoryKey = $scope.queryParams.categoryKey;
-        $scope.event.category =$scope.event.eventType.categories.filter(function (item) {
-          return item.key == $scope.event.categoryKey
-        })[0];
+      if($scope.queryParams) {
+        if ($scope.queryParams.eventTypeKey) {
+          $scope.event.eventTypeKey = $scope.queryParams.eventTypeKey;
+          $scope.event.eventType = $scope.eventTypes.filter(function (item) {
+            return item.key == $scope.event.eventTypeKey
+          })[0];
+        }
+        if ($scope.queryParams.categoryKey) {
+          $scope.event.categoryKey = $scope.queryParams.categoryKey;
+          $scope.event.category = $scope.event.eventType.categories.filter(function (item) {
+            return item.key == $scope.event.categoryKey
+          })[0];
+        }
       }
     });
 
@@ -62,7 +64,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     //load properties
     Property.query(function (properties) {
       $scope.properties = properties;
-      if ($scope.queryParams.propertyKey) {
+      if ($scope.queryParams && $scope.queryParams.propertyKey) {
         $scope.eventProperties = [{
           propertyKey: $scope.queryParams.propertyKey, property: properties.filter(function (item) {
             return item.key == $scope.queryParams.propertyKey
@@ -246,18 +248,6 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
         });
       });
     };
-
-    $scope.showLoading = function () {
-      $scope.loadingModal = $modal.open({
-        template: '<div class="modal-body">One moment, please ...</div>',
-        backdrop: 'backdrop'
-      });
-    };
-
-    $scope.hideLoading = function () {
-      if ($scope.loadingModal)
-        $scope.loadingModal.close();
-    }
   })
   .controller('addEventCtrl', function ($scope, $location, $route, $routeParams, isModal, $controller, Event, Property, EventType, Container, $q) {
     $controller('eventCtrl', {$scope: $scope});

@@ -13,7 +13,7 @@ angular.module('echoCalendarApp.error', [])
     };
     switch ($routeParams.status) {
       case '401':
-        $scope.error.message = 'Sorry, you are not authorized to view this page.';
+        $scope.error.message = 'Sorry, restricted area, .';
         break;
       case '404':
         $scope.error.message = 'Sorry, the page you are looking for does not exist.';
@@ -22,7 +22,5 @@ angular.module('echoCalendarApp.error', [])
         $scope.error.message = 'Something went wrong, please contact administrator for troubleshooting the issue.';
         break;
     }
-
-
   })
 ;

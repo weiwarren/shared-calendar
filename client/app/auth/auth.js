@@ -19,9 +19,10 @@ angular.module('echoCalendarApp.auth', ['ngRoute', 'ui.bootstrap'])
       $window.location.href = '/auth/adfs';
     }
   })
-  .controller('logoutCtrl', function ($scope, $window, LoopBackAuth) {
+  .controller('logoutCtrl', function ($scope, $window, $cookies, LoopBackAuth) {
     LoopBackAuth.clearUser();
     LoopBackAuth.clearStorage();
+    delete $cookies["access_token"];
     $window.location.href = '/auth/adfs/logout';
   })
   .controller('authCBCtrl', function ($scope, $cookies, $location, LoopBackAuth) {

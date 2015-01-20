@@ -1,6 +1,10 @@
 angular.module('echoCalendarApp.advanceFilter', [])
   .controller('advanceFilterCtrl', function ($scope, $modal, $timeout, $modalInstance, filters, Product, Property, Customer) {
-    $scope.filters = filters;
+    $scope.filters = filters || {
+      product: {all: true, include: []},
+      customer: {all: true, include: []},
+      venue: {all: true, include: []}
+    };
     //angular.copy(filters, $scope.filters);
     Product.query(function (products) {
       products.forEach(function (p) {
@@ -24,7 +28,9 @@ angular.module('echoCalendarApp.advanceFilter', [])
       $scope.venues = [];
       properties.forEach(function (property) {
         property.venues.forEach(function (venue) {
-          if (!$scope.venues.filter(function (item) {return item.key == venue.key}).length) {
+          if (!$scope.venues.filter(function (item) {
+              return item.key == venue.key
+            }).length) {
             venue.checked = $scope.filters.venue.all || $scope.filters.venue.include.filter(function (item) {
               return item.key == venue.key
             }).length;

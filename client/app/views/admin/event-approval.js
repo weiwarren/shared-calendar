@@ -9,7 +9,7 @@ angular.module('echoCalendarApp.eventApproval', ['ngRoute'])
   }])
   .controller('eventApprovalCtrl', function ($scope, $modal, $q, $location, Event) {
     var queryEvent = function () {
-      Event.find({filter: {where: {approved: {ne: true}}}}, function (events) {
+      return Event.find({filter: {where: {approved: {ne: true}}}}).$promise.then(function (events) {
         $scope.events = events;
       });
     };
@@ -35,6 +35,7 @@ angular.module('echoCalendarApp.eventApproval', ['ngRoute'])
     };
 
     $scope.approveAll = function () {
+      $scope.showLoading();
       var events = $scope.events.filter(function (item) {
         return item.approved == true;
       });
@@ -43,7 +44,9 @@ angular.module('echoCalendarApp.eventApproval', ['ngRoute'])
         qs.push($scope.approve(event));
       });
       $q.all(qs).then(function () {
-        queryEvent();
+        queryEvent().then(function(){
+          $scope.hideLoading();
+        });
       });
     };
 

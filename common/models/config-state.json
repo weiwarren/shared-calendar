@@ -4,7 +4,7 @@
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
-    "state": {
+    "config": {
       "type": "object",
       "required": true
     },
@@ -25,10 +25,24 @@
       "permission": "DENY"
     },
     {
-      "accessType": "*",
+      "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$authenticated",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "Creator",
+      "permission": "ALLOW",
+      "property": "*"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "Manager",
+      "permission": "ALLOW",
+      "property": "*"
     }
   ],
   "methods": []

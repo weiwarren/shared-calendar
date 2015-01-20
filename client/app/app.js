@@ -7,10 +7,10 @@ angular.module('echoCalendarApp', [
   'lbServices',
   'ngResource',
   'ngClipboard',
+  'ngStorage',
   'daypilot',
   'angularMoment',
   'mgcrea.ngStrap.modal',
-  'echoCalendarApp.modal',
   'echoCalendarApp.auth',
   'echoCalendarApp.home',
   'echoCalendarApp.editEvent',
@@ -18,33 +18,46 @@ angular.module('echoCalendarApp', [
   'echoCalendarApp.advanceFilter',
   'echoCalendarApp.version',
   'echoCalendarApp.eventApproval',
+  'echoCalendarApp.shareURL',
   'echoCalendarApp.error'
 ])
   .config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider', 'ngClipProvider',
     function ($routeProvider, $httpProvider, LoopBackResourceProvider, ngClipProvider) {
       $routeProvider.when('/', {redirectTo: '/home'});
-// Use a custom auth header instead of the default 'Authorization'
+      // Use a custom auth header instead of the default 'Authorization'
       LoopBackResourceProvider.setAuthHeader('X-Access-Token');
 
-// Change the URL where to access the LoopBack REST API server
+      // Change the URL where to access the LoopBack REST API server
       LoopBackResourceProvider.setUrlBase('/api');
 
-      $httpProvider.interceptors.push(function ($q, $window, $location) {
+      // http interceptors
+      $httpProvider.interceptors.push(function ($q, $window, $location, $cookies, $injector) {
         return {
-
           responseError: function (rejection) {
+            var rootScope;
             if (rejection.status == 401) {
-              console.log($location);
-              $location.nextAfterLogin = $location.path();
-              $location.path('/login');
+              //redirect to 401 if user is already logged in
+              if ($cookies["access_token"] != 'undefined' && $cookies["access_token"] != undefined) {
+                rootScope = $injector.get('$rootScope');
+                rootScope.hideLoading();
+                $location.nextAfterLogin = $location.path();
+                $location.path('/error/401');
+              }
+              else {
+                //otherwise redirect to login
+                $location.nextAfterLogin = $location.path();
+                $location.path('/login');
+              }
             }
             return $q.reject(rejection);
           }
         };
       });
 
+      //flash clipboard for copy urls
       ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
 
+      //moment js global config
       moment.locale('en-AU', {
         longDateFormat: {
           LT: "h:mm a",
@@ -59,6 +72,7 @@ angular.module('echoCalendarApp', [
       });
       moment.locale('en-AU');
     }])
+  //<debug val="?" />
   .directive('debug', function () {
     return {
       restrict: 'E',
@@ -74,6 +88,7 @@ angular.module('echoCalendarApp', [
       }
     }
   })
+  //global anchor config - prevent from angular routing
   .directive('a', function () {
     return {
       restrict: 'E',
@@ -84,6 +99,7 @@ angular.module('echoCalendarApp', [
       }
     }
   })
+  //copy model values
   .directive('syncModel', function () {
     return {
       restrict: 'A',
@@ -98,6 +114,25 @@ angular.module('echoCalendarApp', [
       }
     }
   })
+  //reverse of syncModel directive
+  .directive('updateModel', function () {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      scope: {
+        'ngModel': '=',
+        'updateModel': '='
+      },
+      link: function (scope, element, attrs) {
+        scope.$watch('ngModel', function (nv, ov) {
+          if (nv != ov) {
+            scope.updateModel = nv;
+          }
+        });
+      }
+    }
+  })
+  //convert datetime 3rd party jquery module to angularjs directive
   .directive('datetimez', function ($rootScope) {
     return {
       restrict: 'A',
@@ -123,8 +158,8 @@ angular.module('echoCalendarApp', [
               language: 'en-AU',
               pickTime: nv
             }).on('dp.change', function (e) {
-              setTimeout(function(){
-                scope.$apply(function() {
+              setTimeout(function () {
+                scope.$apply(function () {
                   scope.ngModel = e.date.format(scope.f);
                 });
               })
@@ -138,6 +173,7 @@ angular.module('echoCalendarApp', [
       }
     }
   })
+  //watch start, end date time and duration
   .directive('dateWatcher', function ($timeout) {
     return {
       restrict: '',
@@ -187,6 +223,7 @@ angular.module('echoCalendarApp', [
       }
     }
   })
+  //image slider directive
   .directive('wrapOwlcarousel', function ($timeout) {
     return {
       restrict: 'E',
@@ -203,6 +240,7 @@ angular.module('echoCalendarApp', [
       }
     };
   })
+  //focus on controls based on model
   .directive('focusMe', function () {
     return {
       restrict: 'A',
@@ -217,6 +255,7 @@ angular.module('echoCalendarApp', [
       }
     }
   })
+  //form wide error focus
   .directive('formFocusError', function () {
     return {
       restrict: 'A',
@@ -237,6 +276,65 @@ angular.module('echoCalendarApp', [
       }
     }
   })
+  //minimum value validator
+  .directive('ngMin', function () {
+    function isEmpty(value) {
+      return angular.isUndefined(value) || value === '' || value === null || value !== value;
+    }
+
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function (scope, elem, attr, ctrl) {
+        scope.$watch(attr.ngMin, function () {
+          ctrl.$setViewValue(ctrl.$viewValue);
+        });
+        var minValidator = function (value) {
+          var min = scope.$eval(attr.ngMin) || 0;
+          if (!isEmpty(value) && value < min) {
+            ctrl.$setValidity('ngMin', false);
+            return undefined;
+          } else {
+            ctrl.$setValidity('ngMin', true);
+            return value;
+          }
+        };
+
+        ctrl.$parsers.push(minValidator);
+        ctrl.$formatters.push(minValidator);
+      }
+    };
+  })
+  //max value validator
+  .directive('ngMax', function () {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function (scope, elem, attr, ctrl) {
+        function isEmpty(value) {
+          return angular.isUndefined(value) || value === '' || value === null || value !== value;
+        }
+
+        scope.$watch(attr.ngMax, function () {
+          ctrl.$setViewValue(ctrl.$viewValue);
+        });
+        var maxValidator = function (value) {
+          var max = scope.$eval(attr.ngMax) || Infinity;
+          if (!isEmpty(value) && value > max) {
+            ctrl.$setValidity('ngMax', false);
+            return undefined;
+          } else {
+            ctrl.$setValidity('ngMax', true);
+            return value;
+          }
+        };
+
+        ctrl.$parsers.push(maxValidator);
+        ctrl.$formatters.push(maxValidator);
+      }
+    };
+  })
+  //thumbnail preview using canvas
   .directive('ngThumb', ['$window', function ($window) {
     var helper = {
       support: !!($window.FileReader && $window.CanvasRenderingContext2D),
@@ -282,92 +380,11 @@ angular.module('echoCalendarApp', [
       }
     };
   }])
-  .directive('updateModel', function () {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      scope: {
-        'ngModel': '=',
-        'updateModel': '='
-      },
-      link: function (scope, element, attrs) {
-        scope.$watch('ngModel', function (nv, ov) {
-          if (nv != ov) {
-            scope.updateModel = nv;
-          }
-        });
-      }
-    }
-  })
-  .directive('ngMin', function () {
-    function isEmpty(value) {
-      return angular.isUndefined(value) || value === '' || value === null || value !== value;
-    }
-
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      link: function (scope, elem, attr, ctrl) {
-        scope.$watch(attr.ngMin, function () {
-          ctrl.$setViewValue(ctrl.$viewValue);
-        });
-        var minValidator = function (value) {
-          var min = scope.$eval(attr.ngMin) || 0;
-          if (!isEmpty(value) && value < min) {
-            ctrl.$setValidity('ngMin', false);
-            return undefined;
-          } else {
-            ctrl.$setValidity('ngMin', true);
-            return value;
-          }
-        };
-
-        ctrl.$parsers.push(minValidator);
-        ctrl.$formatters.push(minValidator);
-      }
-    };
-  })
-  .directive('ngMax', function () {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      link: function (scope, elem, attr, ctrl) {
-        function isEmpty(value) {
-          return angular.isUndefined(value) || value === '' || value === null || value !== value;
-        }
-
-        scope.$watch(attr.ngMax, function () {
-          ctrl.$setViewValue(ctrl.$viewValue);
-        });
-        var maxValidator = function (value) {
-          var max = scope.$eval(attr.ngMax) || Infinity;
-          if (!isEmpty(value) && value > max) {
-            ctrl.$setValidity('ngMax', false);
-            return undefined;
-          } else {
-            ctrl.$setValidity('ngMax', true);
-            return value;
-          }
-        };
-
-        ctrl.$parsers.push(maxValidator);
-        ctrl.$formatters.push(maxValidator);
-      }
-    };
-  })
-  .directive('watchCheckers', function () {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      link: function (scope, elem, attrs, ctrl) {
-        scope.$watch(attrs.ngModel, function () {
-
-        })
-      }
-    }
-  })
   .run(function ($rootScope, $injector, $cookies, $route, $location, $modal, LoopBackAuth, Event) {
-    LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], {userName: $cookies['userName']});
+    LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], {
+      userName: $cookies['userName'],
+      userRoles: $cookies['userRoles']
+    });
     LoopBackAuth.rememberMe = false;
     LoopBackAuth.save();
     $rootScope.currentUserId = LoopBackAuth.currentUserData.userName || "Anonymous";
@@ -379,8 +396,6 @@ angular.module('echoCalendarApp', [
         return angular.toJson(data);
       }
     };
-
-    console.dir("token", $cookies['access_token']);
 
     $rootScope.debug = $location.search().debug;
 
@@ -399,6 +414,17 @@ angular.module('echoCalendarApp', [
       });
     };
 
+    $rootScope.showLoading = function () {
+      $rootScope.loadingModal = $modal.open({
+        template: '<div class="modal-body">One moment, please ...</div>',
+        backdrop: 'static'
+      });
+    };
+
+    $rootScope.hideLoading = function () {
+      if ($rootScope.loadingModal)
+        $rootScope.loadingModal.close();
+    }
     $rootScope.modal = function (path, params) {
       angular.forEach($route.routes, function (item) {
         if (item.templateUrl && item.controller && path.match(item.regexp)) {

@@ -1,0 +1,9 @@
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-11">
+      <input type="text" class="form-control" readonly ng-model="item.title"/>
+    </div>
+    <a class="btn btn-sm" clip-copy="item.title" ng-click="copied=true"><i class="fa fa-clipboard"></i></a>
+    <span class="small" ng-show="copied">Copied</span>
+  </div>
+</div>

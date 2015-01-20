@@ -1,6 +1,6 @@
-<div id="wrapper" ng-class="{toggled:showFilters}">
+<div id="wrapper" ng-class="{toggled:scheduler.config.showFilters}">
   <nav class="navbar navbar-fixed-top navbar-default echo-brand" role="navigation">
-    <a class="navbar-brand filter-control open" ng-class="{open:!showFilters}" ng-click="showFilters = !showFilters"
+    <a class="navbar-brand filter-control open" ng-class="{open:!scheduler.config.showFilters}" ng-click="scheduler.config.showFilters = !scheduler.config.showFilters"
        aria-expanded="false">
       <i class="fa fa-filter"></i> <span class="sr-only">Filters</span></a>
 
@@ -65,16 +65,16 @@
               <form action="#">
                 <fieldset class="property">
                   <ul class="list-unstyled">
-                    <li><input type="checkbox" id="property1" ng-model="scheduler.filters.TheStar"/><label
+                    <li><input type="checkbox" id="property1" ng-model="scheduler.config.filters.TheStar"/><label
                       for="property1"><span class="ui"></span>The
                       Star</label><a class="btn btn-sm btn-default pull-right adv-filter"
                                      ng-click="scheduler.showAdvancedFilter()"
                       ><i class="fa fa-cog"></i></a>
                     </li>
-                    <li><input type="checkbox" id="property2" ng-model="scheduler.filters.Jupiters"/><label
+                    <li><input type="checkbox" id="property2" ng-model="scheduler.config.filters.Jupiters"/><label
                       for="property2"><span class="ui"></span>Jupiters</label>
                     </li>
-                    <li><input type="checkbox" id="property3" ng-model="scheduler.filters.Treasury"/><label
+                    <li><input type="checkbox" id="property3" ng-model="scheduler.config.filters.Treasury"/><label
                       for="property3"><span class="ui"></span>The
                       Treasury</label></li>
                   </ul>
@@ -85,11 +85,8 @@
         </div>
         <div class="panel panel-default">
           <a class="" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-
             <div class="panel-heading" role="tab" id="headingTwo">
-
               <h4 class="panel-title">Event Types</h4>
-
             </div>
           </a>
 
@@ -98,13 +95,13 @@
             <div class="panel-body">
               <fieldset class="{{eventType.key | lowercase}}" ng-repeat="eventType in eventTypes">
                 <input type="checkbox" id="{{eventType.key | lowercase}}-event-group" class="checkall"
-                       name="{{eventType.key | lowercase}}Filter" ng-model="scheduler.filters[eventType.key]"/><label
+                       name="{{eventType.key | lowercase}}Filter" ng-model="scheduler.config.filters[eventType.key]"/><label
                 for="{{eventType.key | lowercase}}-event-group"><span class="ui"></span><h5>{{eventType.name}}</h5></label>
                 <ul class="list-unstyled">
                   <li ng-repeat="category in eventType.categories">
                     <input type="checkbox" id="{{eventType.key+category.key}}-category" name="{{eventType.key | lowercase}}Filter"
-                           ng-model="scheduler.filters[eventType.key+category.key]"
-                           sync-model="scheduler.filters[eventType.key]"/><label for="{{eventType.key+category.key}}-category"><span
+                           ng-model="scheduler.config.filters[eventType.key+category.key]"
+                           sync-model="scheduler.config.filters[eventType.key]"/><label for="{{eventType.key+category.key}}-category"><span
                     class="ui"></span>{{category.name}}</label></li>
                 </ul>
               </fieldset>
@@ -143,24 +140,24 @@
                    ng-click="openCalendar=!openCalendar" id="dropdownMenuYearSelect"
                    is-open="openCalendar" datepicker-options="{minMode:'month'}" datepicker-mode="'month'"
                    datepicker-popup="'shortDate'"
-                   ng-model="scheduler.currentDate" ng-change="scheduler.changeScale('month')">
-                  {{ (scheduler.currentDate | date:'MMMM yyyy') || 'Month Name' }}
+                   ng-model="scheduler.config.currentDate" ng-change="scheduler.changeScale('month')">
+                  {{ (scheduler.config.currentDate | date:'MMMM yyyy') || 'Month Name' }}
                   <i class="fa fa-angle-down"></i>
                 </a>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="btn-group pull-right view-selector" role="group" aria-label="...">
-                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.momentScale=='day'}"
+                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.config.momentScale=='day'}"
                         ng-click="scheduler.changeScale('day')">Day
                 </button>
-                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.momentScale=='week'}"
+                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.config.momentScale=='week'}"
                         ng-click="scheduler.changeScale('week')">Week
                 </button>
-                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.momentScale=='month'}"
+                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.config.momentScale=='month'}"
                         ng-click="scheduler.changeScale('month')">Month
                 </button>
-                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.momentScale=='year'}"
+                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.config.momentScale=='year'}"
                         ng-click="scheduler.changeScale('year')">6 Month
                 </button>
               </div>
@@ -191,18 +188,18 @@
 
       <div class="row filter-display well">
         <div class="col-sm-9">
-            <span ng-repeat="(key,prop) in scheduler.advanceFilters">
+            <span ng-repeat="(key,prop) in scheduler.config.advanceFilters">
               <span class="label label-primary"
                     ng-class="{'label-warning': key=='customer','label-danger':key=='venue'}"
-                    ng-show="scheduler.advanceFilters[key].all">all<button
+                    ng-show="scheduler.config.advanceFilters[key].all">all<button
                 type="button" class="close"
-                ng-click="scheduler.advanceFilters[key].all=false;scheduler.applyAdvanceFilters()"><span
+                ng-click="scheduler.config.advanceFilters[key].all=false;scheduler.applyAdvanceFilters()"><span
                 aria-hidden="true">×</span></button></span>
               <span class="label label-primary"
                     ng-class="{'label-warning': key=='customer','label-danger':key=='venue'}"
-                    ng-repeat="cfi in scheduler.advanceFilters[key].include">{{cfi.name}}<button
+                    ng-repeat="cfi in scheduler.config.advanceFilters[key].include">{{cfi.name}}<button
                 type="button" class="close"
-                ng-click="scheduler.advanceFilters[key].include.splice($index,1);scheduler.applyAdvanceFilters()"><span
+                ng-click="scheduler.config.advanceFilters[key].include.splice($index,1);scheduler.applyAdvanceFilters()"><span
                 aria-hidden="true">×</span></button></span>
             </span>
 
