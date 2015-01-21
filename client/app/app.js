@@ -19,7 +19,8 @@ angular.module('echoCalendarApp', [
   'echoCalendarApp.version',
   'echoCalendarApp.eventApproval',
   'echoCalendarApp.shareURL',
-  'echoCalendarApp.error'
+  'echoCalendarApp.error',
+  'echoCalendarApp.admin'
 ])
   .config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider', 'ngClipProvider',
     function ($routeProvider, $httpProvider, LoopBackResourceProvider, ngClipProvider) {
@@ -72,6 +73,13 @@ angular.module('echoCalendarApp', [
       });
       moment.locale('en-AU');
     }])
+
+  .filter('trim', function () {
+    return function (text) {
+      if(text)
+        return text.replace(/\s+/g, '');
+    };
+  })
   //<debug val="?" />
   .directive('debug', function () {
     return {
@@ -409,9 +417,12 @@ angular.module('echoCalendarApp', [
     });
 
     $rootScope.checkApproval = function () {
-      Event.count({filter: {where: {approved: {ne: true}}}}, function (response) {
-        $rootScope.waitApproval = response.count;
-      });
+      console.log(LoopBackAuth.currentUserData.userRoles)
+      if (LoopBackAuth.currentUserData.userRoles == 'Manager') {
+        Event.count({filter: {where: {approved: {ne: true}}}}, function (response) {
+          $rootScope.waitApproval = response.count;
+        });
+      }
     };
 
     $rootScope.showLoading = function () {
@@ -422,6 +433,7 @@ angular.module('echoCalendarApp', [
     };
 
     $rootScope.hideLoading = function () {
+
       if ($rootScope.loadingModal)
         $rootScope.loadingModal.close();
     }

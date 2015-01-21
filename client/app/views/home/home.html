@@ -1,6 +1,7 @@
 <div id="wrapper" ng-class="{toggled:scheduler.config.showFilters}">
   <nav class="navbar navbar-fixed-top navbar-default echo-brand" role="navigation">
-    <a class="navbar-brand filter-control open" ng-class="{open:!scheduler.config.showFilters}" ng-click="scheduler.config.showFilters = !scheduler.config.showFilters"
+    <a class="navbar-brand filter-control open" ng-class="{open:!scheduler.config.showFilters}"
+       ng-click="scheduler.config.showFilters = !scheduler.config.showFilters"
        aria-expanded="false">
       <i class="fa fa-filter"></i> <span class="sr-only">Filters</span></a>
 
@@ -11,11 +12,13 @@
 
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li class="actions export"><a class="dropdown-toggle" download href="/api/events"
-                                      aria-expanded="false"><!--<i class="fa fa-share-square-o"></i>--><span
-          class="image-holder"></span><span class="sr-only">Export Report</span></a>
+        <li class="actions export">
+          <a class="dropdown-toggle" download href="/api/events" aria-expanded="false">
+            <!--<i class="fa fa-share-square-o"></i>--><span
+            class="image-holder"></span><span class="sr-only">Export Report</span></a>
           <ul class="dropdown-menu" role="menu">
-            <li class="disabled"><a data-toggle="dropdown" ng-csv="scheduler.exportCSV()" lazy-load="true" filename="export"><i
+            <li class="disabled"><a data-toggle="dropdown" ng-csv="scheduler.exportCSV()" lazy-load="true"
+                                    filename="export"><i
               class="fa fa-file-code-o"></i> Export Report as .csv file (Coming Soon)</a></li>
             <li class="divider"></li>
             <li class="disabled"><a><i class="fa fa-file-excel-o"></i> Export Report for Excel (Coming
@@ -24,7 +27,6 @@
               (Coming Soon)</a></li>
           </ul>
         </li>
-
         <li class="actions add-event">
           <a href="#/addEvent" tooltip="Add&nbsp;an&nbsp;event" tooltip-placement="bottom"><span
             class="image-holder"></span><span class="sr-only">Add Event</span></a>
@@ -33,13 +35,17 @@
           <a tooltip="Send&nbsp;URL" ng-click="saveConfigState()"
              tooltip-placement="bottom"><span
             class="fa fa-share-alt" style="font-size:32px"></span><span class="sr-only">Send URL</span></a></li>
-        <li class="user-details"><a href="#/eventApproval" class="user-creds"><img src="image/user_face_pic.png"
-                                                                                   alt="User Profile Pic"
-                                                                                   class="profile-image img-circle">
-          <span>{{currentUserId || 'UserName'}}</span>
+        <li class="user-details" dropdown ng-mouseenter="open=true" ng-mouseleave="open=false" is-open="open">
+          <a href="#/eventApproval" class="user-creds dropdown-toggle" aria-expanded="false">
+            <img src="image/user_face_pic.png" alt="User Profile Pic" class="profile-image img-circle">
+            <span>{{currentUserId || 'UserName'}}</span>
 
-          <div class="badge approval-counter" ng-show="waitApproval>0" data-ng-bind="waitApproval"></div>
-        </a>
+            <div class="badge approval-counter" ng-show="waitApproval>0" data-ng-bind="waitApproval"></div>
+          </a>
+          <ul class="dropdown-menu btn-block" role="menu">
+            <li><a ng-href="#/logout"><i
+              class="fa fa-sign-out"></i> Logout</a></li>
+          </ul>
         </li>
 
       </ul>
@@ -95,13 +101,17 @@
             <div class="panel-body">
               <fieldset class="{{eventType.key | lowercase}}" ng-repeat="eventType in eventTypes">
                 <input type="checkbox" id="{{eventType.key | lowercase}}-event-group" class="checkall"
-                       name="{{eventType.key | lowercase}}Filter" ng-model="scheduler.config.filters[eventType.key]"/><label
-                for="{{eventType.key | lowercase}}-event-group"><span class="ui"></span><h5>{{eventType.name}}</h5></label>
+                       name="{{eventType.key | lowercase}}Filter"
+                       ng-model="scheduler.config.filters[eventType.key]"/><label
+                for="{{eventType.key | lowercase}}-event-group"><span class="ui"></span><h5>{{eventType.name}}</h5>
+              </label>
                 <ul class="list-unstyled">
                   <li ng-repeat="category in eventType.categories">
-                    <input type="checkbox" id="{{eventType.key+category.key}}-category" name="{{eventType.key | lowercase}}Filter"
+                    <input type="checkbox" id="{{eventType.key+category.key}}-category"
+                           name="{{eventType.key | lowercase}}Filter"
                            ng-model="scheduler.config.filters[eventType.key+category.key]"
-                           sync-model="scheduler.config.filters[eventType.key]"/><label for="{{eventType.key+category.key}}-category"><span
+                           sync-model="scheduler.config.filters[eventType.key]"/><label
+                    for="{{eventType.key+category.key}}-category"><span
                     class="ui"></span>{{category.name}}</label></li>
                 </ul>
               </fieldset>
@@ -154,7 +164,8 @@
                 <button type="button" class="btn btn-default" ng-class="{'active':scheduler.config.momentScale=='week'}"
                         ng-click="scheduler.changeScale('week')">Week
                 </button>
-                <button type="button" class="btn btn-default" ng-class="{'active':scheduler.config.momentScale=='month'}"
+                <button type="button" class="btn btn-default"
+                        ng-class="{'active':scheduler.config.momentScale=='month'}"
                         ng-click="scheduler.changeScale('month')">Month
                 </button>
                 <button type="button" class="btn btn-default" ng-class="{'active':scheduler.config.momentScale=='year'}"
@@ -184,7 +195,6 @@
 
 
       <!-- ADVANCED FILTER RESULTS **** -->
-
 
       <div class="row filter-display well">
         <div class="col-sm-9">
