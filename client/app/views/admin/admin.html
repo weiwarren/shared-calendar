@@ -30,12 +30,12 @@
           <div class="panel-heading">Customers</div>
           <div class="panel-body">
             <form class="form-horizontal">
-              <div class="form-group" ng-repeat="customer in customers">
+              <div class="form-group" ng-repeat="customer in customers track by $index">
                 <div class="col-sm-6">
                   <input type="text" class="form-control" placeholder="Enter name" ng-model="customer.name">
                 </div>
-                <button class="btn btn-default" ng-disabled="$index==0" ng-click="customers.splice($index,1);customers.splice($index-1,0,venue)" tabindex="-1"><i class="fa fa-arrow-up"></i></button>
-                <button class="btn btn-default" ng-disabled="$index==customers.length-1" ng-click="customers.splice($index,1);customers.splice($index+1,0,venue)" tabindex="-1"><i class="fa fa-arrow-down"></i></button>
+                <button class="btn btn-default" ng-disabled="$index==0" ng-click="customers.splice($index,1);customers.splice($index-1,0,customer)" tabindex="-1"><i class="fa fa-arrow-up"></i></button>
+                <button class="btn btn-default" ng-disabled="$index==customers.length-1" ng-click="customers.splice($index,1);customers.splice($index+1,0,customer)" tabindex="-1"><i class="fa fa-arrow-down"></i></button>
               </div>
               <div class="form-group">
                 <div class="col-sm-6">
@@ -49,9 +49,9 @@
         <div class="panel panel-default">
           <div class="panel-heading">Venues</div>
           <div class="panel-body">
-            <form class="form-horizontal" ng-repeat="property in properties">
+            <form class="form-horizontal" ng-repeat="property in properties track by $index">
               <h3>{{property.name}}</h3>
-              <div class="form-group" ng-repeat="venue in property.venues">
+              <div class="form-group" ng-repeat="venue in property.venues track by $index">
                 <div class="col-sm-6">
                   <input type="text" class="form-control" placeholder="Enter name" ng-model="venue.name">
                 </div>
