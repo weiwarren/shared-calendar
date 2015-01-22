@@ -42,8 +42,8 @@
               <li>{{event.metadata.venue.name}}</li>
             </ul>
           </dd>
-          <dt><i class="fa fa-users sm"></i></dt>
-          <dd>{{event.people}}</dd>
+          <dt ng-show="event.people"><i class="fa fa-users sm"></i></dt>
+          <dd ng-show="event.people">{{event.people}}</dd>
           <dt><i class="fa fa-clipboard sm"></i></dt>
           <dd>
             <h5>Details</h5>
@@ -107,8 +107,8 @@
                   <li class="title" ng-show="event.metadata.product">Product</li>
                   <li ng-bind="event.metadata.product.name" ng-show="event.metadata.product"></li>
                   <li class="title" ng-show="event.metadata.hasCustomer">VIP Loyalty Event</li>
-                  <li ng-bind="event.metadata.customer.name"></li>
-                  <li ng-bind="event.metadata.customer.details"></li>
+                  <li ng-show="event.metadata.customer.name" ng-bind="event.metadata.customer.name"></li>
+                  <li  ng-show="event.metadata.customer.details" ng-bind="event.metadata.customer.details"></li>
                   <li class="title" ng-show="event.metadata.hasPrizeAmount">Prize Money</li>
                   <li ng-repeat="(key,prop) in event.metadata.prize" ng-bind="event.metadata.prize[key]"></li>
                   <li class="title" ng-show="event.metadata.notes">Comments</li>

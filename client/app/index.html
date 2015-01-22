@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="echoCalendarApp" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>
+<html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="echoCalendarApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="echoCalendarApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +16,8 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>
+  <link rel="stylesheet"
+        href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>
   <link rel="stylesheet" href="bower_components/owl-carousel/owl-carousel/owl.carousel.min.css"/>
   <link rel="stylesheet" href="bower_components/owl-carousel/owl-carousel/owl.theme.min.css"/>
   <link rel="icon shortcut" href="favicon.ico" type="image/x-icon"/>
@@ -20,61 +25,94 @@
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body class="echoApp">
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
 
-  <div ng-view></div>
+<div ng-view></div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <!-- libs -->
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-  <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<!-- libs -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 
-  <!-- 3rd party modules -->
-  <script src="bower_components/owl-carousel/owl-carousel/owl.carousel.min.js"></script>
-  <script src="bower_components/moment/moment.js"></script>
-  <script src="bower_components/zeroclipboard/dist/ZeroClipboard.min.js"></script>
-  <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-  <script src="bower_components/daypilot/js/daypilot-all.min.js?v=1338"></script>
+<!-- 3rd party modules -->
+<script src="bower_components/owl-carousel/owl-carousel/owl.carousel.min.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/zeroclipboard/dist/ZeroClipboard.min.js"></script>
+<script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="bower_components/daypilot/js/daypilot-all.min.js?v=1338"></script>
 
-  <script src="bower_components/angular-moment/angular-moment.min.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-  <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
-  <script src="bower_components/ng-clip/dest/ng-clip.min.js"></script>
-  <script src="bower_components/ng-csv/build/ng-csv.js"></script>
-  <script src="bower_components/angular-file-upload/angular-file-upload-echo.js"></script>
-  <script src="bower_components/ngstorage/ngStorage.min.js"></script>
+<script src="bower_components/angular-moment/angular-moment.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+<script src="bower_components/ng-clip/dest/ng-clip.min.js"></script>
+<script src="bower_components/ng-csv/build/ng-csv.js"></script>
+<script src="bower_components/angular-file-upload/angular-file-upload-echo.js"></script>
+<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 
-  <!-- app modules -->
-  <script src="app.js"></script>
-  <script src="services/lb-services.js"></script>
+<!-- app modules -->
+<script src="app.js"></script>
+<script src="services/lb-services.js"></script>
 
-  <!-- app controllers -->
-  <script src="auth/auth.js"></script>
-  <script src="views/error/error.js"></script>
-  <script src="views/home/home.js"></script>
-  <script src="views/event/edit-event-form.js"></script>
-  <script src="views/admin/event-approval.js"></script>
-  <script src="views/admin/admin.js"></script>
+<!-- app controllers -->
+<script src="auth/auth.js"></script>
+<script src="views/error/error.js"></script>
+<script src="views/home/home.js"></script>
+<script src="views/event/edit-event-form.js"></script>
+<script src="views/admin/event-approval.js"></script>
+<script src="views/admin/admin.js"></script>
 
-  <script src="partials/advance-filter.js"></script>
-  <script src="partials/share-url.js"></script>
+<script src="partials/advance-filter.js"></script>
+<script src="partials/share-url.js"></script>
 
-  <script src="auth/auth.js"></script>
+<script src="auth/auth.js"></script>
 
-  <script src="views/event/event-details.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+<script src="views/event/event-details.js"></script>
+<script src="components/version/version.js"></script>
+<script src="components/version/version-directive.js"></script>
+<script src="components/version/interpolate-filter.js"></script>
+
+<!--
+To collect end-user usage analytics about your application,
+insert the following script into each page you want to track.
+Place this code immediately before the closing </head> tag,
+and before any other scripts. Your first data will appear
+automatically in just a few seconds.
+-->
+<script type="text/javascript">
+  var appInsights = window.appInsights || function (config) {
+      function s(config) {
+        t[config] = function () {
+          var i = arguments;
+          t.queue.push(function () {
+            t[config].apply(t, i)
+          })
+        }
+      }
+
+      var t = {config: config}, r = document, f = window, e = "script", o = r.createElement(e), i, u;
+      for (o.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", r.getElementsByTagName(e)[0].parentNode.appendChild(o), t.cookie = r.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;)s("track" + i.pop());
+      return config.disableExceptionTracking || (i = "onerror", s("_" + i), u = f[i], f[i] = function (config, r, f, e, o) {
+        var s = u && u(config, r, f, e, o);
+        return s !== !0 && t["_" + i](config, r, f, e, o), s
+      }), t
+    }({
+      instrumentationKey: "7bea8548-8779-44b5-b0b2-7c350b7cc5d4"
+    });
+
+  window.appInsights = appInsights;
+  appInsights.trackPageView();
+</script>
 
 
 </body>
