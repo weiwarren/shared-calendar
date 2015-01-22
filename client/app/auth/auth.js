@@ -14,8 +14,9 @@ angular.module('echoCalendarApp.auth', ['ngRoute', 'ui.bootstrap'])
       controller: 'authCBCtrl'
     });
   }])
-  .controller('loginCtrl', function ($scope, $window) {
+  .controller('loginCtrl', function ($scope, $window, $location, $localStorage) {
     if (!$scope.formAuth) {
+      $localStorage["redirect_url"] = $location.nextAfterLogin;
       $window.location.href = '/auth/adfs';
     }
   })

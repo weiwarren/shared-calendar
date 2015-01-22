@@ -4,13 +4,9 @@
     "connector": "memory"
   },
   "mongodb": {
-    "name":"mongo_prod",
-    "port":29801,
-    "connector": "loopback-connector-mongodb",
-    "host":"ds029801.mongolab.com",
-    "username":"admin2",
-    "password":"password1",
-    "database":"echo"
+    "name":"mongo_test",
+    "connector": "mongodb",
+    "url":"mongodb://caladmin:#k9028aalks!%@c231.galaga.0.mongolayer.com:10231,c228.galaga.1.mongolayer.com:10228/Echo-SharedCalendar?replicaSet=set-54c037d3d6c9281d3f00e0da"
   },
   "storage": {
     "name": "storage",

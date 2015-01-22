@@ -39,15 +39,18 @@ angular.module('echoCalendarApp', [
             if (rejection.status == 401) {
               //redirect to 401 if user is already logged in
               if ($cookies["access_token"] != 'undefined' && $cookies["access_token"] != undefined) {
+                //possibly modal dialog
                 rootScope = $injector.get('$rootScope');
                 rootScope.hideLoading();
                 $location.nextAfterLogin = $location.path();
                 $location.path('/error/401');
               }
               else {
-                //otherwise redirect to login
-                $location.nextAfterLogin = $location.path();
-                $location.path('/login');
+                //cache the redirect url except for login before redirect to login
+                if ($location.path() != '/login'){
+                  $location.nextAfterLogin = $location.path();
+                }
+                $location.path("/login");
               }
             }
             return $q.reject(rejection);
@@ -76,7 +79,7 @@ angular.module('echoCalendarApp', [
 
   .filter('trim', function () {
     return function (text) {
-      if(text)
+      if (text)
         return text.replace(/\s+/g, '');
     };
   })
@@ -388,7 +391,11 @@ angular.module('echoCalendarApp', [
       }
     };
   }])
-  .run(function ($rootScope, $injector, $cookies, $route, $location, $modal, LoopBackAuth, Event) {
+  .run(function ($rootScope, $injector, $cookies, $route, $localStorage, $location, $modal, LoopBackAuth, Event) {
+    if ($localStorage["redirect_url"]) {
+      $location.path($localStorage["redirect_url"]);
+      $localStorage["redirect_url"] = null;
+    }
     LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], {
       userName: $cookies['userName'],
       userRoles: $cookies['userRoles']
@@ -433,10 +440,10 @@ angular.module('echoCalendarApp', [
     };
 
     $rootScope.hideLoading = function () {
-
       if ($rootScope.loadingModal)
         $rootScope.loadingModal.close();
-    }
+    };
+
     $rootScope.modal = function (path, params) {
       angular.forEach($route.routes, function (item) {
         if (item.templateUrl && item.controller && path.match(item.regexp)) {

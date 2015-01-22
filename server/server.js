@@ -83,6 +83,10 @@ var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 app.get('/', function (req, res, next) {
   res.redirect('/app');
 });
+app.get('/auth/adfs/fail', function (req, res, next) {
+
+  next();
+});
 
 app.get('/auth/adfs/fail', function (req, res, next) {
   res.redirect("/app/#/error/401");
