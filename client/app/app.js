@@ -434,7 +434,7 @@ angular.module('echoCalendarApp', [
 
     $rootScope.showLoading = function () {
       $rootScope.loadingModal = $modal.open({
-        template: '<div class="modal-body">One moment, please ...</div>',
+        templateUrl: 'partials/loading.html',
         backdrop: 'static'
       });
     };
