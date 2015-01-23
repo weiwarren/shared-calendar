@@ -47,10 +47,7 @@ angular.module('echoCalendarApp', [
               }
               else {
                 //cache the redirect url except for login before redirect to login
-                if ($location.path() != '/login'){
-                  $location.nextAfterLogin = $location.path();
-                }
-                $location.path("/login");
+                window.location.href = '/auth/adfs';
               }
             }
             return $q.reject(rejection);
