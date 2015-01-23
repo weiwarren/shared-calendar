@@ -4,9 +4,18 @@
     "connector": "memory"
   },
   "mongodb": {
-    "name":"mongo_test",
+    "name":"mongo_replca",
     "connector": "mongodb",
-    "url":"mongodb://caladmin:#k9028aalks!%@c231.galaga.0.mongolayer.com:10231,c228.galaga.1.mongolayer.com:10228/Echo-SharedCalendar?replicaSet=set-54c037d3d6c9281d3f00e0da"
+    "url":"mongodb://caladmin:#k9028aalks!%@c231.galaga.0.mongolayer.com:10231"
+  },
+  "mongodb": {
+    "name":"mongo_prod",
+    "connector": "mongodb",
+    "database":"Echo-SharedCalendar",
+    "host":"c231.galaga.0.mongolayer.com",
+    "port":10231,
+    "username":"caladmin",
+    "password":"#k9028aalks!%"
   },
   "storage": {
     "name": "storage",
