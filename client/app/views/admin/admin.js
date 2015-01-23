@@ -43,6 +43,8 @@ angular.module('echoCalendarApp.admin', ['ngRoute'])
       });
       $q.all(qs).then(function(){
         $scope.hideLoading();
+      },function(){
+        alert('error');
       });
     };
 
