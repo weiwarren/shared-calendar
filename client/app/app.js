@@ -76,7 +76,6 @@ angular.module('echoCalendarApp', [
       });
       moment.locale('en-AU');
     }])
-
   .filter('trim', function () {
     return function (text) {
       if (text)
