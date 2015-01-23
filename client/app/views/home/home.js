@@ -50,7 +50,27 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
             }
           ]
         }),
-        onTimeRangeSelect: function (args) {},
+        onTimeHeaderClicked: function (args) {
+          var level = args.header.level;
+          var range, scale;
+          if(level > 0){
+            range = moment(args.header.end.value).diff(args.header.start.value, 'days');
+            if (range == 1) {
+              scale = 'day';
+            }
+            else if (range == 7) {
+              scale = 'week';
+            }
+            else if (range > 7 && range < 33){
+              scale = 'month';
+            }
+            $scope.$apply(function () {
+              $scope.scheduler.changeScale(scale, args.header.start.value);
+            });
+          }
+        },
+        onTimeRangeSelect: function (args) {
+        },
         onTimeRangeSelected: function (args) {
           var menu = new DayPilot.Menu({
             items: [
@@ -62,7 +82,8 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           });
           menu.show(args);
         },
-        onResourceHeaderClicked: function (args) {},
+        onResourceHeaderClicked: function (args) {
+        },
         onResourceCollapse: function (args) {
           var selector = $("div[class$='_event_group'][resource^='" + args.resource.id + "']");
           selector.trigger('click');
@@ -134,7 +155,8 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           $scope.dp.message("Event moved: " + args.e.text());
         },
         eventClickHandling: "Select",
-        onRowClick: function () {},
+        onRowClick: function () {
+        },
         onEventSelected: function (args) {
           /*var selectedEvent = $scope.dp.multiselect.events();
            if (selectedEvent.length == 1) {
@@ -272,7 +294,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
             init = false;
           });
         }
-        else if($scope.$lStorage.config){
+        else if ($scope.$lStorage.config) {
           $q.all([
             $scope.scheduler.queryEventTypes(),
             $scope.scheduler.queryResources()
@@ -338,11 +360,11 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       }
     };
 
-    $scope.$watch('scheduler.config', function (nv,ov) {
-      if(nv && !init && !$routeParams.configId){
+    $scope.$watch('scheduler.config', function (nv, ov) {
+      if (nv && !init && !$routeParams.configId) {
         $scope.$lStorage.config = nv;
       }
-    },true);
+    }, true);
 
     $scope.$watch('scheduler.config.filters', function (nv) {
       if (nv && $scope.scheduler.orgionalResources) {
