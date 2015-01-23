@@ -6704,7 +6704,7 @@ label {
   background-position: 0 0;
 }
 .navbar.echo-brand li.active.actions a.close-add:hover span.image-holder {
-  background-position: 0 -32px;
+  background-position: 0 -31px;
 }
 .navbar.echo-brand li.actions.add-event a span.image-holder {
   display: block;
@@ -6746,6 +6746,9 @@ label {
 .filter-display.well {
   min-height: 10px;
   padding: 8px 3px 3px;
+}
+.filter-display.well .btn.adv-filters {
+  max-width: 200px;
 }
 .filter-display.well .col-sm-9,
 .filter-display.well .col-sm-3 {
@@ -7130,6 +7133,7 @@ label {
 .modal-content .echo .modal-header {
   border: 0;
   padding-left: 25px;
+  min-height: 60px;
 }
 .modal-content .echo .modal-header .close {
   margin-top: -7px;
@@ -7146,7 +7150,7 @@ label {
   background-position: 0 0;
 }
 .modal-content .echo .modal-header .close:hover span.image-holder {
-  background-position: 0 -40px;
+  background-position: 0 -39px;
 }
 .modal-content .echo .event-type-badges {
   padding-bottom: 15px;
@@ -7430,7 +7434,17 @@ fieldset.gaming {
   /* label h5 {
                 color: @event-gaming-label;
             } */
-  /* Competitor Events in Gaming Fieldset */
+  /* Competitor Events in Gaming Fieldset 
+
+                [type="checkbox"]:checked + label.competition:after {
+                  background: @event-competition;
+                  top: 2px; left: 40px;
+                }
+
+                [type="checkbox"]:checked + label.competition .ui:after {
+                  color: @event-competition;
+                }
+            */
 }
 fieldset.gaming [type="checkbox"]:checked + label:after {
   background: #e2a5a4;
@@ -7443,19 +7457,30 @@ fieldset.gaming [type="checkbox"]:checked + label .ui:after {
 fieldset.gaming [type="checkbox"]:not(:checked) + label .ui:before {
   color: #333;
 }
-fieldset.gaming [type="checkbox"]:checked + label.competition:after {
-  background: #f1c40f;
-  top: 2px;
-  left: 40px;
+fieldset.gaming ul li:last-of-type label {
+  color: #f39c12;
 }
-fieldset.gaming [type="checkbox"]:checked + label.competition .ui:after {
-  color: #f1c40f;
+fieldset.gaming ul li:last-of-type label .ui:after {
+  color: #f1c40f !important;
+}
+fieldset.gaming ul li:last-of-type [type="checkbox"]:checked + label:after {
+  background: #f1c40f !important;
 }
 fieldset.nongaming {
   /*  label h5 {
                 color: @event-nongaming-label;
             } */
-  /* Competitor Events in NonGaming Fieldset */
+  /* Competitor Events in NonGaming Fieldset 
+
+                [type="checkbox"]:checked + label.competition:after {
+                  background: @event-competition;
+                  top: 2px; left: 40px;
+                }
+
+                [type="checkbox"]:checked + label.competition .ui:after {
+                  color: @event-competition;
+                }
+            */
 }
 fieldset.nongaming [type="checkbox"]:checked + label:after {
   background: #90b3e6;
@@ -7468,13 +7493,14 @@ fieldset.nongaming [type="checkbox"]:checked + label .ui:after {
 fieldset.nongaming [type="checkbox"]:not(:checked) + label .ui:before {
   color: #333;
 }
-fieldset.nongaming [type="checkbox"]:checked + label.competition:after {
-  background: #f1c40f;
-  top: 2px;
-  left: 40px;
+fieldset.nongaming ul li:last-of-type label {
+  color: #f39c12;
 }
-fieldset.nongaming [type="checkbox"]:checked + label.competition .ui:after {
-  color: #f1c40f;
+fieldset.nongaming ul li:last-of-type label .ui:after {
+  color: #f1c40f !important;
+}
+fieldset.nongaming ul li:last-of-type [type="checkbox"]:checked + label:after {
+  background: #f1c40f !important;
 }
 fieldset.property {
   /*  label h5 {
@@ -7496,6 +7522,13 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   .filter-control.open,
   .filter-control {
     margin-left: 0 !important;
+  }
+  .navbar.echo-brand .navbar-header img.brand-logo-image {
+    width: 350px;
+    margin-left: -20px;
+    width: 321px;
+    margin-left: -117px;
+    padding-top: 10px;
   }
 }
 @media (max-width: 919px) {
@@ -9483,11 +9516,11 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
 }
 .echo_link_horizontal {
   border-bottom-style: solid;
-  border-bottom-color: red;
+  border-bottom-color: #ff0000;
 }
 .echo_link_vertical {
   border-right-style: solid;
-  border-right-color: red;
+  border-right-color: #ff0000;
 }
 .echo_link_arrow_right:before {
   content: '';
@@ -9553,14 +9586,17 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   color: white;
 }
 .Gaming.EventType {
-  background-color: rgba(226, 165, 164, 0.3);
+  background-color: rgba(226, 165, 164, 0.25);
   color: #40301e;
 }
 .Gaming.EventType.Promotion {
   background-color: rgba(226, 165, 164, 0.25);
 }
 .Gaming.EventType.Offer {
-  background-color: rgba(226, 165, 164, 0.15);
+  background-color: rgba(226, 165, 164, 0.25);
+}
+.Gaming.EventType.Competitor {
+  background-color: rgba(241, 196, 15, 0.2);
 }
 .echo_rowheader.NonGaming {
   background-color: #90b3e6;
@@ -9574,13 +9610,16 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   background-color: rgba(144, 179, 230, 0.25);
 }
 .NonGaming.EventType.Promotion {
-  background-color: rgba(144, 179, 230, 0.15);
+  background-color: rgba(144, 179, 230, 0.25);
 }
 .NonGaming.EventType.Shows {
-  background-color: rgba(144, 179, 230, 0.15);
+  background-color: rgba(144, 179, 230, 0.25);
 }
 .NonGaming.EventType.FoodBarRest {
-  background-color: rgba(144, 179, 230, 0.3);
+  background-color: rgba(144, 179, 230, 0.25);
+}
+.NonGaming.EventType.Competitor {
+  background-color: rgba(241, 196, 15, 0.2);
 }
 .echo_rowheader.Public {
   background-color: #39d2b4;
@@ -9618,6 +9657,9 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
 .Item.Gaming .echo_event_bar_inner {
   background-color: #a77c7b;
 }
+.Item.Competitor.Gaming .echo_event_inner {
+  background-color: rgba(241, 196, 15, 0.15);
+}
 .Item.NonGaming .echo_event_inner {
   background-color: rgba(144, 179, 230, 0.15);
   color: #354f77;
@@ -9627,6 +9669,9 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
 }
 .Item.NonGaming .echo_event_bar_inner {
   background-color: #354f77;
+}
+.Item.Competitor.NonGaming .echo_event_inner {
+  background-color: rgba(241, 196, 15, 0.15);
 }
 .Item.Public .echo_event_inner {
   background-color: rgba(57, 210, 180, 0.15);

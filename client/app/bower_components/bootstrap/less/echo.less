@@ -446,7 +446,7 @@
 }
 
 .Gaming.EventType {
-  background-color: @event-gaming-lt;
+  background-color: @event-gaming-ltr;
   color: @echo-brand-dk;
 }
 
@@ -455,7 +455,11 @@
 }
 
 .Gaming.EventType.Offer {
-  background-color: @event-gaming-ltst;
+  background-color: @event-gaming-ltr;
+}
+
+.Gaming.EventType.Competitor {
+  background-color: rgba(241, 196, 15, 0.2);
 }
 
 // .Non-Gaming
@@ -475,15 +479,19 @@
 }
 
 .NonGaming.EventType.Promotion {
-  background-color: @event-nongaming-ltst;
+  background-color: @event-nongaming-ltr;
 }
 
 .NonGaming.EventType.Shows {
-  background-color: @event-nongaming-ltst;
+  background-color: @event-nongaming-ltr;
 }
 
 .NonGaming.EventType.FoodBarRest {
-  background-color: @event-nongaming-lt;
+  background-color: @event-nongaming-ltr;
+}
+
+.NonGaming.EventType.Competitor {
+  background-color: rgba(241, 196, 15, 0.2);
 }
 
 // .Public
@@ -541,6 +549,10 @@
   }
 }
 
+.Item.Competitor.Gaming .echo_event_inner {
+    background-color: rgba(241, 196, 15, 0.15);
+}
+
 //## Non-Gaming Event Styles
 
 .Item.NonGaming {
@@ -556,6 +568,10 @@
   .echo_event_bar_inner {
     background-color: @event-nongaming-label;
   }
+}
+
+.Item.Competitor.NonGaming .echo_event_inner {
+    background-color: rgba(241, 196, 15, 0.15);
 }
 
 //## Public Event Styles

@@ -17,6 +17,8 @@
             <!--<i class="fa fa-share-square-o"></i>--><span
             class="image-holder"></span><span class="sr-only">Export Report</span></a>
           <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="saveConfigState()"><span class="fa fa-share-alt"></span>Send Current View as URL</a></li>
+            <li class="divider"></li>
             <li class="disabled"><a data-toggle="dropdown" ng-csv="scheduler.exportCSV()" lazy-load="true"
                                     filename="export"><i
               class="fa fa-file-code-o"></i> Export Report as .csv file (Coming Soon)</a></li>
@@ -31,10 +33,12 @@
           <a href="#/addEvent" tooltip="Add&nbsp;an&nbsp;event" tooltip-placement="bottom"><span
             class="image-holder"></span><span class="sr-only">Add Event</span></a>
         </li>
+<!--
         <li class="actions export">
           <a tooltip="Send&nbsp;URL" ng-click="saveConfigState()"
              tooltip-placement="bottom"><span
             class="fa fa-share-alt" style="font-size:32px"></span><span class="sr-only">Send URL</span></a></li>
+-->
         <li class="user-details" dropdown ng-mouseenter="open=true" ng-mouseleave="open=false" is-open="open">
           <a href="#/eventApproval" class="user-creds dropdown-toggle" aria-expanded="false">
             <img src="image/user_face_pic.png" alt="User Profile Pic" class="profile-image img-circle">
@@ -232,7 +236,7 @@
         </div>
 
         <div class="col-sm-3">
-          <button class="btn btn-sm btn-block btn-primary" ng-click="scheduler.showAdvancedFilter()"><i
+          <button class="btn btn-sm btn-block btn-primary adv-filters pull-right" ng-click="scheduler.showAdvancedFilter()"><i
             class="fa fa-cog"></i> Edit Advanced Filters
           </button>
         </div>
