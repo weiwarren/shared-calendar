@@ -420,7 +420,6 @@ angular.module('echoCalendarApp', [
     });
 
     $rootScope.checkApproval = function () {
-      console.log(LoopBackAuth.currentUserData.userRoles)
       if (LoopBackAuth.currentUserData.userRoles == 'Manager') {
         Event.count({filter: {where: {approved: {ne: true}}}}, function (response) {
           $rootScope.waitApproval = response.count;

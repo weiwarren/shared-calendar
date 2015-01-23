@@ -53,7 +53,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
         onTimeHeaderClicked: function (args) {
           var level = args.header.level;
           var range, scale;
-          if(level > 0){
+          if (level > 0) {
             range = moment(args.header.end.value).diff(args.header.start.value, 'days');
             if (range == 1) {
               scale = 'day';
@@ -61,7 +61,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
             else if (range == 7) {
               scale = 'week';
             }
-            else if (range > 7 && range < 33){
+            else if (range > 7 && range < 33) {
               scale = 'month';
             }
             $scope.$apply(function () {
@@ -317,8 +317,8 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           //default scale
           $timeout(function () {
             $scope.scheduler.changeScale('month', (new Date()));
+            init = false;
           });
-          init = false;
         }
       },
       showAdvancedFilter: function () {
@@ -390,6 +390,27 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
           });
         });
     };
+
+
+    //TODO: move this into a parent property e.g. property
+    $scope.$watch('scheduler.config.filters.TheStar+scheduler.config.filters.Jupiters+scheduler.config.filters.Treasury',function(nv){
+      $scope.countPropertyFilter();
+    });
+
+    $scope.countPropertyFilter = function () {
+      var counter = 0;
+      if ($scope.scheduler.config.filters.TheStar) {
+        counter++;
+      }
+      if($scope.scheduler.config.filters.Jupiters){
+        counter++;
+      }
+      if($scope.scheduler.config.filters.Treasury){
+        counter++;
+      }
+      $scope.propertyFilterCount = counter;
+    }
+
 
     $scope.checkApproval();
 
