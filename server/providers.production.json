@@ -11,8 +11,8 @@
   "adfs": {
     "provider": "adfs",
     "module": "passport-saml",
-    "entryPoint": "https://ee-adfs01.cloudapp.net/adfs/ls",
-    "exitPoint": "https://ee-adfs01.cloudapp.net/adfs/ls/?wa=wsignoutcleanup1.0",
+    "entryPoint": "https://fs.echoent.com.au/adfs/ls",
+    "exitPoint": "https://fs.echoent.com.au/adfs/ls/?wa=wsignoutcleanup1.0",
     "issuer": "https://echo-sharedcalendar.azurewebsites.net",
     "callbackUrl": "https://echo-sharedcalendar.azurewebsites.net/auth/adfs/callback",
     "identifierFormat": null,

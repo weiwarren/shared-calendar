@@ -6,7 +6,8 @@
   "mongodb": {
     "name": "mongo_replca",
     "connector": "mongodb",
-    "url": "mongodb://caladmin:#k9028aalks!%@c231.galaga.0.mongolayer.com:10231,c228.galaga.1.mongolayer.com:10228/Echo-SharedCalendar?replicaSet=set-54c037d3d6c9281d3f00e0da"
+    "url": "mongodb://caladmin:#k9028aalks!%@c231.galaga.0.mongolayer.com:10231,c228.galaga.1.mongolayer.com:10228/Echo-SharedCalendar?replicaSet=set-54c037d3d6c9281d3f00e0da",
+    "socketTimeoutMS": 40
   },
   "storage": {
     "name": "storage",
