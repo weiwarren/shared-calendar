@@ -9655,11 +9655,11 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   color: white;
 }
 .Public.EventType {
-  background-color: rgba(57, 210, 180, 0.3);
+  background-color: rgba(57, 210, 180, 0.15);
   color: #40301e;
 }
 .Public.EventType.Holiday {
-  background-color: rgba(57, 210, 180, 0.25);
+  background-color: rgba(57, 210, 180, 0.15);
 }
 .Public.EventType.Festival {
   background-color: rgba(57, 210, 180, 0.15);

@@ -2,3 +2,12 @@ node_modules/*
 .idea/workspace.xml
 server/storage/*
 dump/*
+client/app/bower_components/bootstrap/less/bootstrap.css
+
+client/app/bower_components/bootstrap/less/variables.css
+
+*.codekit
+
+*.codekit
+
+client/app/config.codekit
