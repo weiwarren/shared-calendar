@@ -47,7 +47,9 @@ angular.module('echoCalendarApp', [
               }
               else {
                 //cache the redirect url except for login before redirect to login
-                window.location.href = '/auth/adfs';
+                setTimeout(function () {
+                  window.location.href = '/auth/adfs';
+                }, 100);
               }
             }
             return $q.reject(rejection);
@@ -391,6 +393,10 @@ angular.module('echoCalendarApp', [
     if ($localStorage["redirect_url"]) {
       $location.path($localStorage["redirect_url"]);
       $localStorage["redirect_url"] = null;
+    }
+
+    if ($cookies["access_token"] == 'undefined' || $cookies["access_token"] == undefined) {
+      window.location = '/auth/adfs';
     }
     LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], {
       userName: $cookies['userName'],
