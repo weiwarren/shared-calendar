@@ -37,7 +37,7 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     //load event types
     EventType.query(function (eventTypes) {
       $scope.eventTypes = eventTypes;
-      if($scope.queryParams) {
+      if ($scope.queryParams) {
         if ($scope.queryParams.eventTypeKey) {
           $scope.event.eventTypeKey = $scope.queryParams.eventTypeKey;
           $scope.event.eventType = $scope.eventTypes.filter(function (item) {

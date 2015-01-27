@@ -12,6 +12,7 @@
       <li class="user-details"><a ng-href="#/eventApproval" class="user-creds">
         <img src="image/user_face_pic.png" class="profile-image img-circle">
         <span>{{currentUserId || 'UserName'}}</span>
+
         <div class="badge approval-counter" ng-show="waitApproval>0" data-ng-bind="waitApproval"></div>
       </a>
       </li>
@@ -50,9 +51,8 @@
                               class="form-control"
                               ng-model="event.eventTypeKey"
                               ng-required="true"
-                              focus-me="eventForm.submitting && eventForm.sectionBasic.eventType.$invalid"
-                              ng-change="event.metadata.productKey=null;event.eventType=((eventTypes | filter:{key:event.eventTypeKey})[0])"
-                              ng-options="et.key as et.name for et in eventTypes">
+                              ng-change="event.metadata.productKey=null;event.eventType=((eventTypes | filter:{key:event.eventTypeKey})[0]);">
+                        <option ng-repeat="et in eventTypes" ng-value="et.key" data-ng-bind="et.name" ng-selected="et.key == event.eventTypeKey"></option>
                       </select>
                     </div>
                     <div class="form-group col-sm-3"
@@ -64,8 +64,8 @@
                               ng-disabled="!event.eventTypeKey"
                               ng-model="event.categoryKey"
                               ng-required="true"
-                              ng-change="event.category=((event.eventType.categories | filter:{key:event.categoryKey})[0])"
-                              ng-options="cat.key as cat.name for cat in event.eventType.categories">
+                              ng-change="event.category=((event.eventType.categories | filter:{key:event.categoryKey})[0])">
+                        <option ng-repeat="cat in event.eventType.categories" ng-value="cat.key" data-ng-bind="cat.name" ng-selected="cat.key==event.categoryKey"></option>
                       </select>
                     </div>
                     <div class="form-group col-sm-3"
@@ -76,8 +76,8 @@
                               ng-disabled="!event.eventTypeKey"
                               ng-model="event.metadata.productKey"
                               ng-required="event.eventType.products.length"
-                              ng-change="event.metadata.product=((event.eventType.products | filter:{key:event.productKey})[0])"
-                              ng-options="prod.key as prod.name for prod in event.eventType.products">
+                              ng-change="event.metadata.product=((event.eventType.products | filter:{key:event.metadata.productKey})[0]);">
+                        <option ng-repeat="prod in event.eventType.products" ng-value="prod.key" data-ng-bind="prod.name" ng-selected="prod.key == event.metadata.productKey"></option>
                       </select>
                     </div>
                     <div class="col-sm-3 validation-msg"
@@ -566,10 +566,13 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="aw in event.metadata.artworks">
-                              <td><img ng-src="/api/containers/{{aw.container}}/download/{{aw.file.name}}?access_token={{accessToken}}" width="100"
-                                       class="thumbnail"/></td>
+                              <td><img
+                                ng-src="/api/containers/{{aw.container}}/download/{{aw.file.name}}?access_token={{accessToken}}"
+                                width="100"
+                                class="thumbnail"/></td>
                               <td>
-                                <a href="/api/containers/{{aw.container}}/download/{{aw.file.name}}?access_token={{accessToken}}"><strong>{{
+                                <a
+                                  href="/api/containers/{{aw.container}}/download/{{aw.file.name}}?access_token={{accessToken}}"><strong>{{
                                   aw.file.name }}</strong></a></td>
                               <td nowrap>{{ aw.file.size/1024/1024|number:2 }} MB</td>
                               <td>
@@ -582,11 +585,12 @@
                               </td>
                               <td ng-show="debug">
                                 <button type="button" class="btn btn-danger btn-xs"
-                                                            ng-click="recycleFile(aw.file.name)"
-                                                            title="Delete the file">
-                                <span class="glyphicon glyphicon-trash"></span>
-                                Recycle
-                              </button></td>
+                                        ng-click="recycleFile(aw.file.name)"
+                                        title="Delete the file">
+                                  <span class="glyphicon glyphicon-trash"></span>
+                                  Recycle
+                                </button>
+                              </td>
                             </tr>
                             </tbody>
                           </table>
@@ -643,6 +647,7 @@
                                  size="100"
                                  multiple
                                  uploader="attachmentUploader"/>
+
                           <p class="help-block"></p>
                         </div>
                       </div>
