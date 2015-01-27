@@ -9545,11 +9545,11 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
 }
 .echo_link_horizontal {
   border-bottom-style: solid;
-  border-bottom-color: red;
+  border-bottom-color: #ff0000;
 }
 .echo_link_vertical {
   border-right-style: solid;
-  border-right-color: red;
+  border-right-color: #ff0000;
 }
 .echo_link_arrow_right:before {
   content: '';
@@ -9790,6 +9790,21 @@ span.overlay {
   left: 47%;
 }
 @-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-o-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
   100% {
     -webkit-transform: rotate(360deg);
   }
