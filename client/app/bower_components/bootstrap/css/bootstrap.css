@@ -9321,7 +9321,16 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   /*border-right: 1px solid @echo-brand-lt-stroke;*/
   padding: 2px;
 }
-.echo_timeheadergroup_inner {
+.echo_timeheadergroup:first-of-type .echo_timeheader_float_inner,
+.echo_timeheadergroup:first-of-type .echo_timeheadergroup_inner {
+  cursor: default;
+}
+.echo_timeheadergroup:first-of-type .echo_timeheader_float_inner:hover,
+.echo_timeheadergroup:first-of-type .echo_timeheadergroup_inner:hover {
+  background-color: rgba(237, 233, 230, 0.5);
+}
+.echo_timeheadergroup_inner,
+.echo_timeheader_float_inner {
   padding-top: 5px;
   position: absolute;
   left: 0px;
@@ -9332,6 +9341,16 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   border-right: 1px solid #d8d0ca;
   /*border-bottom: 1px solid @echo-brand-lt-stroke;*/
   background-color: rgba(237, 233, 230, 0.5);
+  cursor: pointer;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.echo_timeheadergroup_inner:hover,
+.echo_timeheader_float_inner:hover {
+  background-color: rgba(200, 200, 0, 0.1);
 }
 .echo_timeheadercol_inner {
   padding-top: 5px;
@@ -9344,6 +9363,15 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
   text-align: center;
   border-right: 1px solid #d8d0ca;
   background-color: rgba(237, 233, 230, 0.5);
+  cursor: pointer;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.echo_timeheadercol_inner:hover {
+  background-color: rgba(200, 200, 0, 0.1);
 }
 .echo_corner_inner {
   background-color: rgba(237, 233, 230, 0.5);
@@ -9423,6 +9451,7 @@ fieldset.property [type="checkbox"]:not(:checked) + label .ui:before {
 .echo_timeheader_float_inner {
   padding: 5px 10px;
   font-weight: 600;
+  cursor: pointer;
 }
 .echo_event_float_inner {
   padding: 5px 4px 4px 8px;
