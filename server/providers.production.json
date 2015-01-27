@@ -11,8 +11,10 @@
   "adfs": {
     "provider": "adfs",
     "module": "passport-saml",
-    "entryPoint": "https://fs.echoent.com.au/adfs/ls",
-    "exitPoint": "https://fs.echoent.com.au/adfs/ls/?wa=wsignoutcleanup1.0",
+    "entryPoint": "https://fs.echoent.com.au/adfs/ls/integrated",
+    //Below signout url is for AFDFS3 only
+    //"exitPoint": "https://fs.echoent.com.au/adfs/ls/?wa=wsignoutcleanup1.0",
+    "exitPoint": "https://fs.echoent.com.au/adfs/ls/?wa=wsignout1.0",
     "issuer": "https://echo-sharedcalendar.azurewebsites.net",
     "callbackUrl": "https://echo-sharedcalendar.azurewebsites.net/auth/adfs/callback",
     "identifierFormat": null,
