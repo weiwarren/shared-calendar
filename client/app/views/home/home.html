@@ -148,10 +148,10 @@
               </div>
             </div>
             <div class="col-sm-2">
-              <div class="dropdown year-selector">
+              <div class="dropdown year-selector" >
                 <a class="btn btn-link header dropdown-toggle" show-button-bar="false"
-                   ng-click="openCalendar=!openCalendar" id="dropdownMenuYearSelect"
-                   is-open="openCalendar" datepicker-options="{minMode:'month'}" datepicker-mode="'month'"
+                   id="dropdownMenuYearSelect" ng-click="openCalendar($event)"
+                   is-open="calendarOpen" datepicker-options="{minMode:'month'}" datepicker-mode="'month'"
                    datepicker-popup="'shortDate'"
                    ng-model="scheduler.config.currentDate" ng-change="scheduler.changeScale('month')">
                   {{ (scheduler.config.currentDate | date:'MMMM yyyy') || 'Month Name' }}

@@ -11,6 +11,13 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
     'use strict';
     var init = true;
     $scope.$lStorage = $localStorage.$default({});
+
+    $scope.openCalendar = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $scope.calendarOpen = !$scope.calendarOpen;
+    };
+
     $scope.scheduler = {
       config: {
         momentScale: 'month',
@@ -393,7 +400,7 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
 
 
     //TODO: move this into a parent property e.g. property
-    $scope.$watch('scheduler.config.filters.TheStar+scheduler.config.filters.Jupiters+scheduler.config.filters.Treasury',function(nv){
+    $scope.$watch('scheduler.config.filters.TheStar+scheduler.config.filters.Jupiters+scheduler.config.filters.Treasury', function (nv) {
       $scope.countPropertyFilter();
     });
 
@@ -402,10 +409,10 @@ angular.module('echoCalendarApp.home', ['daypilot', 'ngSanitize', 'ngCsv'])
       if ($scope.scheduler.config.filters.TheStar) {
         counter++;
       }
-      if($scope.scheduler.config.filters.Jupiters){
+      if ($scope.scheduler.config.filters.Jupiters) {
         counter++;
       }
-      if($scope.scheduler.config.filters.Treasury){
+      if ($scope.scheduler.config.filters.Treasury) {
         counter++;
       }
       $scope.propertyFilterCount = counter;
