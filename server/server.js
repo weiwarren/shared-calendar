@@ -81,6 +81,7 @@ for (var s in config) {
 //adfs authentication
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 app.get('/', function (req, res, next) {
+  console.log("alive");
   res.redirect('/app');
 });
 app.get('/auth/adfs/fail', function (req, res, next) {

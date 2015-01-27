@@ -20,7 +20,8 @@ angular.module('echoCalendarApp', [
   'echoCalendarApp.eventApproval',
   'echoCalendarApp.shareURL',
   'echoCalendarApp.error',
-  'echoCalendarApp.admin'
+  'echoCalendarApp.admin',
+  'echoCalendarApp.loading'
 ])
   .config(['$routeProvider', '$httpProvider', 'LoopBackResourceProvider', 'ngClipProvider',
     function ($routeProvider, $httpProvider, LoopBackResourceProvider, ngClipProvider) {
@@ -436,10 +437,10 @@ angular.module('echoCalendarApp', [
     $rootScope.showLoading = function () {
       $rootScope.loadingModal = $modal.open({
         templateUrl: 'partials/loading.html',
-        backdrop: 'static'
+        backdrop: 'static',
+        windowClass:'loading'
       });
     };
-
     $rootScope.hideLoading = function () {
       if ($rootScope.loadingModal)
         $rootScope.loadingModal.close();
