@@ -20,6 +20,7 @@
     "successRedirect": "/auth/adfs/success",
     "failureRedirect": "/login",
     "link": false,
+    "acceptedClockSkewMs":-1,
     "authScheme":"adfs"
   }
 }
