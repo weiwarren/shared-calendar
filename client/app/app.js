@@ -396,7 +396,7 @@ angular.module('echoCalendarApp', [
     }
 
     if ($cookies["access_token"] == 'undefined' || $cookies["access_token"] == undefined) {
-      window.location = '/auth/adfs';
+      window.location.href = '/auth/adfs';
     }
     LoopBackAuth.setUser($cookies['access_token'], $cookies['userId'], {
       userName: $cookies['userName'],
