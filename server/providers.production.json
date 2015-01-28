@@ -11,7 +11,7 @@
   "adfs": {
     "provider": "adfs",
     "module": "passport-saml",
-    "entryPoint": "https://fs.echoent.com.au/adfs/ls/integrated",
+    "entryPoint": "https://fs.echoent.com.au/adfs/ls",
     "exitPoint": "https://fs.echoent.com.au/adfs/ls/?wa=wsignout1.0",
     "issuer": "https://echo-sharedcalendar.azurewebsites.net",
     "callbackUrl": "https://echo-sharedcalendar.azurewebsites.net/auth/adfs/callback",
@@ -21,6 +21,7 @@
     "failureRedirect": "/login",
     "link": false,
     "acceptedClockSkewMs":-1,
-    "authScheme":"adfs"
+    "authScheme":"adfs",
+    "authnContext": "http://schemas.microsoft.com/ws/2008/06/identity/authenticationmethod/windows"
   }
 }
