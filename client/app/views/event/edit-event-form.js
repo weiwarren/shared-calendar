@@ -375,7 +375,6 @@ angular.module('echoCalendarApp.editEvent', ['ngRoute', 'ui.bootstrap', 'angular
     var saveEvent = function () {
       $scope.eventProperties.forEach(function (ep) {
         var event = $scope.getEventForProperty(ep);
-        console.log(event);
         event.$save(function () {
           $scope.closeForm();
         });

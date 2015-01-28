@@ -435,15 +435,20 @@ angular.module('echoCalendarApp', [
     };
 
     $rootScope.showLoading = function () {
-      $rootScope.loadingModal = $modal.open({
+      //TODO: temporary disabled this as there is issue on production on disabling the loading
+      /*$rootScope.loadingModal = $modal.open({
         templateUrl: 'partials/loading.html',
         backdrop: 'static',
         windowClass:'loading'
-      });
+      });*/
     };
+
     $rootScope.hideLoading = function () {
+      //TODO: temporary disabled this as there is issue on production on disabling the loading
+      /*
       if ($rootScope.loadingModal)
         $rootScope.loadingModal.close();
+      */
     };
 
     $rootScope.modal = function (path, params) {

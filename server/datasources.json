@@ -10,24 +10,6 @@
     "name": "mongodb",
     "connector": "mongodb"
   },
-  "mongodb": {
-    "name":"mongo_prod",
-    "connector": "mongodb",
-    "database":"Echo-SharedCalendar",
-    "host":"c228.galaga.1.mongolayer.com",
-    "port":10228,
-    "username":"caladmin",
-    "password":"#k9028aalks!%"
-  },
-  "mongodb": {
-    "name":"mongo_prod",
-    "connector": "mongodb",
-    "database":"Echo-SharedCalendar",
-    "host":"c231.galaga.0.mongolayer.com",
-    "port":10231,
-    "username":"caladmin",
-    "password":"#k9028aalks!%"
-  },
   "storage": {
     "name": "storage",
     "connector": "loopback-component-storage",
