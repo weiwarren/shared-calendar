@@ -23,5 +23,6 @@
     "acceptedClockSkewMs":-1,
     "authScheme":"adfs",
     "authnContext": "http://schemas.microsoft.com/ws/2008/06/identity/authenticationmethod/windows"
+    
   }
 }
